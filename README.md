@@ -1,4 +1,8 @@
 # SWAPS
+* Maria Wong
+* Adrian Jensen
+* Amer Saleh
+* Miles Helm
 
 ## Table of Contents
 
