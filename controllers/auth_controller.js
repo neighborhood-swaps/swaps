@@ -11,7 +11,6 @@ var env = {
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
-    console.log("in get / in index.js");
     console.log(JSON.stringify(env));
     res.render("index", { env: env });
 });
@@ -33,6 +32,7 @@ router.get("/callback",
 });
 
 router.get("/user", ensureLoggedIn, function(req, res, next) {
+    // console.log("res from get /user: " + res);
     res.render("user", { user: req.user });
 });
 
