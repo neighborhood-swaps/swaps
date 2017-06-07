@@ -15,7 +15,8 @@ var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var dotenv = require("dotenv");
 var passport = require("passport");
-var auth0Strategy = require("passport-auth0");
+//leave Auth0Strategy capital - constructor
+var Auth0Strategy = require("passport-auth0");
 
 dotenv.load();
 
@@ -65,7 +66,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', authRoutes);
+app.use("/", authRoutes);
 
 //*** auth part 2 ends *******************************************************
 
