@@ -9,6 +9,7 @@ var db = require("./models");
 // *** auth part 2 starts; will combine with other code and remove ** when auth work done *****
 
 var path = require("path");
+var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var dotenv = require("dotenv");
@@ -29,6 +30,15 @@ var strategy = new Auth0Strategy({
         clientSecret: process.env.AUTH0_CLIENT_SECRET,
         callbackURL:  process.env.AUTH0_CALLBACK_URL || "http://localhost:3000/callback"
     }, function(accessToken, refreshToken, extraParams, profile, done) {
+
+            var userProfile = {
+                "profile": profile,
+                "accessToken": accessToken,
+                "refreshToken": refreshToken,
+                "extraParams": extraParams
+            };
+
+            console.log(JSON.stringify("userProfile: " + userProfile));
         return done(null, profile);
 });
 
@@ -66,7 +76,7 @@ app.use(methodOverride("_method"));
 // *** auth part 2 starts; will combine with other code and remove ** when auth work done *****
 
 // logs every request to the console
-app.use(express.logger('dev')); 
+app.use(logger('dev')); 
 
 // parses cookies holding session and users' information
 app.use(cookieParser());
