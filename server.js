@@ -3,7 +3,7 @@ var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 
-var routes = require('./controllers/swap_controller.js');
+//var routes = require('./controllers/swap_controller.js');
 var db = require("./models");
 
 var port = process.env.PORT || 3000;
@@ -24,9 +24,9 @@ app.engine('handlebars', exphbs({
 
 app.set('view engine', 'handlebars'); 
 
-app.use('/', routes); 
+//app.use('/', routes); 
 
-db.sequelize.sync().then(function() {
+db.sequelize.sync({ force: true }).then(function() {
   	app.listen(port, function() {
     	console.log('Listening on ' + port);
   	});

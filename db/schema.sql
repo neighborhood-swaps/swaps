@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS swaps_db;
+USE swaps_db;
