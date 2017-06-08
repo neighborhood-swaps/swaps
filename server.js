@@ -23,22 +23,26 @@ dotenv.load();
 // imports routes, giving server access to them
 var authRoutes = require("./controllers/auth_controller.js");
 
-// configures Passport to use Auth0
+// configures Passport to use Auth0 and retrieves user info from auth0
 var strategy = new Auth0Strategy({
         domain:       process.env.AUTH0_DOMAIN,
         clientID:     process.env.AUTH0_CLIENT_ID,
         clientSecret: process.env.AUTH0_CLIENT_SECRET,
         callbackURL:  process.env.AUTH0_CALLBACK_URL || "http://localhost:3000/callback"
     }, function(accessToken, refreshToken, extraParams, profile, done) {
-
             var userProfile = {
                 "profile": profile,
                 "accessToken": accessToken,
                 "refreshToken": refreshToken,
                 "extraParams": extraParams
             };
-
-            console.log(JSON.stringify("userProfile: " + userProfile));
+            var userInfo = {
+                "userNickname": profile.nickname,
+                "userEmail": profile._json.email,
+                "userClientID": profile._json.clientID
+            }
+            console.log("userProfile: " + JSON.stringify(userProfile));
+            console.log("userInfo: " + JSON.stringify(userInfo));
         return done(null, profile);
 });
 
