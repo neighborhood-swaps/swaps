@@ -1,9 +1,18 @@
+
+var express = require('express');  
+var methodOverride = require('method-override'); 
+var bodyParser = require('body-parser');
+var exphbs = require('express-handlebars');
+
+//var routes = require('./controllers/swap_controller.js');
+
 // sets dependencies
 var express = require("express");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var exphbs = require("express-handlebars");
 var swapsRoutes = require("./controllers/swaps_controller.js");
+
 var db = require("./models");
 
 // *** auth part 2 starts; will combine with other code and remove ** when auth work done *****
@@ -92,6 +101,15 @@ app.use(session({
     saveUninitialized: true // saves new sessions
 }));
 
+
+//app.use('/', routes); 
+
+db.sequelize.sync({ force: true }).then(function() {
+  	app.listen(port, function() {
+    	console.log('Listening on ' + port);
+  	});
+});
+
 // initializes passport
 app.use(passport.initialize());
 
@@ -116,6 +134,7 @@ db.sequelize.sync().then(function() {
 
 // *** NOTE: This .env setup should only be used for development. For production we should still set 
 // --- the environment variables in the standard way (If using Heroku, heroku config:set <variable>=<value>
+
 
 
 
