@@ -115,7 +115,8 @@ db.sequelize.sync().then(function() {
 });
 
 // *** NOTE: This .env setup should only be used for development. For production we should still set 
-// --- the environment variables in the standard way (If using Heroku, heroku config:set <variable>=<value>
+// --- the environment variables in the standard way (If using Heroku, command line: heroku config:set <variable>=<value>
+// (can also use heroku gui under settings)
 
 
 
