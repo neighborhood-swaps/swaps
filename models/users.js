@@ -2,7 +2,6 @@
 // sometimes causes errors on Windows machines
 // var bcrypt = require("bcrypt-nodejs");
 
-
 module.exports = function(sequelize, DataTypes) {
 	var Users = sequelize.define("Users", {
 			user_id: {
@@ -57,6 +56,7 @@ module.exports = function(sequelize, DataTypes) {
 // 				allowNull: false,
 // 				validate: { len: [1] }
 // 			},// user_name
+
 
 			password: {
 				type: DataTypes.STRING,
