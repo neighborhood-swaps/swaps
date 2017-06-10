@@ -5,7 +5,6 @@ var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 var exphbs = require("express-handlebars");
 
-var swapsRoutes = require("./controllers/swaps_controller.js");
 var db = require("./models");
 
 // *** auth part 2 starts; will combine with other code and remove ** when auth work done *****
@@ -111,7 +110,7 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // syncs sequelize models, then initiates the listener
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync().then(function() {
     app.listen(port, function() {
         console.log("Listening on " + port);
     });

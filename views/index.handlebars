@@ -1,9 +1,18 @@
-
 <p>Welcome</p>
 
 <br/>
 
-<a href="/login"> <button> Login </button> </a> 
+<form id="userForm">
+	<input required type="textbox" id="userName" placeholder="Ex. Thomas Mahon">
+	<input type="textbox" id="userPhone" placeholder="Ex. 919-354-6060">
+	<br/>
+	<button id="submitLogin" type="submit"> Login </button>
+</form>
 
-
-  
+<div id="confirmation">
+	name: <span id="confName"></span>
+	phone: <span id="confPhone"></span>
+	<br/>
+	<a href="/login"> <button> Confirm </button> </a> 
+	<button id="reenter" type="submit"> Reenter </button>
+</div>
