@@ -10,13 +10,17 @@ $("#confirmation").hide();
 $("#submitLogin").on("click", function(){
 	var userName = $("#userName").val().trim();
     var userPhone = $("#userPhone").val().trim();
-    if ($(userName !== "")) {
+    if (userPhone === "") {
+        userPhone = "Not Provided";
+    }
+    console.log(userPhone);
+    if (userName !== "") {
         var userInfo = {
             name: userName,
             phone: userPhone
         }
         $("#confName").html(userName);
-        if ($(userPhone !== "")) {
+        if (userPhone !== "") {
             $("#confPhone").html(userPhone);
         } else {
             $("#confPhone").html("Not Provided");
