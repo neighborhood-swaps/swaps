@@ -85,14 +85,25 @@ module.exports = function(sequelize, DataTypes) {
         {
             classMethods: {
             	associate: function(models) {
-            		Products.belongsTo(models.Users, {
-            			foreignKey: { allowNull: false }		
+            		Products.belongsTo(models.Users, 
+                        {
+                            onDelete: "cascade",
+                            foreignKey: {
+                                allowNull: false
+                            }
+                        }
+                    );		
             	}, 
                 associate: function(models) {
-                    Products.belongsTo(models.Locations, {
-                        foreignKey: { allowNull: false }        
+                    Products.belongsTo(models.Locations, 
+                        {
+                            onDelete: "cascade",
+                            foreignKey: {
+                                allowNull: false
+                            }               
+                        }
+                    );
                 }
-            }
             }
         }
 	);

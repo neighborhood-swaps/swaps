@@ -79,7 +79,8 @@
 //******* WORKING DATABASE **************
 
 module.exports = function(sequelize, DataTypes) {
-    var Swaps = sequelize.define("Swaps", { 
+    var Swaps = sequelize.define("Swaps", 
+        { 
             requester_id: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -100,7 +101,16 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: false,
                 validate: { len: [1] }
             }
-        } 
+        },
+        {
+            
+            timestamps: false
+        }
     ); 
     return Swaps;
 }; 
+
+
+
+
+
