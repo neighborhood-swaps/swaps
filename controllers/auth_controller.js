@@ -74,11 +74,9 @@ router.get("/404", function(req, res, next) {
 
 router.get('/api/newUser', function(req, res) {
     res.sendFile(path.join(__dirname, "../public/adduser.html"));
-
 });
 
 router.post('/api/postItem', function(req, res) {
-console.log("in get /api/postItem in swaps controller");
 console.log(req.body);
     db.Products.create({
         product_name: req.body.prodName,
@@ -94,8 +92,76 @@ console.log(req.body);
     }).then(function() {
         res.redirect("/");
     });
-
 });
+
+router.get('/household', function(req, res) {
+    db.Products.findAll({
+        where: {
+            user_id: 1
+        } 
+    }).then(function(data) {
+        var postData = {
+            data: data
+        };
+        res.render("postReturn", postData);
+    });
+});
+
+router.get('/furniture', function(req, res) {
+    db.Products.findAll({
+        where: {
+            user_id: 1
+        } 
+    }).then(function(data) {
+        var postData = {
+            data: data
+        };
+        res.render("postReturn", postData);
+    });
+});
+
+router.get('/tools', function(req, res) {
+    db.Products.findAll({
+        where: {
+            user_id: 1
+        } 
+    }).then(function(data) {
+        var postData = {
+            data: data
+        };
+        res.render("postReturn", postData);
+    });
+});
+
+router.get('/toys', function(req, res) {
+    db.Products.findAll({
+        where: {
+            user_id: 1
+        } 
+    }).then(function(data) {
+        var postData = {
+            data: data
+        };
+        res.render("postReturn", postData);
+    });
+});
+
+router.get('/electronics', function(req, res) {
+    db.Products.findAll({
+        where: {
+            user_id: 1
+        } 
+    }).then(function(data) {
+        var postData = {
+            data: data
+        };
+        res.render("postReturn", postData);
+    });
+});
+
+
+
+
 
 router.get('/api/upload', function(req, res) {
     res.sendFile(path.join(__dirname, "../public/uploadfile.html"));
@@ -190,8 +256,16 @@ router.post('/save-details', (req, res) => {
 });
 
 router.get("/posts", function(req, res) {
-    
     res.render("posts");
 });
+
+router.get("/userPosts", function(req, res) {
+    res.render("postReturn");
+});
+
+router.get("/search", function(req, res) {
+    res.render("search");
+});
+
 module.exports = router;
 
