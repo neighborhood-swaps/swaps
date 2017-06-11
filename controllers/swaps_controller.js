@@ -30,8 +30,6 @@ app.post('/api/postItem', function(req, res) {
 
 });
 
-
-
 app.get('/api/upload', function(req, res) {
     res.sendFile(path.join(__dirname, "../public/uploadfile.html"));
     // console.log(S3_BUCKET);
@@ -95,7 +93,6 @@ app.get('/api/getSingleImage/:', function(req, res) {
         });
 
 });
-
 
 app.get('/api/getAllImages/:', function(req, res) {
     db.Products.findOne({
