@@ -7,17 +7,18 @@
 								<div class="row" id="">
 									<div class="col-sm-12" id="">
 										<div class="row">
-											<form class="" id="" action="/postItem" method="POST">
+											<form class="" id="" action="/api/postItem" method="POST">
 												<div class="form-group">
 													<div class="col-sm-12">
-														<input id="userIDInput">User ID</input>
-														<input id="categoryInput">Category</input>
-														<input id="ownerInput"> Owner</input>
-													    <input id="descriptionInput">Description</input>
-													    <input id="conditionInput"> Condition</input>
-													    <input id="availabilityInput"> Availability </input>
-													    <input id="swap_locationInput">Location </input>
-													    <input id="commentsInput">Comments </input>
+														<input name="userIDInput">User ID</input>
+														<input name="categoryInput">Category</input>
+													    <input name="descriptionInput">Description</input>
+													    <input name="conditionInput"> Condition</input>
+													    <input name="availabilityInput"> Availability </input>
+													    <input name="swap_locationInput">Location </input>
+													    <input name="commentsInput">Comments </input>
+													    <input name="userUserID">User User ID </input>
+													    <br/><br/><br/>
 													    <button type="submit" id="postForm" class="btn">Submit</button>
 													</div>
 												</div>
@@ -36,49 +37,3 @@
 
 
 
-{{!-- THE BELOW SECTION IS FOR RETRIEVING POSTS FROM THE DATABASE --}}
-{{!-- 			<div class="col-sm-4">
-				<div id="postsDiv">
-					{{each}}
-						{{#if this.posts}}
-							<div class="">
-								<div class="row" id="">
-									<div class="col-sm-12" id="">
-										<div class="row">
-											<div class="col-sm-12">
-												<p id="owner"> Owner: {{this.first_name}} </p>
-											    <p id="description"> Description {{this.description}} </p>
-											    <img id="image" src="{{this.img_location}}">
-											    <p id="condition"> Condition: {{this.condition}} </p>
-											    <p id="availability"> Availability: {{this.availability}} </p>
-											    <p id="swap_location"> Swap Location: {{this.swap_location}} </p>
-											    <p id="comments"> Comments: {{this.comments}} </p>
-											</div>
-										</div>
-										<div class="row" class="classRow">
-											<div class="col-sm-4">
-												<form action="/contact" method="GET">
-													<input type="hidden" name="" value="{{this.product_id}}">
-													<button type="submit" class="btn">Contact</button>
-												</form>
-											</div>
-											<div class="col-sm-4">
-												<form>
-													<input type="hidden" name="" value="{{this.product_id}}">
-													<button type="submit" class="btn">SWAP!</button>
-												</form>
-											</div>
-											<div class="col-sm-4">
-												<form>
-													<input type="hidden" name="" value="{{this.product_id}}">
-													<button type="submit" class="btn">Location</button>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						{{/if}}
-					{{/each}}
-				</div>
-			</div> --}}

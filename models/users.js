@@ -141,16 +141,16 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: false,
                 validate: { isEmail: true }
             } // email
-        }, // end of 2nd argument which contains the columns for Users' model
-        { //join .. Saying that a user could have more than one product to exchange with other users
-            classMethods: {
-                associate: function(models) {
-                        //onDelete: "cascade": When a user is deleted, also delete any associated Products
-                        Users.hasMany(models.Products, { onDelete: "cascade" });
-                    } // end of associate
+        } // end of 2nd argument which contains the columns for Users' model
+        // { //join .. Saying that a user could have more than one product to exchange with other users
+        //     classMethods: {
+        //         associate: function(models) {
+        //                 //onDelete: "cascade": When a user is deleted, also delete any associated Products
+        //                 Users.hasMany(models.Products, { onDelete: "cascade" });
+        //             } // end of associate
 
-            } // end of 2nd argument which contains the columns for Users' model
-        }
+        //     } // end of 2nd argument which contains the columns for Users' model
+        // }
     ); // end of define
     return Users;
 }; // end of module.exports
