@@ -7,17 +7,21 @@
 								<div class="row" id="">
 									<div class="col-sm-12" id="">
 										<div class="row">
-											<div class="col-sm-12">
-												<input id="userID"></input>
-												<input id="category"></input>
-												<input id="ownerInput"> </input>
-											    <input id="descriptionInput"></input>
-											    <input id="conditionInput"> </input>
-											    <input id="availabilityInput">  </input>
-											    <input id="swap_locationInput"> </input>
-											    <input id="commentsInput"> </input>
-											    <button type="submit" id="postForm" class="btn">Submit</button>
-											</div>
+											<form class="" id="" action="/postItem" method="POST">
+												<div class="form-group">
+													<div class="col-sm-12">
+														<input id="userIDInput">User ID</input>
+														<input id="categoryInput">Category</input>
+														<input id="ownerInput"> Owner</input>
+													    <input id="descriptionInput">Description</input>
+													    <input id="conditionInput"> Condition</input>
+													    <input id="availabilityInput"> Availability </input>
+													    <input id="swap_locationInput">Location </input>
+													    <input id="commentsInput">Comments </input>
+													    <button type="submit" id="postForm" class="btn">Submit</button>
+													</div>
+												</div>
+											</form>
 										</div>
 									</div>
 								</div>
@@ -33,7 +37,7 @@
 
 
 {{!-- THE BELOW SECTION IS FOR RETRIEVING POSTS FROM THE DATABASE --}}
-			<div class="col-sm-4">
+{{!-- 			<div class="col-sm-4">
 				<div id="postsDiv">
 					{{each}}
 						{{#if this.posts}}
@@ -77,4 +81,4 @@
 						{{/if}}
 					{{/each}}
 				</div>
-			</div>
+			</div> --}}

@@ -106,7 +106,9 @@ app.post('/save-details', (req, res) => {
 });
 
 app.get("/posts", function(req, res) {
+    console.log("in get /posts in swaps controller");
     res.render("posts");
 });
 
+/////////////////////////////
 module.exports = app;
