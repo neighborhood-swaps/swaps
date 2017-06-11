@@ -1,11 +1,12 @@
 {
   "development": {
     "username": "root",
-    "password": "Coffee@1978S",
+    "password": "",
     "database": "swaps_db",
-    "host": "127.0.0.1",
+    "host": "localhost",
     "dialect": "mysql"
   },
+
   "test": {
     "username": "root",
     "password": null,
