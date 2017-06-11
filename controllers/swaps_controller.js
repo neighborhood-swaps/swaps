@@ -12,6 +12,26 @@ app.get('/api/newUser', function(req, res) {
 
 });
 
+app.post('/api/postItem', function(req, res) {
+
+    db.Products.create({
+        product_name: req.body.prodName,
+        category: req.body.category,
+        product_description: req.body.description,
+        img_location: req.body.img,
+        condition: req.body.condition,
+        availabilitiy: req.body.available,
+        swap_location: req.body.location,
+        comments: req.body.comments,
+        user_id: req.body.user_id
+    }).then(function() {
+        res.render("/posts", );
+    });
+
+});
+
+
+
 app.get('/api/upload', function(req, res) {
     res.sendFile(path.join(__dirname, "../public/uploadfile.html"));
     // console.log(S3_BUCKET);

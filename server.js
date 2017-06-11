@@ -22,7 +22,7 @@ dotenv.load();
 
 // imports routes, giving server access to them
 var authRoutes = require("./controllers/auth_controller.js");
-var routes = require('./controllers/swap_controller.js');
+var routes = require('./controllers/swaps_controller.js');
 
 // configures Passport to use Auth0 and retrieves user info from auth0
 var strategy = new Auth0Strategy({
