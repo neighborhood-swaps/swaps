@@ -1,0 +1,45 @@
+			<div class="col-sm-4">
+				<div id="postsDiv">
+					{{each}}
+						{{#if this.posts}}
+							<div class="">
+								<div class="row" id="">
+									<div class="col-sm-12" id="">
+										<div class="row">
+											<div class="col-sm-12">
+												<p id="owner"> Owner: {{this.first_name}} </p>
+											    <p id="description"> Description {{this.description}} </p>
+											    <img id="image" src="{{this.img_location}}"> 
+											    <p id="condition"> Condition: {{this.condition}} </p>
+											    <p id="availability"> Availability: {{this.availability}} </p>
+											    <p id="swap location"> Swap Location: {{this.swap_location}} </p>
+											    <p id="comments"> Comments: {{this.comments}} </p>
+											</div>
+										</div>
+										<div class="row" class="classRow">
+											<div class="col-sm-4">
+												<form action="/posts?_method=PUT" method="POST">
+													<input type="hidden" name="" value="{{this.product_id}}">
+													<button type="submit" class="btn">Contact</button>
+												</form>
+											</div>
+											<div class="col-sm-4">
+												<form action="/posts?_method=PUT" method="POST">
+													<input type="hidden" name="" value="{{this.product_id}}">
+													<button type="submit" class="btn">SWAP!</button>
+												</form>
+											</div>
+											<div class="col-sm-4">
+												<form action="/posts?_method=PUT" method="POST">
+													<input type="hidden" name="" value="{{this.product_id}}">
+													<button type="submit" class="btn">Location</button>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						{{/if}}
+					{{/each}}
+				</div>
+			</div>
