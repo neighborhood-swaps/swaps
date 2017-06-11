@@ -13,7 +13,6 @@ var env = {
 
 // renders home page
 router.get("/", function(req, res, next) {
-    console.log(JSON.stringify(env));
     res.render("index", { env: env });
 });
 
@@ -42,6 +41,20 @@ router.get("/callback",
 // ensures user is logged in, then renders user page
 router.get("/user", ensureLoggedIn, function(req, res, next) {
     res.render("user", { user: req.user });
+});
+
+// enters user name and phone in db from sign-in form
+router.post("/api/user", function(req,res) {
+    // if(req.body.name !== "") {
+    //     db.Users.create({
+    //         name: req.body.name,
+    //         phone: req.body.phone
+    //       }).then(function() {
+    //         res.redirect("/");
+    //       }).catch(function(err) {
+    //         res.render("400");
+    //     });
+    // };
 });
 
 // renders 404 page 
