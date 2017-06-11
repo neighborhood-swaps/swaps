@@ -76,10 +76,10 @@
 
 
 
-//******* by Maria and Adrian *** this is what we got working with what we need **************
+//******* WORKING DATABASE **************
 
 module.exports = function(sequelize, DataTypes) {
-    var Swaps = sequelize.define("Swaps", { // 2nd argument in define method for columns
+    var Swaps = sequelize.define("Swaps", { 
             requester_id: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -100,7 +100,7 @@ module.exports = function(sequelize, DataTypes) {
                 allowNull: false,
                 validate: { len: [1] }
             }
-        } // end of the 2nd argument in define method
-    ); // end of define
+        } 
+    ); 
     return Swaps;
-}; //exports
+}; 
