@@ -1,4 +1,3 @@
-
 // sets dependencies
 var express = require("express");
 var bodyParser = require("body-parser");
@@ -23,29 +22,29 @@ dotenv.load();
 
 // imports routes, giving server access to them
 var authRoutes = require("./controllers/auth_controller.js");
-//var routes = require('./controllers/swap_controller.js');
+var routes = require('./controllers/swap_controller.js');
 
 // configures Passport to use Auth0 and retrieves user info from auth0
 var strategy = new Auth0Strategy({
-        domain:       process.env.AUTH0_DOMAIN,
-        clientID:     process.env.AUTH0_CLIENT_ID,
-        clientSecret: process.env.AUTH0_CLIENT_SECRET,
-        callbackURL:  process.env.AUTH0_CALLBACK_URL || "http://localhost:3000/callback"
-    }, function(accessToken, refreshToken, extraParams, profile, done) {
-            var userProfile = {
-                "profile": profile,
-                "accessToken": accessToken,
-                "refreshToken": refreshToken,
-                "extraParams": extraParams
-            };
-            var userInfo = {
-                "userNickname": profile.nickname,
-                "userEmail": profile._json.email,
-                "userClientID": profile._json.clientID
-            }
-            console.log("userProfile: " + JSON.stringify(userProfile));
-            console.log("userInfo: " + JSON.stringify(userInfo));
-        return done(null, profile);
+    domain: process.env.AUTH0_DOMAIN,
+    clientID: process.env.AUTH0_CLIENT_ID,
+    clientSecret: process.env.AUTH0_CLIENT_SECRET,
+    callbackURL: process.env.AUTH0_CALLBACK_URL || "http://localhost:3000/callback"
+}, function(accessToken, refreshToken, extraParams, profile, done) {
+    var userProfile = {
+        "profile": profile,
+        "accessToken": accessToken,
+        "refreshToken": refreshToken,
+        "extraParams": extraParams
+    };
+    var userInfo = {
+        "userNickname": profile.nickname,
+        "userEmail": profile._json.email,
+        "userClientID": profile._json.clientID
+    }
+    console.log("userProfile: " + JSON.stringify(userProfile));
+    console.log("userInfo: " + JSON.stringify(userInfo));
+    return done(null, profile);
 });
 
 // adds the Auth0 strategy to passport framework
@@ -69,7 +68,7 @@ var port = process.env.PORT || 3000;
 // creates an express app instance
 var app = express();
 
-// serves static content from the "public" directory 
+// serves static content from the "public" directory
 app.use(express.static(process.cwd() + "/public"));
 
 // parses data
@@ -82,7 +81,7 @@ app.use(methodOverride("_method"));
 // *** auth part 2 starts; will combine with other code and remove ** when auth work done *****
 
 // logs every request to the console
-app.use(logger('dev')); 
+app.use(logger('dev'));
 
 // parses cookies holding session and users' information
 app.use(cookieParser());
@@ -90,7 +89,7 @@ app.use(cookieParser());
 // configures session attributes
 app.use(session({
     secret: "shhhhhhhhh", // encrypts session identifier
-    resave: true, // automatically writes to session store 
+    resave: true, // automatically writes to session store
     saveUninitialized: true // saves new sessions
 }));
 
@@ -116,14 +115,6 @@ db.sequelize.sync().then(function() {
     });
 });
 
-// *** NOTE: This .env setup should only be used for development. For production we should still set 
+// *** NOTE: This .env setup should only be used for development. For production we should still set
 // --- the environment variables in the standard way (If using Heroku, command line: heroku config:set <variable>=<value>
 // (can also use heroku gui under settings)
-
-
-
-
-
-
-
-
