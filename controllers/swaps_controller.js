@@ -125,4 +125,8 @@ app.post('/save-details', (req, res) => {
     res.sendFile(path.join(__dirname, "../public/uploadfile.html"));
 });
 
+app.get("/posts", function(req, res) {
+    res.render("posts");
+});
+
 module.exports = app;
