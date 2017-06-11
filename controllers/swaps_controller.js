@@ -51,14 +51,13 @@ app.get('/sign-s3', (req, res) => {
 
 });
 
-app.post('/api/addusertodb', (req, res) => {
+app.post('/api/addUserToDB', (req, res) => {
 
     db.Users.create({
         first_name: req.body.fName,
         last_name: req.body.lName,
         user_email: req.body.email,
-        user_id: req.body.uname,
-        password: req.body.password
+        user_id: req.body.uname
     }).then(function() {
         res.redirect("/newUser");
     });
