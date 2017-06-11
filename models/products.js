@@ -1,5 +1,5 @@
 // module.exports = function(sequelize, DataTypes) {
-//     var Products = sequelize.define("Products", { // 2nd argument in define method for columns 
+//     var Products = sequelize.define("Products", { // 2nd argument in define method for columns
 //             product_name: {
 //             	type: DataTypes.STRING,
 //             	allowNull: false,
@@ -18,13 +18,13 @@
 //             } //3rd col
 //         },// end of the 2nd argument in define method
 
-//         // We are creating a foreignkey boject which is the third argument in define method 
+//         // We are creating a foreignkey boject which is the third argument in define method
 //         //to join products model and users model
 //         {
 //             classMethods: {
 //             	associate: function(models) {
 //             		Products.belongsTo(models.Users, {
-//             			foreignKey: { allowNull: false }		
+//             			foreignKey: { allowNull: false }
 //             		});// end of belongdsTo method
 //             	}//end of associate
 //             }// end of classMethod
