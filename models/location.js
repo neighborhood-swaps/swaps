@@ -1,5 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
-    var Locations = sequelize.define("Locations", {
+    var Locations = sequelize.define("Locations", 
+        {
             swap_location: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -14,11 +15,20 @@ module.exports = function(sequelize, DataTypes) {
                 type: DataTypes.STRING,
                 allowNull: false,
                 validate: { len: [1] }
-            },
+            }
+        },
+        {
+            timestamps: false
+        },
+        {
             classMethods: {
                 associate: function(models) {
-                        Products.hasMany(models.Locations, { onDelete: "cascade" });
-                    } 
+                    Products.hasMany(models.Locations, 
+                        { 
+                            onDelete: "cascade",
+                        } 
+                    );
+                } 
             }
         }
     ); 
