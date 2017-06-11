@@ -13,19 +13,19 @@ app.get('/api/newUser', function(req, res) {
 });
 
 app.post('/api/postItem', function(req, res) {
-
+console.log("in get /api/postItem in swaps controller");
     db.Products.create({
         product_name: req.body.prodName,
-        category: req.body.category,
-        product_description: req.body.description,
+        category: req.body.categoryInput,
+        product_description: req.body.descriptionInput,
         img_location: req.body.img,
-        condition: req.body.condition,
-        availabilitiy: req.body.available,
-        swap_location: req.body.location,
-        comments: req.body.comments,
-        user_id: req.body.user_id
+        condition: req.body.conditionInput,
+        availabilitiy: req.body.availabilityInput,
+        swap_location: req.body.swap_locationInput,
+        comments: req.body.commentsInput,
+        user_id: req.body.userIDInput
     }).then(function() {
-        res.render("/posts", );
+        res.render("/posts");
     });
 
 });
@@ -123,7 +123,9 @@ app.post('/save-details', (req, res) => {
 });
 
 app.get("/posts", function(req, res) {
+    
     res.render("posts");
 });
 
+/////////////////////////////
 module.exports = app;
