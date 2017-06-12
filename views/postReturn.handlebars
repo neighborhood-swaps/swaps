@@ -1,8 +1,8 @@
 {{!-- THE BELOW SECTION IS FOR RETRIEVING POSTS FROM THE DATABASE --}}
 			<div class="col-sm-4">
 				<div id="postsDiv">
-					{{each}}
-						{{#if this.posts}}
+					{{#each postData}}
+						{{!-- {{#if this.postData}} --}}
 							<div class="">
 								<div class="row" id="">
 									<div class="col-sm-12" id="">
@@ -40,7 +40,7 @@
 									</div>
 								</div>
 							</div>
-						{{/if}}
+						{{!-- {{/if}} --}}
 					{{/each}}
 				</div>
 			</div>
