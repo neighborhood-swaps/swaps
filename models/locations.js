@@ -1,4 +1,3 @@
-// ****************** WORKING DATABASE ********************
 
 module.exports = function(sequelize, DataTypes) {
     var Locations = sequelize.define("Locations", 
