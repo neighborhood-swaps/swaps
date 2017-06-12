@@ -12,3 +12,9 @@ body {
 	margin: 40px auto; 
 	padding: 10px;
 }
+
+/* The following lines were added by Amer*/
+#map {
+	height: 40%;
+	width: 40%;
+}

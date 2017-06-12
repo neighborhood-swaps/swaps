@@ -69,7 +69,7 @@ app.get('/sign-s3', (req, res) => {
 
 });
 
-app.post('/api/addUserToDB', (req, res) => {
+app.post('/api/addUserToDB', function(req, res)  {
 
     db.Users.create({
         first_name: req.body.fName,
