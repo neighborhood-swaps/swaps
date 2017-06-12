@@ -37,11 +37,6 @@
 
 module.exports = function(sequelize, DataTypes) {
     var Products = sequelize.define("Products", { 
-			started_at: {
-			  type: DataTypes.DATE,
-			  allowNull: false,
-			  defaultValue: DataTypes.NOW
-			},
             category: {
             	type: DataTypes.STRING,
             	allowNull: false,
@@ -89,7 +84,7 @@ module.exports = function(sequelize, DataTypes) {
                         {
                             onDelete: "cascade",
                             foreignKey: {
-                                allowNull: false
+                                // allowNull: false
                             }
                         }
                     );		
@@ -99,7 +94,7 @@ module.exports = function(sequelize, DataTypes) {
                         {
                             onDelete: "cascade",
                             foreignKey: {
-                                allowNull: false
+                                // allowNull: false
                             }               
                         }
                     );
