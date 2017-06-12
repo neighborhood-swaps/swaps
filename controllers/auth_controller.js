@@ -5,12 +5,19 @@ var ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn();
 var router = express.Router();
 
 
+//************** CODE FOR IMAGES START ***************************
+
 var db = require("../models");
 var uuid = require("uuid");
 var path = require("path");
 var aws = require('aws-sdk');
 
 const S3_BUCKET = process.env.S3_BUCKET_NAME;
+
+//************** CODE FOR IMAGES END ***************************
+
+//************** CODE FOR AUTH START ***************************
+
 
 // sets AuthO credentials 
 var env = {
@@ -65,17 +72,16 @@ router.post("/api/user", function(req,res) {
     // };
 });
 
+//************** CODE FOR AUTH END ***************************
+
+//************** CODE FOR POSTS/SWAPS START ******************
+
 // renders 404 page 
 router.get("/404", function(req, res, next) {
     res.render("404");
 });
-///////////////////////
 
-
-router.get('/api/newUser', function(req, res) {
-    res.sendFile(path.join(__dirname, "../public/adduser.html"));
-});
-
+// adds post data to db then redirects to homepage
 router.post('/api/postItem', function(req, res) {
 console.log(req.body);
     db.Products.create({
@@ -94,74 +100,55 @@ console.log(req.body);
     });
 });
 
-router.get('/household', function(req, res) {
-    db.Products.findAll({
-        where: {
-            user_id: 1
-        } 
-    }).then(function(data) {
-        var postData = {
-            data: data
-        };
-        res.render("postReturn", postData);
-    });
-});
+//exampe/test
+// router.get('/electronics', function(req, res) {
+//     db.Products.findAll({
+//         where: {
+//             category: req.params.category, 
+//             user_id: 1
+//         } 
+//     }).then(function(data) {
+//         var postData = {
+//             data: data
+//         };
+//         res.render("postReturn", postData);
+//     });
+// });
 
-router.get('/furniture', function(req, res) {
-    db.Products.findAll({
-        where: {
-            user_id: 1
-        } 
-    }).then(function(data) {
-        var postData = {
-            data: data
-        };
-        res.render("postReturn", postData);
-    });
-});
 
-router.get('/tools', function(req, res) {
-    db.Products.findAll({
-        where: {
-            user_id: 1
-        } 
-    }).then(function(data) {
-        var postData = {
-            data: data
-        };
-        res.render("postReturn", postData);
-    });
-});
-
-router.get('/toys', function(req, res) {
-    db.Products.findAll({
-        where: {
-            user_id: 1
-        } 
-    }).then(function(data) {
-        var postData = {
-            data: data
-        };
-        res.render("postReturn", postData);
-    });
-});
-
-router.get('/electronics', function(req, res) {
-    db.Products.findAll({
-        where: {
-            user_id: 1
-        } 
-    }).then(function(data) {
-        var postData = {
-            data: data
-        };
-        res.render("postReturn", postData);
-    });
+router.get("/api/posts/category/:category", function(req, res) {
+    db.Post.findAll({
+            where: {
+                category: req.params.category, 
+            }
+        })
+        .then(function(dbPost) {
+            res.json(dbPost);
+        });
 });
 
 
 
+router.get("/posts", function(req, res) {
+    res.render("posts");
+});
 
+router.get("/userPosts", function(req, res) {
+    res.render("postReturn");
+});
+
+router.get("/search", function(req, res) {
+    res.render("search");
+});
+
+//************** CODE FOR POSTS/SWAPS END ******************
+
+
+//************** CODE FOR IMAGES START ***************************
+
+router.get('/api/newUser', function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/adduser.html"));
+});
 
 router.get('/api/upload', function(req, res) {
     res.sendFile(path.join(__dirname, "../public/uploadfile.html"));
@@ -239,33 +226,16 @@ router.get('/api/getAllImages/:', function(req, res) {
 
 });
 
-router.get("/api/posts/category/:category", function(req, res) {
-    db.Post.findAll({
-            where: {
-                category: req.params.category
-            }
-        })
-        .then(function(dbPost) {
-            res.json(dbPost);
-        });
-});
-
 // Need to figure out how to correctly handle this return
 router.post('/save-details', (req, res) => {
     res.sendFile(path.join(__dirname, "../public/uploadfile.html"));
 });
 
-router.get("/posts", function(req, res) {
-    res.render("posts");
-});
+//************** CODE FOR IMAGES END ***************************
 
-router.get("/userPosts", function(req, res) {
-    res.render("postReturn");
-});
-
-router.get("/search", function(req, res) {
-    res.render("search");
-});
 
 module.exports = router;
+
+
+
 
