@@ -36,30 +36,31 @@
 //******* WORKING DATABASE **************
 
 module.exports = function(sequelize, DataTypes) {
-    var Products = sequelize.define("Products", { 
+    var Products = sequelize.define("Products", 
+        { 
             category: {
-            	type: DataTypes.STRING,
-            	allowNull: false,
-            	validate: { len:[1] }
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: { len:[1] }
             }, 
             description: {
-            	type: DataTypes.STRING,
-            	allowNull: false,
-            	validate: { len:[1] }
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: { len:[1] }
             }, 
             img_location: {
-            	type: DataTypes.STRING,
-            	allowNull: false
+                type: DataTypes.STRING,
+                allowNull: false
             },
-           	prod_condition: {
-            	type: DataTypes.STRING,
+               prod_condition: {
+                type: DataTypes.STRING,
                 allowNull: true,
-            	validate: { len:[1] }
+                validate: { len:[1] }
             }, 
             availabilitiy: {
-            	type: DataTypes.STRING,
-            	allowNull: false,
-            	validate: { len:[1] }
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: { len:[1] }
             }, 
             swap_location: {
             	type: DataTypes.STRING,
@@ -75,7 +76,6 @@ module.exports = function(sequelize, DataTypes) {
             	allowNull: false,
             	validate: { len:[1] }
             } 
-            
         },
         {
             classMethods: {
