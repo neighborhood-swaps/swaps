@@ -5,10 +5,10 @@
 			{{#each posts}}
 				<div class="">
 					<div class="row" id="">
-						<div class="col-sm-12" id="">
+						<div class="col-sm-12" id="{{this.id}}" data="{{this.user_id}}">
 							<div class="row">
 								<div class="col-sm-12">
-									{{!-- <p id="owner"> Owner: {{this.user_name}} </p> --}}
+									<p id="owner"> Owner: {{this.user_name}} </p>
 									<p id="description"> {{this.description}} </p>
 									<img id="image" src="{{img_location}}">
 									<p id="condition"> Condition: {{prod_condition}} </p>

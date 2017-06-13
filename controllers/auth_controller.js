@@ -80,29 +80,19 @@ router.get("/user", ensureLoggedIn, function(req, res, next) {
 
 //************** CODE FOR POSTS/SWAPS START ******************
 
-//exampe/test
-// router.get('/electronics', function(req, res) {
-//     db.Products.findAll({
-//         where: {
-//             category: req.params.category,
-//             user_id: 1
-//         }
-//     }).then(function(data) {
-//         var postData = {
-//             data: data
-//         };
-//         res.render("postReturn", postData);
-//     });
-// });
-
-router.get("/api/posts/category/:category", function(req, res) {//--------------???????????--------------
-    db.Post.findAll({
+// retrieves data by category
+router.get("/api/posts/:category", function(req, res) {//--------------???????????--------------
+    console.log()
+    db.Products.findAll({
             where: {
-                category: req.params.category,
+                category: req.params.category
             }
         })
-        .then(function(dbPost) {
-            res.json(dbPost);
+        .then(function(dbPosts) {
+            var postData = {
+                posts: dbPosts
+            }
+            res.render("postReturn", postData);
         });
 });
 
@@ -177,6 +167,7 @@ router.post('/api/postItem', upload.array('upl', 1), function(req, res, next) {
 //adds post form data to db then redirects to user page
 // router.post('/api/postItem', function(req, res) {
 //     db.Products.create({
+//         user_name: req.body.nameInput,
 //         category: req.body.categoryInput,
 //         description: req.body.descriptionInput,
 //         img_location: "testlocation",
