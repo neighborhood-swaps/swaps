@@ -10,7 +10,7 @@
 								<div class="col-sm-12">
 									<p id="owner"> Owner: {{this.user_name}} </p>
 									<p id="description"> {{this.description}} </p>
-									<img id="image" src="{{img_location}}">
+									<img id="image" src="{{this.img_location}}">
 									<p id="condition"> Condition: {{prod_condition}} </p>
 									<p id="availability"> Availability: {{availability}} </p>
 									<p id="swap_location"> Swap Location: {{swap_location}} </p>
@@ -32,8 +32,8 @@
 								</div>
 								<div class="col-sm-4">
 									<form>
-										<input type="hidden" name="" value="{{this.product_id}}">
-										<button type="submit" class="btn">Location</button>
+										<input id="swapLocation" type="hidden" name="" data="{{this.swap_location}}">
+										<button id="submitSwapLocation" type="submit" class="btn">Location</button>
 									</form>
 								</div>
 							</div>

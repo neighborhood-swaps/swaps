@@ -148,30 +148,13 @@ var upload = multer({
 //-----------------------------------------------------------------------------------------------
 
 // adds post form data to db then redirects to user page
-router.post('/api/postItem', upload.array('upl', 1), function(req, res, next) {
-    console.log(req);
-    db.Products.create({
-        category: req.body.categoryInput,
-        description: req.body.descriptionInput,
-        img_location: req.files[0].location,
-        condition: req.body.conditionInput,
-        availabilitiy: req.body.availabilityInput,
-        swap_location: req.body.swap_locationInput,
-        comments: req.body.commentsInput,
-        user_id: req.user.id,
-    }).then(function() {
-        res.redirect("/user");
-    });
-});
-
-//adds post form data to db then redirects to user page
-// router.post('/api/postItem', function(req, res) {
+// router.post('/api/postItem', upload.array('upl', 1), function(req, res, next) {
+//     console.log(req);
 //     db.Products.create({
-//         user_name: req.body.nameInput,
 //         category: req.body.categoryInput,
 //         description: req.body.descriptionInput,
-//         img_location: "testlocation",
-//         prod_condition: req.body.conditionInput,
+//         img_location: req.files[0].location,
+//         condition: req.body.conditionInput,
 //         availabilitiy: req.body.availabilityInput,
 //         swap_location: req.body.swap_locationInput,
 //         comments: req.body.commentsInput,
@@ -180,6 +163,23 @@ router.post('/api/postItem', upload.array('upl', 1), function(req, res, next) {
 //         res.redirect("/user");
 //     });
 // });
+
+//adds post form data to db then redirects to user page
+router.post('/api/postItem', upload.array('upl', 1), function(req, res) {
+    db.Products.create({
+        user_name: req.body.nameInput,
+        category: req.body.categoryInput,
+        description: req.body.descriptionInput,
+        img_location: req.files[0].location,
+        prod_condition: req.body.conditionInput,
+        availabilitiy: req.body.availabilityInput,
+        swap_location: req.body.swap_locationInput,
+        comments: req.body.commentsInput,
+        user_id: req.user.id,
+    }).then(function() {
+        res.redirect("/user");
+    });
+});
 
 //-----------------------------------------------------------------------------------------------
 
