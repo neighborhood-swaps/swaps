@@ -1,9 +1,11 @@
+
 // sets dependencies
 var express = require("express");
 var passport = require("passport");
 var ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn();
 var router = express.Router();
 
+//NOTE: COOKIE WITH USER INFO SENT WITH EVERY REQUEST TO SERVER. YOU CAN RETRIEVE THE USER ID WITH REQ.USER.ID.
 
 //************** CODE FOR IMAGES START ***************************
 
@@ -11,15 +13,31 @@ var db = require("../models");
 var uuid = require("uuid");
 var path = require("path");
 var aws = require('aws-sdk');
-
+var multer = require('multer');
+var multerS3 = require('multer-s3');
 const S3_BUCKET = process.env.S3_BUCKET_NAME;
+s3 = new aws.S3();
+
+// temp route to test DB and image returns ------------------------------------ temp temp temp temp -------
+router.get("/myposts", function(req, res, next) {
+    db.Products.findAll({
+        where: {
+            user_id: "apj124"
+        }
+    }).then(function(data) {
+        var postData = {
+            data: data
+        };
+        res.render("postReturn", postData);
+    });
+
+});
 
 //************** CODE FOR IMAGES END ***************************
 
 //************** CODE FOR AUTH START ***************************
 
-
-// sets AuthO credentials 
+// sets AuthO credentials
 var env = {
     AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
     AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
@@ -31,18 +49,18 @@ router.get("/", function(req, res, next) {
     res.render("index", { env: env });
 });
 
-// renders login 
+// renders login
 router.get("/login",
-    function(req, res){
+    function(req, res) {
         res.render("login", { env: env });
 });
 
 // logs user out, then redirects to home page
-router.get("/logout", function(req, res){
+router.get("/logout", function(req, res) {
     req.logout();
     res.redirect("/");
 });
- 
+
 // opens auth0 for authorization, then redirects to user page if authentication succeeds
 router.get("/callback",
     passport.authenticate("auth0", { failureRedirect: "/404" }),
@@ -51,7 +69,7 @@ router.get("/callback",
             throw new Error('user null');
         }
         res.redirect(req.session.returnTo || "/user");
-});
+    });
 
 // ensures user is logged in, then renders user page
 router.get("/user", ensureLoggedIn, function(req, res, next) {
@@ -62,36 +80,13 @@ router.get("/user", ensureLoggedIn, function(req, res, next) {
 
 //************** CODE FOR POSTS/SWAPS START ******************
 
-// renders 404 page 
-router.get("/404", function(req, res, next) {
-    res.render("404");
-});
-
-// adds post data to db then redirects to homepage
-router.post("/api/postItem", function(req, res) {
-console.log(req.body);
-    db.Products.create({
-        category: req.body.categoryInput,
-        description: req.body.descriptionInput,
-        img_location: "testlocation",
-        condition: req.body.conditionInput,
-        availabilitiy: req.body.availabilityInput,
-        swap_location: req.body.swap_locationInput,
-        comments: req.body.commentsInput,
-        user_id: req.body.userIDInput,
-        UserUserId: req.body.userUserID
-    }).then(function() {
-        res.redirect("/");
-    });
-});
-
 //exampe/test
 // router.get('/electronics', function(req, res) {
 //     db.Products.findAll({
 //         where: {
-//             category: req.params.category, 
+//             category: req.params.category,
 //             user_id: 1
-//         } 
+//         }
 //     }).then(function(data) {
 //         var postData = {
 //             data: data
@@ -100,11 +95,10 @@ console.log(req.body);
 //     });
 // });
 
-
-router.get("/api/posts/category/:category", function(req, res) {
+router.get("/api/posts/category/:category", function(req, res) {//--------------???????????--------------
     db.Post.findAll({
             where: {
-                category: req.params.category, 
+                category: req.params.category,
             }
         })
         .then(function(dbPost) {
@@ -112,22 +106,86 @@ router.get("/api/posts/category/:category", function(req, res) {
         });
 });
 
-
-
+// displays post input form
 router.get("/posts", function(req, res) {
     res.render("posts");
 });
 
+// displays user's posts
 router.get("/userPosts", function(req, res) {
     res.render("postReturn");
 });
 
+// displays category search buttons
 router.get("/search", function(req, res) {
     res.render("search");
 });
 
 //************** CODE FOR POSTS/SWAPS END ******************
 
+//************** CODE FOR IMAGES START ***************************
+
+//-----------------------------------------------------------------------------------------------
+
+var upload = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: S3_BUCKET,
+        key: function(req, file, cb) {
+            cb(null, uuid.v4() + file.originalname); //use Date.now() for unique file keys
+        }
+    })
+});
+
+//-----------------------------------------------------------------------------------------------
+
+//************** CODE FOR IMAGES END ***************************
+
+//************** CODE FOR POSTS/SWAPS START **********************
+
+//-----------------------------------------------------------------------------------------------
+
+// adds post form data to db then redirects to user page
+router.post('/api/postItem', upload.array('upl', 1), function(req, res, next) {
+    console.log(req);
+    db.Products.create({
+        category: req.body.categoryInput,
+        description: req.body.descriptionInput,
+        img_location: req.files[0].location,
+        condition: req.body.conditionInput,
+        availabilitiy: req.body.availabilityInput,
+        swap_location: req.body.swap_locationInput,
+        comments: req.body.commentsInput,
+        user_id: req.user.id,
+    }).then(function() {
+        res.redirect("/user");
+    });
+});
+
+// adds post form data to db then redirects to user page
+// router.post('/api/postItem', function(req, res) {
+//     db.Products.create({
+//         category: req.body.categoryInput,
+//         description: req.body.descriptionInput,
+//         img_location: "testlocation",
+//         prod_condition: req.body.conditionInput,
+//         availabilitiy: req.body.availabilityInput,
+//         swap_location: req.body.swap_locationInput,
+//         comments: req.body.commentsInput,
+//         user_id: req.user.id,
+//     }).then(function() {
+//         res.redirect("/user");
+//     });
+// });
+
+//-----------------------------------------------------------------------------------------------
+
+// renders 404 page
+router.get("/404", function(req, res, next) {
+    res.render("404");
+});
+
+//************** CODE FOR POSTS/SWAPS END ************************
 
 //************** CODE FOR IMAGES START ***************************
 
@@ -218,9 +276,4 @@ router.post('/save-details', (req, res) => {
 
 //************** CODE FOR IMAGES END ***************************
 
-
 module.exports = router;
-
-
-
-

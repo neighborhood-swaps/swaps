@@ -108,9 +108,6 @@ app.use(passport.session());
 // handles authentication routes
 app.use("/", authRoutes);
 
-//just for testing
-// app.use("/", routes);
-
 // *** auth part 2 ends *******************************************************
 
 // sets templating engine to handlebars

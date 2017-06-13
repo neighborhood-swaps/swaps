@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-               prod_condition: {
+            prod_condition: {
                 type: DataTypes.STRING,
                 allowNull: true,
                 validate: { len:[1] }
@@ -37,7 +37,7 @@ module.exports = function(sequelize, DataTypes) {
             }, 
             user_id: {
             	type: DataTypes.STRING,
-            	allowNull: false,
+            	allowNull: true,//-----------------------------------temp true
             	validate: { len:[1] }
             } 
         },
