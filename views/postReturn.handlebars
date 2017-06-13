@@ -2,13 +2,12 @@
 			<div class="col-sm-4">
 				<div id="postsDiv">
 					{{#each postData}}
-						{{!-- {{#if this.postData}} --}}
 							<div class="">
 								<div class="row" id="">
 									<div class="col-sm-12" id="">
 										<div class="row">
 											<div class="col-sm-12">
-												<p id="owner"> Owner: {{this.first_name}} </p>
+												<p id="owner"> Owner: {{this.user_name}} </p>
 											    <p id="description"> Description {{this.description}} </p>
 											    <img id="image" src="{{this.img_location}}">
 											    <p id="condition"> Condition: {{this.condition}} </p>
@@ -40,7 +39,6 @@
 									</div>
 								</div>
 							</div>
-						{{!-- {{/if}} --}}
 					{{/each}}
 				</div>
 			</div>
