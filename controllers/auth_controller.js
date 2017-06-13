@@ -113,7 +113,19 @@ router.get("/posts", function(req, res) {
 
 // displays user's posts
 router.get("/userPosts", function(req, res) {
-    res.render("postReturn");
+    console.log("req.user.id: " + req.user.id);
+    db.Products.findAll({
+            where: {
+                user_id: req.user.id
+            }
+        })
+        .then(function(dbPosts) {
+            var postData = {
+                posts: dbPosts
+            }
+            console.log("dbPosts:  " + JSON.stringify(dbPosts));
+            res.render("postReturn", postData);
+    });
 });
 
 // displays category search buttons
@@ -162,7 +174,7 @@ router.post('/api/postItem', upload.array('upl', 1), function(req, res, next) {
     });
 });
 
-// adds post form data to db then redirects to user page
+//adds post form data to db then redirects to user page
 // router.post('/api/postItem', function(req, res) {
 //     db.Products.create({
 //         category: req.body.categoryInput,
