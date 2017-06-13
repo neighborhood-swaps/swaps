@@ -58,20 +58,6 @@ router.get("/user", ensureLoggedIn, function(req, res, next) {
     res.render("user", { user: req.user });
 });
 
-// enters user name and phone in db from sign-in form
-router.post("/api/user", function(req,res) {
-    // if(req.body.name !== "") {
-    //     db.Users.create({
-    //         name: req.body.name,
-    //         phone: req.body.phone
-    //       }).then(function() {
-    //         res.redirect("/");
-    //       }).catch(function(err) {
-    //         res.render("400");
-    //     });
-    // };
-});
-
 //************** CODE FOR AUTH END ***************************
 
 //************** CODE FOR POSTS/SWAPS START ******************
@@ -82,10 +68,9 @@ router.get("/404", function(req, res, next) {
 });
 
 // adds post data to db then redirects to homepage
-router.post('/api/postItem', function(req, res) {
+router.post("/api/postItem", function(req, res) {
 console.log(req.body);
     db.Products.create({
-        product_name: req.body.prodName,
         category: req.body.categoryInput,
         description: req.body.descriptionInput,
         img_location: "testlocation",

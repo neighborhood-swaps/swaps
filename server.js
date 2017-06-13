@@ -42,8 +42,14 @@ var strategy = new Auth0Strategy({
         "userEmail": profile._json.email,
         "userClientID": profile._json.clientID
     }
-    console.log("userProfile: " + JSON.stringify(userProfile));
-    console.log("userInfo: " + JSON.stringify(userInfo));
+    //logs user id and email to database
+    db.Users.create({
+            user_id: profile.id,
+            user_email: profile._json.email
+        }).then(function() {
+        }).catch(function(err) {
+            console.log(err);
+    });
     return done(null, profile);
 });
 
