@@ -1,4 +1,4 @@
-{{!-- TO CAPTURE USERINFO FROM AUTH0 USE: user.picture, user.nickname, user._json.email, user._json.clientID --}}
+{{!-- TO CAPTURE USERINFO FROM AUTH0 USE: user.picture, user.nickname, user._json.email, user.id --}}
 
 {{!-- WE CAN ALSO USE USERNAME FROM DATABASE INSTEAD OF USER NICKNAME FROM AUTH0 --}}
 
@@ -8,3 +8,13 @@
 
 <br/>
 <a href="/logout"> <button> Logout </button> </a>
+
+<form action="/posts" method="GET">
+	<button id="post" type="submit"> Post An Item </button>
+</form>
+<form action="/userPosts" method="GET">
+	<button id="myPosts" type="submit"> My Posts </button>
+</form>
+<form action="/search" method="GET">
+	<button id="searchPosts" type="submit"> Search Posts </button>
+</form>

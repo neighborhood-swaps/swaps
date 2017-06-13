@@ -1,4 +1,5 @@
 
+
 // ****************** WORKING DATABASE ********************
 
 module.exports = function(sequelize, DataTypes) {
@@ -9,21 +10,16 @@ module.exports = function(sequelize, DataTypes) {
                 primaryKey: true,
                 autoIncrement: false,
                 allowNull: false,
-                validate: { len: [1] } 
-            },
-            first_name: {
-                type: DataTypes.STRING,
-                allowNull: false,
                 validate: { len: [1] }
             }, 
-            last_name: {
+            user_name: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                allowNull: true,
                 validate: { len: [1] }
             }, 
             user_email: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                allowNull: true,
                 validate: { isEmail: true }
             }
         }, 

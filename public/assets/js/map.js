@@ -2,7 +2,7 @@
 $("#submitSwapLocation").on("click", function(event){
 	event.preventDefault();
 	var map;             
-	var sawpLocation = $("#swapLocation").val().trim();
+	var sawpLocation = $("#swapLocation").attr("data");
 	console.log(swapLocation);
 	initMap();
 	function initMap() {

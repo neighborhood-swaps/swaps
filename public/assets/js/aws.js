@@ -1,75 +1,74 @@
-/*
- Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
-*/
+// much of the contents in the file comes from
+// https://github.com/flyingsparx/NodeDirectUploader.git
 
 
-/*
- * Import required packages.
- * Packages should be installed with "npm install".
- */
-const express = require('express');
-const aws = require('aws-sdk');
+$(document).ready(function() {
 
-/*
- * Set-up and run the Express app.
- */
-const app = express();
-app.set('views', './views');
-app.use(express.static('./public'));
-app.engine('html', require('ejs').renderFile);
-app.listen(process.env.PORT || 3000);
+    // function uploadFile(file, signedRequest, url) {
+    //     const xhr = new XMLHttpRequest();
+    //     xhr.open('PUT', signedRequest);
+    //     xhr.onreadystatechange = () => {
+    //         if (xhr.readyState === 4) {
+    //             if (xhr.status === 200) {
+    //                 // document.getElementById('preview').src = url;
+    //                 // document.getElementById('avatar-url').value = url;
+    //                 console.log("Uploaded File");
+    //             } else {
+    //                 alert('Could not upload file.');
+    //             }
+    //         }
+    //     };
+    //     xhr.send(file);
+    // }
 
-/*
- * Load the S3 information from the environment variables.
- */
-const S3_BUCKET = 'unc2017project2swaps';
+    // function getSignedRequest(file) {
+    //     var uname = document.getElementById('uname').value
+    //     var desc = document.getElementById('description').value
+    //     const xhr = new XMLHttpRequest();
+    //     xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}&uname=${uname}&desc=${desc}`);
+    //     xhr.onreadystatechange = () => {
+    //         if (xhr.readyState === 4) {
+    //             if (xhr.status === 200) {
+    //                 const response = JSON.parse(xhr.responseText);
+    //                 uploadFile(file, response.signedRequest, response.url);
+    //             } else {
+    //                 alert('Could not get signed URL.');
+    //             }
+    //         }
+    //     };
+    //     xhr.send();
+    // }
 
-/*
- * Respond to GET requests to /account.
- * Upon request, render the 'account.html' web page in views/ directory.
- */
-app.get('/account', (req, res) => res.render('account.html'));
+    // function initUpload() {
 
-/*
- * Respond to GET requests to /sign-s3.
- * Upon request, return JSON containing the temporarily-signed S3 request and
- * the anticipated URL of the image.
- */
-app.get('/sign-s3', (req, res) => {
-    const s3 = new aws.S3();
-    const fileName = req.query['file-name'];
-    const fileType = req.query['file-type'];
-    const s3Params = {
-        Bucket: S3_BUCKET,
-        Key: fileName,
-        Expires: 60,
-        ContentType: fileType,
-        ACL: 'public-read'
+    //     const files = document.getElementById('my-file-selector').files;
+    //     const file = files[0];
+    //     if (file == null) {
+    //         return alert('No file selected.');
+    //     } else {
+    //         var reader = new FileReader();
+    //         reader.onload = function(e) {
+    //             $('#preview').attr('src', e.target.result);
+    //         }
+    //         reader.readAsDataURL(file);
+    //     }
+    //     getSignedRequest(file);
+    // }
+
+    document.getElementById("my-file-selector").onchange = function() {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            // get loaded data and render thumbnail.
+            document.getElementById("preview").src = e.target.result;
+        };
+
+        // read the image file as a data URL.
+        reader.readAsDataURL(this.files[0]);
     };
 
-    s3.getSignedUrl('putObject', s3Params, (err, data) => {
-        if (err) {
-            console.log(err);
-            return res.end();
-        }
-        const returnData = {
-            signedRequest: data,
-            url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
-        };
-        res.write(JSON.stringify(returnData));
-        res.end();
-    });
-});
+    // (() => {
+    //     document.getElementById('postForm').onclick = initUpload;
+    // })();
 
-/*
- * Respond to POST requests to /submit_form.
- * This function needs to be completed to handle the information in
- * a way that suits your application.
- */
-app.post('/save-details', (req, res) => {
-    // TODO: Read POSTed form data and do something useful
 });
