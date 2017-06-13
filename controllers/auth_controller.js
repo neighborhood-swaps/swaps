@@ -11,15 +11,18 @@ var db = require("../models");
 var uuid = require("uuid");
 var path = require("path");
 var aws = require('aws-sdk');
-
+var multer = require('multer');
+var multerS3 = require('multer-s3');
 const S3_BUCKET = process.env.S3_BUCKET_NAME;
+s3 = new aws.S3();
+
 
 //************** CODE FOR IMAGES END ***************************
 
 //************** CODE FOR AUTH START ***************************
 
 
-// sets AuthO credentials 
+// sets AuthO credentials
 var env = {
     AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID,
     AUTH0_DOMAIN: process.env.AUTH0_DOMAIN,
@@ -31,18 +34,34 @@ router.get("/", function(req, res, next) {
     res.render("index", { env: env });
 });
 
-// renders login 
-router.get("/login",
-    function(req, res){
-        res.render("login", { env: env });
+
+// temp route to test DB and image returns
+router.get("/myposts", function(req, res, next) {
+    db.Products.findAll({
+        where: {
+            user_id: "apj124"
+        }
+    }).then(function(data) {
+        var postData = {
+            data: data
+        };
+        res.render("postReturn", postData);
+    });
+
 });
 
+// renders login
+router.get("/login",
+    function(req, res) {
+        res.render("login", { env: env });
+    });
+
 // logs user out, then redirects to home page
-router.get("/logout", function(req, res){
+router.get("/logout", function(req, res) {
     req.logout();
     res.redirect("/");
 });
- 
+
 // opens auth0 for authorization, then redirects to user page if authentication succeeds
 router.get("/callback",
     passport.authenticate("auth0", { failureRedirect: "/404" }),
@@ -51,7 +70,7 @@ router.get("/callback",
             throw new Error('user null');
         }
         res.redirect(req.session.returnTo || "/user");
-});
+    });
 
 // ensures user is logged in, then renders user page
 router.get("/user", ensureLoggedIn, function(req, res, next) {
@@ -59,7 +78,7 @@ router.get("/user", ensureLoggedIn, function(req, res, next) {
 });
 
 // enters user name and phone in db from sign-in form
-router.post("/api/user", function(req,res) {
+router.post("/api/user", function(req, res) {
     // if(req.body.name !== "") {
     //     db.Users.create({
     //         name: req.body.name,
@@ -76,19 +95,30 @@ router.post("/api/user", function(req,res) {
 
 //************** CODE FOR POSTS/SWAPS START ******************
 
-// renders 404 page 
+// renders 404 page
 router.get("/404", function(req, res, next) {
     res.render("404");
 });
 
+
+var upload = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: S3_BUCKET,
+        key: function(req, file, cb) {
+            cb(null, uuid.v4() + file.originalname); //use Date.now() for unique file keys
+        }
+    })
+});
+
 // adds post data to db then redirects to homepage
-router.post('/api/postItem', function(req, res) {
-console.log(req.body);
+router.post('/api/postItem', upload.array('upl', 1), function(req, res, next) {
+    console.log(req);
     db.Products.create({
         product_name: req.body.prodName,
         category: req.body.categoryInput,
         description: req.body.descriptionInput,
-        img_location: "testlocation",
+        img_location: req.files[0].location,
         condition: req.body.conditionInput,
         availabilitiy: req.body.availabilityInput,
         swap_location: req.body.swap_locationInput,
@@ -104,9 +134,9 @@ console.log(req.body);
 // router.get('/electronics', function(req, res) {
 //     db.Products.findAll({
 //         where: {
-//             category: req.params.category, 
+//             category: req.params.category,
 //             user_id: 1
-//         } 
+//         }
 //     }).then(function(data) {
 //         var postData = {
 //             data: data
@@ -119,15 +149,13 @@ console.log(req.body);
 router.get("/api/posts/category/:category", function(req, res) {
     db.Post.findAll({
             where: {
-                category: req.params.category, 
+                category: req.params.category,
             }
         })
         .then(function(dbPost) {
             res.json(dbPost);
         });
 });
-
-
 
 router.get("/posts", function(req, res) {
     res.render("posts");
@@ -145,6 +173,7 @@ router.get("/search", function(req, res) {
 
 
 //************** CODE FOR IMAGES START ***************************
+
 
 router.get('/api/newUser', function(req, res) {
     res.sendFile(path.join(__dirname, "../public/adduser.html"));
@@ -235,7 +264,3 @@ router.post('/save-details', (req, res) => {
 
 
 module.exports = router;
-
-
-
-
