@@ -1,7 +1,23 @@
 {{!-- THE BELOW SECTION IS FOR RETRIEVING POSTS FROM THE DATABASE  --}}
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">SWAPS</a>
+	    <ul class="right hide-on-med-and-down">
+	       <li><a href="#">Post an Item</a></li>
+	       <li><a href="#">Search Offers</a></li>
+	       <li><a href="#">Manage Offers</a></li>
+	       <li><a href="#">Log In</a></li>
+	    </ul>
 
-	<div class="col-sm-4">
-		<div id="postsDiv">
+      	<ul id="nav-mobile" class="side-nav">
+        	<li><a href="#">Navbar Link</a></li>
+      	</ul>
+      	<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+
+<div class="container" id="postsDiv">
+	<div class="section">
+		<div class="row">
 			{{#each posts}}
 				<div class="">
 					<div class="row" id="">
@@ -44,3 +60,34 @@
 		</div>
 	</div>
 	<div id="map"></div>
+	          	<div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
+	            	<div class="card">
+	              		<div class="card-image">
+	              			<img id="image" src="{{this.img_location}}">
+	              		</div>
+	              		<div class="card-content">
+	                		<span id="description" class="card-title">{{this.description}}</span>
+	                		<p id="owner"> Owner: {{this.user_name}} </p>
+							<p id="condition"> Condition: {{prod_condition}} </p>
+							<p id="availability"> Availability: {{availability}} </p>
+							<p id="comments"> Comments: {{comments}} </p>
+	              		</div>
+	              		<div class="card-action">
+	                		<a href="#">Contact</a>
+	                		<a href="#">SWAP!</a>
+	                		<a href="#">Location</a>
+	              		</div>
+	            	</div>
+	          	</div>
+	        {{/each}}
+	    </div>
+	</div>
+</div>
+
+<footer class="page-footer orange">
+    <div class="footer-copyright">
+      	<div class="container">
+      		Made by The SWAPS Team
+      	</div>
+    </div>
+</footer>

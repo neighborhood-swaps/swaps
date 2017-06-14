@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var express = require("express");
 var app = express.Router();
 var db = require("../models");
@@ -130,5 +129,3 @@ app.get("/posts", function(req, res) {
 
 /////////////////////////////
 module.exports = app;
-=======
->>>>>>> e5543f811142f854f36f26443dc8798d08ee0bc4

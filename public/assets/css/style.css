@@ -8,7 +8,7 @@ body {
 }*/
 
 #root {
-	width: 280px; 
+	width: 310px; 
 	margin: 40px auto; 
 	padding: 10px;
 }
@@ -17,4 +17,11 @@ body {
 .mapClass {
 	height: 250px;
 	width: 250px;
+}
+.icon-block {
+ 	padding: 0 15px;
+}
+.icon-block .material-icons {
+    font-size: inherit;
+
 }
