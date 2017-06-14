@@ -1,5 +1,9 @@
- <div id="root"></div> 
-  
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left">SWAPS</a>
+    </div>
+</nav>
+
+<div id="root"></div>
 <script>
 
     var lock = new Auth0Lock("{{env.AUTH0_CLIENT_ID}}", "{{env.AUTH0_DOMAIN}}", { auth: {
@@ -13,6 +17,13 @@
     lock.show();
 
 </script>
+
+<footer class="page-footer orange z-depth-2">
+    <div class="container">
+        <div class="row">
+            <a class="grey-text text-lighten-4"> &#169; 2017 The SWAPS Team</a>
+    </div>
+</footer>
 
 
 
