@@ -19,6 +19,10 @@ body {
 	padding: 10px;
 }
 
+#userImage {
+		width: 310px; 
+}
+
 /* The following lines were added by Amer on June 11, 2017 at 11:02 pm */
 .mapClass {
 	height: 250px;
