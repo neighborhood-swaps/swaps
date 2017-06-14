@@ -1,4 +1,5 @@
 {{!-- THE BELOW SECTION IS FOR RETRIEVING POSTS FROM THE DATABASE  --}}
+
 <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left">SWAPS</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -30,11 +31,11 @@
 							<p id="comments"> Comments: {{this.comments}} </p>
 	              		</div>
 	              		<div class="card-action">
-	              		{{!-- contact button opens contact form and sends post owner an email--}}
-	                		<a href="/contact">Contact</a>
+	              		{{!-- contact button opens modal at bottom of this page with contact form and sends post owner an email--}}
+	                		<a href="#contactOwner">Contact</a>
 	                		{{!-- swap button places requester id, poster id and product id in swaps table,
-	                		and displays a popup saying a swap request has been sent --}}
-	                		<a href="">SWAP!</a>
+	                		and displays the modal at the bottom of this page saying a swap request has been sent --}}
+	                		<a href="#swap">SWAP!</a>
 	                		{{!-- location button creates a popup/modal of google maps showing address on map --}}
 	                		<a href="#">Location</a>
 	              		</div>
@@ -53,3 +54,48 @@
       	</div>
     </div>
 </footer>
+
+<!-- Contact Owner Modal -->
+<div id="contactOwner" class="modal">
+    <div class="modal-content ">
+        <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+        <h4>Contact Owner</h4>
+        <p>Your message will be emailed to {{this.user_name}}</p>
+        <form action="{{this.user_email}}" method="post" enctype="text/plain">
+          	<div class="row">
+            	<div class="input-field col s12">
+                	<input id="name" type="text" name="name" placeholder="Thomas Mahon" class="validate">
+                	<label for="name">Name</label>
+            	</div>
+           	</div>
+           	<div class="row">
+            	<div class="input-field col s12">
+                	<input id="email" type="text" name="email" placeholder="example@gmail.com" class="validate">
+                	<label for="email">Email</label>
+            	</div>
+            </div>
+           	<div class="row">
+           		<div class="input-field col s12">
+                	<textarea id="message" type="text" name="Message" class="validate"></textarea>
+                	<label for="message">Message</label>
+            	</div>
+            </div>
+
+       		<div class="modal-footer">
+            	<input id="button" type="submit" name="submit" value="Submit">
+        	</div>
+        </form>
+	</div>
+</div>
+
+<!-- Swap Modal -->
+<div id="swap" class="modal">
+    <div class="modal-content">
+        <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+       	<h4>Swap Requested!</h4>
+        <p>Your swap request has been sent for {{this.description}}</p>
+   	</div>
+    <div class="modal-footer">
+        <a href="/search" class=" modal-action modal-close waves-effect waves-green btn-flat">Search Posts</a>
+    </div>
+</div>
