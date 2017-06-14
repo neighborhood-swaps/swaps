@@ -37,8 +37,9 @@
 			                this allows the user to see what the requester has to offer (all of the requester's posts) --}}
 			                <a href="/offers">Exchange Offers</a>
 			                {{!-- this one deletes the offer from the database - originally, it was going to go to 
-			                swap history, but I don't think we have time to make a swap history page --}}
-			                <a href="/no">No Thanks</a>
+			                swap history, but I don't think we have time to make a swap history page.
+			                It should also display the reject modal located at the bottom of this page --}}
+			                <a class="modal-trigger" href="#reject">No Thanks</a>
 	              		</div>
 	            	</div>
 	          	</div>
@@ -55,3 +56,15 @@
       	</div>
     </div>
 </footer>
+
+<!-- Reject Modal -->
+<div id="reject" class="modal">
+    <div class="modal-content">
+        <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+       	<h4>Swap Rejected!</h4>
+        <p>This swap has been removed from your offers.</p>
+   	</div>
+    <div class="modal-footer">
+        <a href="/search" class=" modal-action modal-close waves-effect waves-green btn-flat">Search Posts</a>
+    </div>
+</div>
