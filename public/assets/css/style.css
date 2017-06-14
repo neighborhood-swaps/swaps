@@ -14,7 +14,7 @@ body {
 }
 
 /* The following lines were added by Amer on June 11, 2017 at 11:02 pm */
-#map {
-	height: 40%;
-	width: 40%;
+.mapClass {
+	height: 250px;
+	width: 250px;
 }

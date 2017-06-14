@@ -2,7 +2,6 @@
     "development": {
         "username": "root",
         "password": "Coffee@1978S",
-        "password": "",
         "database": "swaps_db",
         "host": "localhost",
         "dialect": "mysql"

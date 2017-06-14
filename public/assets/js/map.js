@@ -2,9 +2,10 @@
 $("#submitSwapLocation").on("click", function(event){
 	event.preventDefault();
 	var map;             
-	var sawpLocation = $("#swapLocation").attr("data");
+	var swapLocation = $("#swapLocation").attr("data");
 	console.log(swapLocation);
 	initMap();
+	
 	function initMap() {
 		map = new google.maps.Map(document.getElementById('map'), {
 			center: {
@@ -13,7 +14,8 @@ $("#submitSwapLocation").on("click", function(event){
 			}, // end of center
 			zoom: 8
 		});
-		var queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + sawpLocation + '&sensor=false;'
+
+		var queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + swapLocation + '&sensor=false;'
 
 		    $.ajax({
 		        url: queryURL,
@@ -30,4 +32,5 @@ $("#submitSwapLocation").on("click", function(event){
 		     	map.setCenter(marker.getPosition());
 		        });
 	}// end of initMap
+	$("#map").addClass("mapClass");
 });// end of on click
