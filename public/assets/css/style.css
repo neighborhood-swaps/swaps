@@ -1,11 +1,17 @@
 body {
   padding: 50px;
-  /*font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+
 }
 
-/*a {
-  color: #00B7FF;
-}*/
+ body {
+     display: flex;
+     min-height: 100vh;
+     flex-direction: column;
+ }
+
+ main {
+     flex: 1 0 auto;
+ }
 
 #root {
 	width: 310px; 
@@ -64,6 +70,11 @@ textarea {
 
 label, textarea {
 	padding-top: 18px;
+}
+
+footer {
+  text-align: center;
+
 }
 
 /*--------temp contact form css end ----------*/
