@@ -13,9 +13,15 @@ body {
 	padding: 10px;
 }
 
+/* The following lines were added by Amer on June 11, 2017 at 11:02 pm */
+.mapClass {
+	height: 250px;
+	width: 250px;
+}
 .icon-block {
  	padding: 0 15px;
 }
 .icon-block .material-icons {
     font-size: inherit;
+
 }
