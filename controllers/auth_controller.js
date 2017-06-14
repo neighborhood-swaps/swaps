@@ -128,16 +128,17 @@ var upload = multer({
 
 //adds post form data to db then redirects to user page
 router.post('/api/postItem', upload.array('upl', 1), function(req, res) {
+
     db.Products.create({
         user_name: req.body.nameInput,
         category: req.body.categoryInput,
         description: req.body.descriptionInput,
         img_location: req.files[0].location,
         prod_condition: req.body.conditionInput,
-        availabilitiy: req.body.availabilityInput,
+        availability: req.body.availabilityInput,
         swap_location: req.body.swap_locationInput,
         comments: req.body.commentsInput,
-        user_id: req.user.id,
+        user_id: req.user.id
     }).then(function() {
         res.redirect("/user");
     });
