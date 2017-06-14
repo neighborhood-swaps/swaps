@@ -25,3 +25,30 @@ body {
     font-size: inherit;
 
 }
+
+/*--------temp contact form css start----------*/
+.middle {
+	overflow: auto;
+	width: 100%;
+	max-width: 960px;/*why media queries don't work unless this is set to max but others not max*/
+	margin-left: auto;
+	margin-right: auto;
+}
+
+form {
+	float: left;
+	width: 650px;
+	background-color: #ffffff;
+	margin: 0 20px 40px 20px;
+	border: solid 1px #dddddd;
+	overflow: auto;
+	padding: 10px 30px 30px 30px;
+}
+
+/*to remove the default inline-block display*/
+label, input, textarea {
+	display: block;
+	width: 100%;
+}
+
+/*--------temp contact form css end ----------*/
