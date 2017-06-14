@@ -1,0 +1,68 @@
+{{!-- THE BELOW SECTION IS FOR RETRIEVING POSTS FROM THE DATABASE  --}}
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left">SWAPS</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/posts"> Post an Item </a></li>
+            <li><a href="/userPosts"> My Posts </a></li>
+            <li><a href="/search"> Search Posts </a></li>
+            <li><a href="/received"> Offers Received </a></li>
+            <li><a href="/made"> Offers Made </a></li>
+            <li><a href="/scheduled"> Scheduled Swaps </a></li>
+            <li><a href="/logout">Log out</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container" id="postsDiv">
+	<div class="section">
+		<div class="row">
+			{{#each posts}}
+	          	<div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
+	            	<div class="card">
+	              		<div class="card-image">
+	              			<img id="image" src="{{this.img_location}}">
+	              		</div>
+	              		<div class="card-content">
+	                		<span id="description" class="card-title">{{this.description}}</span>
+	                		<p id="owner"> Owner: {{this.user_name}} </p>
+							<p id="condition"> Condition: {{this.prod_condition}} </p>
+							<p id="availability"> Availability: {{this.availability}} </p>
+							<p id="comments"> Comments: {{this.comments}} </p>
+	              		</div>
+	              		<div class="card-action">
+	              		{{!-- contact button opens contact form and sends post owner an email--}}
+	                		<a href="/contact">Contact</a>
+	                		{{!-- swap button places requester id, poster id and product id in swaps table,
+	                		and displays a popup saying a swap request has been sent --}}
+	                		<a href="">SWAP!</a>
+	                		{{!-- location button creates a popup/modal of google maps showing address on map --}}
+	                		<a href="#">Location</a>
+	              		</div>
+	            	</div>
+	          	</div>
+				{{!-- These 3 buttons sit right below each post and allow the user to respond to swap requests --}}
+	          	<div>
+	          		<div class="card-action">
+		              	{{!-- contact button opens contact form and sends requester an email--}}
+		                <a href="/contact">Contact</a>
+		                {{!-- click exchange offers (can be shortened ot offers or a better name)-
+		                this allows the user to see what the requester has to offer (all of the requester's posts) --}}
+		                <a href="/offers">Exchange Offers</a>
+		                {{!-- this one deletes the offer from the database - originally, it was going to go to 
+		                swap history, but I don't think we have time to make a swap history page --}}
+		                <a href="/no">No Thanks</a>
+	              	</div>
+	          	</div>
+	        {{/each}}
+	    </div>
+	</div>
+</div>
+<div id="map"></div>
+
+<footer class="page-footer orange">
+    <div class="footer-copyright">
+      	<div class="container">
+      		Made by The SWAPS Team
+      	</div>
+    </div>
+</footer>
