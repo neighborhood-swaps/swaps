@@ -3,11 +3,12 @@
 	<div class="col-sm-4">
 		<div id="postsDiv">
 			{{#each posts}}
-				<div class="">
+{{!-- 				<div class="">
 					<div class="row" id="">
 						<div class="col-sm-12" id="{{this.id}}" data="{{this.user_id}}">
 							<div class="row">
 								<div class="col-sm-12">
+
 									<p id="owner"> Owner: {{this.user_name}} </p>
 									<p id="description"> {{this.description}} </p>
 									<img id="image" src="{{this.img_location}}">
@@ -39,7 +40,25 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
+				      <div class="row">
+          <div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}>
+            <div class="card">
+              <div class="card-image">
+              <img id="image" src="{{this.img_location}}">
+              </div>
+              <div class="card-content">
+                <span id="description" class="card-title">{this.description}}</span>
+                <p id="owner"> Owner: {{this.user_name}} </p>
+				<p id="condition"> Condition: {{prod_condition}} </p>
+				<p id="availability"> Availability: {{availability}} </p>
+				<p id="comments"> Comments: {{comments}} </p>
+              </div>
+              <div data="{{this.product_id}} class="card-action">
+                <a href="#">SWAP!</a>
+              </div>
+            </div>
+          </div>
 			{{/each}}
 		</div>
 	</div>
