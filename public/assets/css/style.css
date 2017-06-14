@@ -51,4 +51,19 @@ label, input, textarea {
 	width: 100%;
 }
 
+input {
+	padding: 6px 0 6px 10px;
+	line-height: 1.5;
+	margin-top: 8px;
+}
+
+textarea {
+	height: 200px;
+	margin-top: 8px;
+}
+
+label, textarea {
+	padding-top: 18px;
+}
+
 /*--------temp contact form css end ----------*/

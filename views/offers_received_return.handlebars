@@ -30,28 +30,17 @@
 							<p id="comments"> Comments: {{this.comments}} </p>
 	              		</div>
 	              		<div class="card-action">
-	              		{{!-- contact button opens contact form and sends post owner an email--}}
-	                		<a href="/contact">Contact</a>
-	                		{{!-- swap button places requester id, poster id and product id in swaps table,
-	                		and displays a popup saying a swap request has been sent --}}
-	                		<a href="">SWAP!</a>
-	                		{{!-- location button creates a popup/modal of google maps showing address on map --}}
-	                		<a href="#">Location</a>
+	              		{{!-- These 3 buttons allow the user to respond to swap requests --}}
+			              	{{!-- contact button opens contact form and sends requester an email--}}
+			                <a href="/contact">Contact</a>
+			                {{!-- click exchange offers (can be shortened ot offers or a better name)-
+			                this allows the user to see what the requester has to offer (all of the requester's posts) --}}
+			                <a href="/offers">Exchange Offers</a>
+			                {{!-- this one deletes the offer from the database - originally, it was going to go to 
+			                swap history, but I don't think we have time to make a swap history page --}}
+			                <a href="/no">No Thanks</a>
 	              		</div>
 	            	</div>
-	          	</div>
-				{{!-- These 3 buttons sit right below each post and allow the user to respond to swap requests --}}
-	          	<div>
-	          		<div class="card-action">
-		              	{{!-- contact button opens contact form and sends requester an email--}}
-		                <a href="/contact">Contact</a>
-		                {{!-- click exchange offers (can be shortened ot offers or a better name)-
-		                this allows the user to see what the requester has to offer (all of the requester's posts) --}}
-		                <a href="/offers">Exchange Offers</a>
-		                {{!-- this one deletes the offer from the database - originally, it was going to go to 
-		                swap history, but I don't think we have time to make a swap history page --}}
-		                <a href="/no">No Thanks</a>
-	              	</div>
 	          	</div>
 	        {{/each}}
 	    </div>
