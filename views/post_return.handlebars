@@ -31,12 +31,11 @@
 							<p id="comments"> Comments: {{this.comments}} </p>
 	              		</div>
 	              		<div class="card-action">
-	              		{{!-- contact button opens modal at bottom of this page with contact form and sends post owner an email--}}
-	                		<a href="#contactOwner">Contact</a>
-	                		{{!-- swap button places requester id, poster id and product id in swaps table,
-	                		and displays the modal at the bottom of this page saying a swap request has been sent --}}
+	              		   {{!-- Contact Owner Modal Trigger; sends owner an email --}}
+                            <a class="modal-trigger" data-target="contactOwner">Contact</a>
+                            {{!-- Swap Modal Trigger; displays swap requested modal --}}
 	                		<a href="#swap">SWAP!</a>
-	                		{{!-- location button creates a popup/modal of google maps showing address on map --}}
+	                		{{!-- Location Modal Trigger; pops up swap location on Google Maps --}}
 	                		<a href="#">Location</a>
 	              		</div>
 	            	</div>
@@ -56,40 +55,39 @@
 </footer>
 
 <!-- Contact Owner Modal -->
-{{!-- <div id="contactOwner" class="modal">
+<div id="contactOwner" class="modal">
     <div class="modal-content ">
         <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
         <h4>Contact Owner</h4>
         <p>Your message will be emailed to {{this.user_name}}</p>
-        <form action="{{this.user_email}}" method="post" enctype="text/plain">
-          	<div class="row">
-            	<div class="input-field col s12">
-                	<input id="name" type="text" name="name" placeholder="Thomas Mahon" class="validate">
-                	<label for="name">Name</label>
-            	</div>
-           	</div>
-           	<div class="row">
-            	<div class="input-field col s12">
-                	<input id="email" type="text" name="email" placeholder="example@gmail.com" class="validate">
-                	<label for="email">Email</label>
-            	</div>
-            </div>
-           	<div class="row">
-           		<div class="input-field col s12">
-                	<textarea id="message" type="text" name="Message" class="validate"></textarea>
-                	<label for="message">Message</label>
-            	</div>
-            </div>
-
-       		<div class="modal-footer">
-            	<input id="button" type="submit" name="submit" value="Submit">
-        	</div>
-        </form>
-	</div>
-</div> --}}
+        <div class="row">
+            <form class="col s12" action="mailto:mwong770@yahoo.com" method="post" enctype="text/plain">
+                <div class="row modal-form-row">
+                	<div class="input-field col s12">
+                    	<input required autofocus id="name" type="text" name="name" class="validate">
+                    	<label for="name">Name</label>
+                	</div>
+               	</div>
+               	<div class="row">
+                	<div class="input-field col s12">
+                        <input required id="email" type="email" name="email" class="validate">
+                    	<label for="email">Email</label>
+                	</div>
+                </div>
+               	<div class="row">
+               		<div class="input-field col s12">
+                    	<textarea required id="message" type="text" name="message" class="materialize-textarea"></textarea>
+                        <label for="message">Message</label>
+                	</div>
+                </div>
+                <input id="button" type="submit" value="Submit">
+            </form>
+    	</div>
+    </div>
+</div>
 
 <!-- Swap Modal -->
-{{!-- <div id="swap" class="modal">
+<div id="swap" class="modal">
     <div class="modal-content">
         <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
        	<h4>Swap Requested!</h4>
@@ -98,4 +96,13 @@
     <div class="modal-footer">
         <a href="/search" class=" modal-action modal-close waves-effect waves-green btn-flat">Search Posts</a>
     </div>
-</div> --}}
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('.modal-trigger').leanModal();
+    });
+</script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js">
