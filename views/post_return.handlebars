@@ -110,7 +110,7 @@
     $.post(currentURL + "/api/swap", newSwap);
 }
     $(document).ready(function(){
-		$("#modalDesc").text("A swap request has been submitted for : " + $("input[name='modal_desc']")[0].value);
+		$("#modalDesc").text("A swap request has been submitted for the following item: " + $("input[name='modal_desc']")[0].value);
         $('.modal-trigger').leanModal(startSwap());
     });
 </script>
