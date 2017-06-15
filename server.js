@@ -37,17 +37,16 @@ var strategy = new Auth0Strategy({
         "extraParams": extraParams
     };
     var userInfo = {
-        "userNickname": profile.nickname,
-        "userEmail": profile._json.email,
-        "userClientID": profile._json.clientID
-    }
-    //logs user id and email to database
+            "userNickname": profile.nickname,
+            "userEmail": profile._json.email,
+            "userClientID": profile._json.clientID
+        }
+        //logs user id and email to database
     db.Users.create({
-            user_id: profile.id,
-            user_email: profile._json.email
-        }).then(function() {
-        }).catch(function(err) {
-            console.log(err);
+        user_id: profile.id,
+        user_email: profile._json.email
+    }).then(function() {}).catch(function(err) {
+        console.log(err);
     });
     return done(null, profile);
 });

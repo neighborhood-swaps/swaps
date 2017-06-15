@@ -76,7 +76,11 @@ router.get("/api/posts/:category", function(req, res) {
             var postData = {
                 posts: dbPosts
             }
-            res.render("postReturn", postData);
+            if (postData.posts.length > 0) {
+                res.render("postReturn", postData);
+            } else {
+                res.redirect("/search");
+            }
         });
 });
 
@@ -105,6 +109,13 @@ router.get("/userPosts", function(req, res) {
 // displays category search buttons
 router.get("/search", function(req, res) {
     res.render("search");
+});
+
+// displays post input form
+router.post("/api/swap", function(req, res) {
+    console.log(req.body); // contains the posters_id and the product_id of the poster
+    console.log(req.user.id); // The requester ID, so the requester want the above item
+    // res.render("posts");
 });
 
 //************** CODE FOR POSTS/SWAPS END ******************
