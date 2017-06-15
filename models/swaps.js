@@ -1,4 +1,7 @@
 
+
+//******* WORKING DATABASE **************
+
 module.exports = function(sequelize, DataTypes) {
     var Swaps = sequelize.define("Swaps", 
         { 
@@ -29,8 +32,3 @@ module.exports = function(sequelize, DataTypes) {
     ); 
     return Swaps;
 }; 
-
-
-
-
-
