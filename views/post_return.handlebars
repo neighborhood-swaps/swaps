@@ -34,6 +34,9 @@
 	              		   {{!-- Contact Owner Modal Trigger; sends owner an email --}}
                             <a class="modal-trigger" data-target="contactOwner">Contact</a>
                             {{!-- Swap Modal Trigger; displays swap requested modal --}}
+								<input type="hidden" name="poster_id" value="{{this.user_id}}">
+								<input type="hidden" name="modal_desc" value="{{this.description}}">
+								<input type="hidden" name="product_id" value="{{this.id}}">
 	                		<a class="modal-trigger" data-target="swapRequest">SWAP!</a>
 	                		{{!-- Location Modal Trigger; pops up swap location on Google Maps --}}
 	                		<a href="#">Location</a>
@@ -91,16 +94,24 @@
     <div class="modal-content">
         <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
        	<h4>Swap Request!</h4>
-        <p>A swap request will be sent for {{this.descriptiosn}}</p>
+        <p id="modalDesc"></p>
    	</div>
-    <div class="modal-footer">
-        <a href="/search" class=" modal-action modal-close waves-effect waves-green btn-flat">Search Posts</a>
-    </div>
 </div>
 
 <script>
+	function startSwap() {
+
+    var newSwap = {
+        poster: $("input[name='poster_id']")[0].value,
+        product: $("input[name='product_id']")[0].value
+    }
+
+
+    $.post(currentURL + "/api/swap", newSwap);
+}
     $(document).ready(function(){
-        $('.modal-trigger').leanModal();
+		$("#modalDesc").text("A swap request has been submitted for : " + $("input[name='modal_desc']")[0].value);
+        $('.modal-trigger').leanModal(startSwap());
     });
 </script>
 
