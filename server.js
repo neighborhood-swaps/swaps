@@ -5,7 +5,6 @@ var methodOverride = require("method-override");
 var exphbs = require("express-handlebars");
 
 var db = require("./models");
-
 // *** auth part 2 starts; will combine with other code and remove ** when auth work done *****
 
 var path = require("path");
@@ -22,7 +21,6 @@ dotenv.load();
 
 // imports routes, giving server access to them
 var authRoutes = require("./controllers/auth_controller.js");
-// var routes = require('./controllers/swaps_controller.js');
 
 // configures Passport to use Auth0 and retrieves user info from auth0
 var strategy = new Auth0Strategy({
@@ -38,17 +36,16 @@ var strategy = new Auth0Strategy({
         "extraParams": extraParams
     };
     var userInfo = {
-        "userNickname": profile.nickname,
-        "userEmail": profile._json.email,
-        "userClientID": profile._json.clientID
-    }
-    //logs user id and email to database
+            "userNickname": profile.nickname,
+            "userEmail": profile._json.email,
+            "userClientID": profile._json.clientID
+        }
+        //logs user id and email to database
     db.Users.create({
-            user_id: profile.id,
-            user_email: profile._json.email
-        }).then(function() {
-        }).catch(function(err) {
-            console.log(err);
+        user_id: profile.id,
+        user_email: profile._json.email
+    }).then(function() {}).catch(function(err) {
+        console.log(err);
     });
     return done(null, profile);
 });

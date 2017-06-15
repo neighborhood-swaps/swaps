@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
             },
             requester_product_id: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                allowNull: true,
                 validate: { len: [1] }
             },
             poster_product_id: {

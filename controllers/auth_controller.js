@@ -1,4 +1,3 @@
-
 // sets dependencies
 var express = require("express");
 var passport = require("passport");
@@ -17,21 +16,6 @@ var multer = require('multer');
 var multerS3 = require('multer-s3');
 const S3_BUCKET = process.env.S3_BUCKET_NAME;
 s3 = new aws.S3();
-
-// temp route to test DB and image returns ------------------------------------ temp temp temp temp -------
-router.get("/myposts", function(req, res, next) {
-    db.Products.findAll({
-        where: {
-            user_id: "apj124"
-        }
-    }).then(function(data) {
-        var postData = {
-            data: data
-        };
-        res.render("postReturn", postData);
-    });
-
-});
 
 //************** CODE FOR IMAGES END ***************************
 
@@ -53,7 +37,7 @@ router.get("/", function(req, res, next) {
 router.get("/login",
     function(req, res) {
         res.render("login", { env: env });
-});
+    });
 
 // logs user out, then redirects to home page
 router.get("/logout", function(req, res) {
@@ -81,8 +65,8 @@ router.get("/user", ensureLoggedIn, function(req, res, next) {
 //************** CODE FOR POSTS/SWAPS START ******************
 
 // retrieves data by category
-router.get("/api/posts/:category", function(req, res) {//--------------???????????--------------
-    console.log()
+router.get("/api/posts/:category", function(req, res) {
+    console.log("req.user:  " + JSON.stringify(req.user));
     db.Products.findAll({
             where: {
                 category: req.params.category
@@ -92,7 +76,11 @@ router.get("/api/posts/:category", function(req, res) {//--------------?????????
             var postData = {
                 posts: dbPosts
             }
-            res.render("postReturn", postData);
+            if (postData.posts.length > 0) {
+                res.render("post_return", postData);
+            } else {
+                res.redirect("/search");
+            }
         });
 });
 
@@ -112,10 +100,10 @@ router.get("/userPosts", function(req, res) {
         .then(function(dbPosts) {
             var postData = {
                 posts: dbPosts
-            }
+            };
             console.log("dbPosts:  " + JSON.stringify(dbPosts));
-            res.render("postReturn", postData);
-    });
+            res.render("post_return", postData);
+        });
 });
 
 // displays category search buttons
@@ -123,11 +111,25 @@ router.get("/search", function(req, res) {
     res.render("search");
 });
 
+// displays post input form
+router.post("/api/swap", function(req, res) {
+    console.log("API/SWAP");
+    console.log(req.body); // contains the posters_id and the product_id of the poster
+    console.log(req.user.id); // The requester ID, so the requester want the above item
+    db.Products.update({
+        requester_id: req.body.poster,
+        status: "pending"
+    }, {
+        where: {
+            id: req.body.product
+        }
+    });
+    // res.render("posts");
+});
+
 //************** CODE FOR POSTS/SWAPS END ******************
 
 //************** CODE FOR IMAGES START ***************************
-
-//-----------------------------------------------------------------------------------------------
 
 var upload = multer({
     storage: multerS3({
@@ -139,49 +141,27 @@ var upload = multer({
     })
 });
 
-//-----------------------------------------------------------------------------------------------
-
 //************** CODE FOR IMAGES END ***************************
 
 //************** CODE FOR POSTS/SWAPS START **********************
 
-//-----------------------------------------------------------------------------------------------
-
-// adds post form data to db then redirects to user page
-// router.post('/api/postItem', upload.array('upl', 1), function(req, res, next) {
-//     console.log(req);
-//     db.Products.create({
-//         category: req.body.categoryInput,
-//         description: req.body.descriptionInput,
-//         img_location: req.files[0].location,
-//         condition: req.body.conditionInput,
-//         availabilitiy: req.body.availabilityInput,
-//         swap_location: req.body.swap_locationInput,
-//         comments: req.body.commentsInput,
-//         user_id: req.user.id,
-//     }).then(function() {
-//         res.redirect("/user");
-//     });
-// });
-
 //adds post form data to db then redirects to user page
 router.post('/api/postItem', upload.array('upl', 1), function(req, res) {
+
     db.Products.create({
         user_name: req.body.nameInput,
         category: req.body.categoryInput,
         description: req.body.descriptionInput,
         img_location: req.files[0].location,
         prod_condition: req.body.conditionInput,
-        availabilitiy: req.body.availabilityInput,
+        availability: req.body.availabilityInput,
         swap_location: req.body.swap_locationInput,
         comments: req.body.commentsInput,
-        user_id: req.user.id,
+        user_id: req.user.id
     }).then(function() {
         res.redirect("/user");
     });
 });
-
-//-----------------------------------------------------------------------------------------------
 
 // renders 404 page
 router.get("/404", function(req, res, next) {
