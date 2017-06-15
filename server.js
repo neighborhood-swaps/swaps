@@ -5,7 +5,6 @@ var methodOverride = require("method-override");
 var exphbs = require("express-handlebars");
 
 var db = require("./models");
-
 // *** auth part 2 starts; will combine with other code and remove ** when auth work done *****
 
 var path = require("path");

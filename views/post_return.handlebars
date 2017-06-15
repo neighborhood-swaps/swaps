@@ -34,7 +34,7 @@
 	              		   {{!-- Contact Owner Modal Trigger; sends owner an email --}}
                             <a class="modal-trigger" data-target="contactOwner">Contact</a>
                             {{!-- Swap Modal Trigger; displays swap requested modal --}}
-	                		<a href="#swap">SWAP!</a>
+	                		<a class="modal-trigger" data-target="swapRequest">SWAP!</a>
 	                		{{!-- Location Modal Trigger; pops up swap location on Google Maps --}}
 	                		<a href="#">Location</a>
 	              		</div>
@@ -59,9 +59,9 @@
     <div class="modal-content ">
         <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
         <h4>Contact Owner</h4>
-        <p>Your message will be emailed to {{this.user_name}}</p>
+        <p>Your message will be emailed to {{user.nickname}} </p>
         <div class="row">
-            <form class="col s12" action="mailto:mwong770@yahoo.com" method="post" enctype="text/plain">
+            <form class="col s12" action="mailto: {{user._json.email}} " method="post" enctype="text/plain">
                 <div class="row modal-form-row">
                 	<div class="input-field col s12">
                     	<input required autofocus id="name" type="text" name="name" class="validate">
@@ -87,11 +87,11 @@
 </div>
 
 <!-- Swap Modal -->
-<div id="swap" class="modal">
+<div id="swapRequest" class="modal">
     <div class="modal-content">
-        <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
-       	<h4>Swap Requested!</h4>
-        <p>Your swap request has been sent for {{this.description}}</p>
+        <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+       	<h4>Swap Request!</h4>
+        <p>A swap request will be sent for {{this.descriptiosn}}</p>
    	</div>
     <div class="modal-footer">
         <a href="/search" class=" modal-action modal-close waves-effect waves-green btn-flat">Search Posts</a>
