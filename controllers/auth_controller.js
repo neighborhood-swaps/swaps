@@ -77,7 +77,7 @@ router.get("/api/posts/:category", function(req, res) {
                 posts: dbPosts
             }
             if (postData.posts.length > 0) {
-                res.render("postReturn", postData);
+                res.render("post_return", postData);
             } else {
                 res.redirect("/search");
             }
@@ -102,7 +102,7 @@ router.get("/userPosts", function(req, res) {
                 posts: dbPosts
             }
             console.log("dbPosts:  " + JSON.stringify(dbPosts));
-            res.render("postReturn", postData);
+            res.render("post_return", postData);
         });
 });
 
