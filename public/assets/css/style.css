@@ -19,6 +19,10 @@ body {
 	padding: 10px;
 }
 
+#postForm, .btn-primary {
+	background-color: #29b6f6;
+}
+
 #userImage {
 		width: 310px; 
 }
