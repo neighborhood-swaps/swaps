@@ -156,8 +156,58 @@ router.post("/reject", function(req, res) {
     );
 });
 
+// updates status and deletes requester when user rescinds a swap
+router.post("/rescind", function(req, res) {
+    console.log("req.body.product:  " + req.body.product);
+    db.Products.update(
+        {
+            requester_id: null,
+            status: "open"
+        }, 
+        {
+            where: {
+                        id: req.body.product
+                   }
+        }
+    );
+});
+
 // displays post input form
 router.get("/received", function(req, res) {
+    db.Products.findAll({
+            where: {
+                user_id: req.user.id,
+                status: "pending" 
+            }
+        })
+        .then(function(dbPosts) {
+            var postData = {
+                posts: dbPosts
+            };
+            // console.log("dbPosts:  " + JSON.stringify(dbPosts));
+            res.render("offers_received_return", postData);
+        });
+});
+
+// displays post input form
+router.get("/made", function(req, res) {
+    db.Products.findAll({
+            where: {
+                requester_id: req.user.id,
+                status: "pending" 
+            }
+        })
+        .then(function(dbPosts) {
+            var postData = {
+                posts: dbPosts
+            };
+            // console.log("dbPosts:  " + JSON.stringify(dbPosts));
+            res.render("offers_made_return", postData);
+        });
+});
+
+// displays post input form
+router.get("/scheduled", function(req, res) {
     db.Products.findAll({
             where: {
                 user_id: req.user.id,
