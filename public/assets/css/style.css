@@ -1,17 +1,22 @@
+
 body {
-  padding: 50px;
-
-}
-
- body {
+ 	 padding-left: 50px;
+ 	 padding-right: 50px;
      display: flex;
      min-height: 100vh;
      flex-direction: column;
- }
+     margin-bottom: 70px;
+}
 
- main {
+h4 {
+  text-align: center;
+  weight: bold;
+  color: blue;
+}
+
+main {
      flex: 1 0 auto;
- }
+}
 
 .input-field input[type=text]:focus + label {
  color: #29b6f6;
@@ -37,13 +42,27 @@ body {
 	padding: 10px;
 }
 
+#cardDiv {
+  height: 275px;
+  overflow: scroll;
+}
+
 #postForm, .btn-primary {
 	background-color: #29b6f6;
+}
+
+#mainImage {
+	height: 300px;
+	background-image: url(/assets/images/hose.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 #userImage {
 		width: 310px; 
 }
+
 
 #landingImage {
     max-width: 100%;
@@ -56,61 +75,121 @@ body {
 }
 
 /* The following lines were added by Amer on June 11, 2017 at 11:02 pm */
+
 .mapClass {
 	height: 250px;
 	width: 250px;
 }
+
 .icon-block {
  	padding: 0 15px;
 }
+
 .icon-block .material-icons {
     font-size: inherit;
+}
+
+.call_modal {
+	padding: 20px;
+	margin: 6px;
+	border-radius: 	5px;
+	background: #3399cc;
+	color: 	#ccc;
+	font-size: 	26px;
+	border: none;
+	cursor: pointer;
+}
+
+.modal {
+	display:none;
+	width: 	100%;
+	height: 100%;
+	position: fixed;	
+	top: 0;
+}
+
+.modal_bg {
+	background: rgba(0,0,0,0.5);
+	height: 100%;
+	width: 	100%;
+	position: fixed;	
+	top: 0;
+}
+
+.modal_main {
+	position: fixed;
+	width: 50%;
+	height: 400px;
+	background: #fff;
+	border-radius: 	6px;
+	top: 9%;
+	left: 24%;
+	display: none;
 
 }
 
-/*--------temp contact form css start----------*/
-/*.middle {
-	overflow: auto;
-	width: 100%;
-	max-width: 960px;
-	margin-left: auto;
-	margin-right: auto;
-}*/
-
-/*form {
-	float: left;
-	width: 650px;
-	background-color: #ffffff;
-	margin: 0 20px 40px 20px;
-	border: solid 1px #dddddd;
-	overflow: auto;
-	padding: 10px 30px 30px 30px;
-}*/
-
-/*to remove the default inline-block display*/
-/*label, input, textarea {
-	display: block;
-	width: 100%;
+.closer {
+	position: absolute;
+	top: 58px;
+	right: 27%;
+	cursor: pointer;
+	z-index: 8;
+	font: italic bold 12px/30px Georgia, serif;
 }
 
-input {
-	padding: 6px 0 6px 10px;
-	line-height: 1.5;
-	margin-top: 8px;
-}
-
-textarea {
-	height: 200px;
-	margin-top: 8px;
-}
-
-label, textarea {
-	padding-top: 18px;
-}*/
 
 footer {
   text-align: center;
-
+  /*position: absolute;
+  width: 100%;
+  bottom: 0;
+  height: 70px;*/
 }
 
-/*--------temp contact form css end ----------*/
+.call_modal {
+			padding: 20px;
+			margin: 6px;
+			border-radius: 	5px;
+			background: #3399cc;
+			color: 	#ccc;
+			font-size: 	26px;
+			border: none;
+			cursor: pointer;
+		}
+
+		#swapLocationModal {
+			display:none;
+			width: 	100%;
+			height: 100%;
+			position: fixed;	
+			top: 0;
+		}
+
+		.modal_bg {
+			background: rgba(0,0,0,0.5);
+			height: 100%;
+			width: 	100%;
+			position: fixed;	
+			top: 0;
+		}
+
+		.modal_main {
+			position: fixed;
+			width: 50%;
+			height: 400px;
+			background: #fff;
+			border-radius: 	6px;
+			top: 9%;
+			left: 24%;
+			display: none;
+
+		}
+		.closer {
+			position: absolute;
+			top: 48px;
+			right: 27%;
+			cursor: pointer;
+			z-index: 8;
+			font: italic bold 12px/30px Georgia, serif;
+		}
+

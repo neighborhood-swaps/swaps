@@ -22,26 +22,27 @@
     </div>
 </nav>
 
+<br/>
+
 <div class="container" id="postsDiv">
 	<div class="section">
 		<div class="row">
 			{{#each posts}}
-	          	<div id="cardDiv" class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
+	          	<div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
 	            	<div class="card">
 	              		<div class="card-image">
 	              			<img id="image" src="{{this.img_location}}">
 	              		</div>
 	              		<div class="card-content">
-	                		<span id="description" class="center card-title">{{this.description}}</span>
+	                		<span id="description" class="card-title">{{this.description}}</span>
 	                		<p id="owner"> Owner: {{this.user_name}} </p>
 							<p id="condition"> Condition: {{this.prod_condition}} </p>
 							<p id="availability"> Availability: {{this.availability}} </p>
 							<p id="comments"> Comments: {{this.comments}} </p>
 	              		</div>
 	              		<div class="card-action">
-			                <a data-id ="{{this.id}}" data-desc="{{this.description}}" class="modal-trigger contactTrigger" data-target="contactOwner">Contact</a>
-			                <a data-id ="{{this.id}}" data-desc="{{this.description}}" class="modal-trigger acceptTrigger" data-target="accept">Accept</a>
-			                <a data-id ="{{this.id}}" data-desc="{{this.description}}" class="modal-trigger rejectTrigger" data-target="reject">No Thanks</a>
+                            <a class="modal-trigger" data-target="contactOwner">Contact</a>
+                            <a data-id="{{this.id}}" data-desc="{{this.description}}" class="completeTrigger modal-trigger" data-target="complete">Swap Completed</a>
 	              		</div>
 	            	</div>
 	          	</div>
@@ -51,34 +52,16 @@
 </div>
 <div id="map"></div>
 
-<footer class="page-footer orange">
+<br/>
+
+<footer class="page-footer orange z-depth-2">
     <div class="container">
         <div class="row">
             <a class="grey-text text-lighten-4"> &#169; 2017 The SWAPS Team</a>
         </div>
-        <div class="row">
-        </div>
     </div>
 </footer>
 
-
-<!-- Accept Modal -->
-<div id="accept" class="modal">
-    <div class="modal-content">
-        <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
-       	<h4>Swap Accepted!</h4>
-        <p id="acceptDesc">You have just scheduled a swap.</p>
-   	</div>
-</div>
-
-<!-- Reject Modal -->
-<div id="reject" class="modal">
-    <div class="modal-content">
-        <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
-       	<h4>Swap Rejected!</h4>
-        <p id="rejectDesc">This swap has been removed from your offers.</p>
-   	</div>
-</div>
 
 <!-- Contact Owner Modal -->
 <div id="contactOwner" class="modal">
@@ -112,34 +95,40 @@
     </div>
 </div>
 
+<!-- Swap Complete Modal -->
+<div id="complete" class="modal">
+    <div class="modal-content">
+        <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+       	<h4>Swap Completed!</h4>
+        <p id="completeDesc">This product has been removed from your items borrowing.</p>
+   	</div>
+</div>
+
 <script>
 
-//change status to scheduled
-    function acceptSwap() {
-        var acceptProd = {
+    function completePost() {
+        var completeProd = {
             product: $(this).attr("data-id")
         };
-        $("#acceptDesc").html("You have just accepted a swap for the following item: " + $(this).attr("data-desc"));
-        console.log("acceptProd:  " + acceptProd);
-        $.post(currentURL + "/accept", acceptProd);
+        $("#completeDesc").html("You are no longer borrowing the following item: " + $(this).attr("data-desc"));
+        console.log("completeProd:  " + completeProd);
+        $.post(currentURL + "/complete", completeProd);
     }
 
 
-//remove requester_id and change status to open
-    function rejectSwap() {
-        var rejectProd = {
-            product: $(this).attr("data-id")
-        };
-        $("#rejectDesc").html("The following items will be removed from your offers: " + $(this).attr("data-desc"));
-        console.log("rejectProd:  " + rejectProd);
-        $.post(currentURL + "/reject", rejectProd);
-    }
+    // function repostPost() {
+    //     var repostProd = {
+    //         product: $(this).attr("data-id")
+    //     };
+    //     $("#repostDesc").html("The following item has been reposted to your available offers: " + $(this).attr("data-desc"));
+    //     console.log("repostProd:  " + repostProd);
+    //     $.post(currentURL + "/rescind", repostProd);
+    // }
+
     
-    $(document).on("click", ".acceptTrigger", acceptSwap);
-    $(document).on("click", ".rejectTrigger", rejectSwap);
+    $(document).on("click", ".completeTrigger", completePost);
 
 </script>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-
