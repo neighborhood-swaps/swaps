@@ -1,0 +1,109 @@
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left" >SWAPS</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/logout">Log out</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="mainImage">
+</div>
+
+<nav class="orange" role="navigation">
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/posts"> Post an Item </a></li>
+            <li><a href="/userPosts"> My Posts </a></li>
+            <li><a href="/search"> Search Posts </a></li>
+            <li><a href="/received"> Offers Received </a></li>
+            <li><a href="/made"> Offers Made </a></li>
+            <li><a href="/lending"> Items Lending </a></li>
+            <li><a href="/borrowing"> Items Borrowing </a></li>
+        </ul>
+    </div>
+</nav>
+
+<br/>
+
+<div class="container" id="postsDiv">
+	<div class="section">
+		<div class="row">
+			{{#each posts}}
+	          	<div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
+	            	<div class="card">
+	              		<div class="card-image">
+	              			<img id="image" src="{{this.img_location}}">
+	              		</div>
+	              		<div class="card-content">
+	                		<span id="description" class="card-title">{{this.description}}</span>
+	                		<p id="owner"> Owner: {{this.user_name}} </p>
+							<p id="condition"> Condition: {{this.prod_condition}} </p>
+							<p id="availability"> Availability: {{this.availability}} </p>
+							<p id="comments"> Comments: {{this.comments}} </p>
+	              		</div>
+	              		<div class="card-action">
+                            <a data-id="{{this.id}}" data-desc="{{this.description}}" class="repostTrigger modal-trigger" data-target="repost">Repost</a>
+                            <a data-id="{{this.id}}" data-desc="{{this.description}}" class="deleteTrigger modal-trigger" data-target="delete">Delete Post</a>
+	              		</div>
+	            	</div>
+	          	</div>
+	        {{/each}}
+	    </div>
+	</div>
+</div>
+<div id="map"></div>
+
+<br/>
+
+<footer class="page-footer orange z-depth-2">
+    <div class="container">
+        <div class="row">
+            <a class="grey-text text-lighten-4"> &#169; 2017 The SWAPS Team</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Repost Modal -->
+<div id="repost" class="modal">
+    <div class="modal-content">
+        <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+       	<h4>Product Reposted!</h4>
+        <p id="repostDesc">This item has been added to your available offers.</p>
+   	</div>
+</div>
+
+<!-- Delete Modal -->
+<div id="delete" class="modal">
+    <div class="modal-content">
+        <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+       	<h4>Product Deleted!</h4>
+        <p id="deleteDesc">This item has been deleted.</p>
+   	</div>
+</div>
+
+<script>
+
+    function repostPost() {
+        var repostProd = {
+            product: $(this).attr("data-id")
+        };
+        $("#repostDesc").html("The following item has been reposted to your available offers: " + $(this).attr("data-desc"));
+        console.log("repostProd:  " + repostProd);
+        $.post(currentURL + "/rescind", repostProd);
+    }
+
+    function deletePost() {
+        var deleteProd = {
+            product: $(this).attr("data-id")
+        };
+        $("#deleteDesc").html("You have deleted the following item: " + $(this).attr("data-desc"));
+        console.log("deleteProd:  " + deleteProd);
+        $.post(currentURL + "/delete", deleteProd);
+    }
+    
+    $(document).on("click", ".repostTrigger", repostPost);
+    $(document).on("click", ".deleteTrigger", deletePost);
+
+</script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
