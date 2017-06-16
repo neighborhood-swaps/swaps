@@ -1,61 +1,66 @@
-<nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left" >SWAPS</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/logout">Log out</a></li>
-        </ul>
+<header>
+
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left" >SWAPS</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/logout">Log out</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="mainImage">
     </div>
-</nav>
 
-<div id="mainImage">
-</div>
+    <nav class="orange" role="navigation">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/posts"> Post an Item </a></li>
+                <li><a href="/userPosts"> My Posts </a></li>
+                <li><a href="/search"> Search Posts </a></li>
+                <li><a href="/received"> Offers Received </a></li>
+                <li><a href="/made"> Offers Made </a></li>
+                <li><a href="/lending"> Items Lending </a></li>
+                <li><a href="/borrowing"> Items Borrowing </a></li>
+            </ul>
+        </div>
+    </nav>
 
-<nav class="orange" role="navigation">
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/posts"> Post an Item </a></li>
-            <li><a href="/userPosts"> My Posts </a></li>
-            <li><a href="/search"> Search Posts </a></li>
-            <li><a href="/received"> Offers Received </a></li>
-            <li><a href="/made"> Offers Made </a></li>
-            <li><a href="/lending"> Items Lending </a></li>
-            <li><a href="/borrowing"> Items Borrowing </a></li>
-        </ul>
+</header>
+
+<main>
+
+    <div class="container" id="postsDiv">
+    	<div class="section">
+    		<div class="row">
+    			{{#each posts}}
+    	          	<div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
+    	            	<div class="card">
+    	              		<div class="card-image">
+    	              			<img id="image" src="{{this.img_location}}">
+    	              		</div>
+    	              		<div class="card-content">
+    	                		<span id="description" class="center card-title">{{this.description}}</span>
+    	                		<p id="owner"> Owner: {{this.user_name}} </p>
+    							<p id="condition"> Condition: {{this.prod_condition}} </p>
+    							<p id="availability"> Availability: {{this.availability}} </p>
+    							<p id="comments"> Comments: {{this.comments}} </p>
+    	              		</div>
+    	              		<div class="card-action">
+                                <a class="modal-trigger" data-target="contactOwner">Contact</a>
+    								<input type="hidden" name="poster_id" value="{{this.user_id}}">
+    								<input type="hidden" name="modal_desc" value="{{this.description}}">
+    								<input type="hidden" name="product_id" value="{{this.id}}">
+    	                		<a id="{{this.id}}" data="{{this.description}}" class="swapTrigger modal-trigger" data-target="swapRequest">SWAP!</a>
+    	                		<a href="#">Location</a>
+    	              		</div>
+                        </div>
+    	            	</div>
+    	          	</div>
+    	        {{/each}}
+    	    </div>
+    	</div>
     </div>
-</nav>
 
-<div class="container" id="postsDiv">
-	<div class="section">
-		<div class="row">
-			{{#each posts}}
-	          	<div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
-	            	<div class="card">
-
-	              		<div class="card-image">
-	              			<img id="image" src="{{this.img_location}}">
-	              		</div>
-	              		<div class="card-content">
-	                		<span id="description" class="center card-title">{{this.description}}</span>
-	                		<p id="owner"> Owner: {{this.user_name}} </p>
-							<p id="condition"> Condition: {{this.prod_condition}} </p>
-							<p id="availability"> Availability: {{this.availability}} </p>
-							<p id="comments"> Comments: {{this.comments}} </p>
-	              		</div>
-	              		<div class="card-action">
-                            <a class="modal-trigger" data-target="contactOwner">Contact</a>
-								<input type="hidden" name="poster_id" value="{{this.user_id}}">
-								<input type="hidden" name="modal_desc" value="{{this.description}}">
-								<input type="hidden" name="product_id" value="{{this.id}}">
-	                		<a id="{{this.id}}" data="{{this.description}}" class="swapTrigger modal-trigger" data-target="swapRequest">SWAP!</a>
-	                		{{!-- Location Modal Trigger; pops up swap location on Google Maps --}}
-	                		<a href="#">Location</a>
-	              		</div>
-
-	            	</div>
-	          	</div>
-	        {{/each}}
-	    </div>
-	</div>
-</div>
-<div id="map"></div>
+</main>
 
 <footer class="page-footer orange z-depth-2">
     <div class="container">
@@ -97,14 +102,12 @@
     </div>
 </div>
 
-<!-- Swap Modal -->
-<div id="swapRequest" class="modal">
-    <div class="modal-content">
-        <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
-       	<h4>Swap Request!</h4>
-        <p id="modalDesc"></p>
-   	</div>
-</div>
+
+<div id="swapLocationModal" class="modal">
+        <div class="modal_bg colse"></div>
+        <p class="closer colse">X</p>
+        <div class="modal_main" id="map"></div>
+    </div>
 
 <script>
 

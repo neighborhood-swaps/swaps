@@ -22,7 +22,6 @@ var upload = multer({
     })
 });
 
-
 //******************************* CODE FOR AUTH START ***********************************
 
 // sets AuthO credentials
@@ -98,7 +97,6 @@ router.get("/user", ensureLoggedIn, function(req, res, next) {
 
 // retrieves data by category
 router.get("/api/posts/:category", function(req, res) {
-    console.log("req.user:  " + JSON.stringify(req.user));
     db.Products.findAll({
             where: {
                 category: req.params.category
@@ -331,7 +329,6 @@ router.get("/404", function(req, res, next) {
 //*************************** CODE FOR POSTS/SWAPS END ******************************
 
 //**************************** CODE FOR IMAGES START ********************************
-
 
 router.get('/api/newUser', function(req, res) {
     res.sendFile(path.join(__dirname, "../public/adduser.html"));
