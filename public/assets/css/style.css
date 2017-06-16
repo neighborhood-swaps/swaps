@@ -16,6 +16,10 @@ main {
      flex: 1 0 auto;
 }
 
+.card {
+	height: 600px;
+}
+
 .input-field input[type=text]:focus + label {
  color: #29b6f6;
 }
