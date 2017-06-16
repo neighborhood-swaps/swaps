@@ -211,7 +211,7 @@ router.get("/scheduled", function(req, res) {
     db.Products.findAll({
             where: {
                 user_id: req.user.id,
-                status: "pending" 
+                status: "scheduled" 
             }
         })
         .then(function(dbPosts) {
