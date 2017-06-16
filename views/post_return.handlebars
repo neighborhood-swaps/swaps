@@ -34,7 +34,10 @@
 	              		   {{!-- Contact Owner Modal Trigger; sends owner an email --}}
                             <a class="modal-trigger" data-target="contactOwner">Contact</a>
                             {{!-- Swap Modal Trigger; displays swap requested modal --}}
-	                		<a class="modal-trigger" data-target="swapRequest">SWAP!</a>
+								<input type="hidden" name="poster_id" value="{{this.user_id}}">
+								<input type="hidden" name="modal_desc" value="{{this.description}}">
+								<input type="hidden" name="product_id" value="{{this.id}}">
+	                		<a id="{{this.id}}" data="{{this.description}}" class="swapTrigger modal-trigger" data-target="swapRequest">SWAP!</a>
 	                		{{!-- Location Modal Trigger; pops up swap location on Google Maps --}}
 	                		<a href="#">Location</a>
 	              		</div>
@@ -91,18 +94,24 @@
     <div class="modal-content">
         <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
        	<h4>Swap Request!</h4>
-        <p>A swap request will be sent for {{this.descriptiosn}}</p>
+        <p id="modalDesc"></p>
    	</div>
-    <div class="modal-footer">
-        <a href="/search" class=" modal-action modal-close waves-effect waves-green btn-flat">Search Posts</a>
-    </div>
 </div>
 
 <script>
-    $(document).ready(function(){
-        $('.modal-trigger').leanModal();
-    });
+
+    function startSwap() {
+        var newSwap = {
+            product: $(this).attr("id")
+        };
+        $("#modalDesc").text("A swap request has been submitted for the following item: " + $(this).attr("data"));
+        console.log("newSwap:  " + newSwap);
+        $.post(currentURL + "/api/swap", newSwap);
+    }
+    
+    $(document).on("click", ".swapTrigger", startSwap);
+
 </script>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>

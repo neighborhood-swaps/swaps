@@ -66,7 +66,7 @@ router.get("/user", ensureLoggedIn, function(req, res, next) {
 
 // retrieves data by category
 router.get("/api/posts/:category", function(req, res) {
-    console.log("req.user:  "  + JSON.stringify(req.user));
+    // console.log("req.user:  " + JSON.stringify(req.user));
     db.Products.findAll({
             where: {
                 category: req.params.category
@@ -91,7 +91,7 @@ router.get("/posts", function(req, res) {
 
 // displays user's posts
 router.get("/userPosts", function(req, res) {
-    console.log("req.user.id: " + req.user.id);
+    // console.log("req.user.id: " + req.user.id);
     db.Products.findAll({
             where: {
                 user_id: req.user.id
@@ -100,7 +100,7 @@ router.get("/userPosts", function(req, res) {
         .then(function(dbPosts) {
             var postData = {
                 posts: dbPosts
-            }; 
+            };
             console.log("dbPosts:  " + JSON.stringify(dbPosts));
             res.render("post_return", postData);
         });
@@ -113,9 +113,17 @@ router.get("/search", function(req, res) {
 
 // displays post input form
 router.post("/api/swap", function(req, res) {
-    console.log(req.body); // contains the posters_id and the product_id of the poster
-    console.log(req.user.id); // The requester ID, so the requester want the above item
-    // res.render("posts");
+    db.Products.update(
+        {
+            requester_id: req.user.id,
+            status: "pending"
+        }, 
+        {
+            where: {
+                        id: req.body.product
+                   }
+        }
+    );
 });
 
 //************** CODE FOR POSTS/SWAPS END ******************
