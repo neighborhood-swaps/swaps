@@ -1,4 +1,7 @@
-<header>
+
+ {{!-- THE BELOW SECTION IS FOR CREATING A POST TO BE SENT TO THE DATABASE --}}
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left">SWAPS</a>
 
 	<nav class="light-blue lighten-1" role="navigation">
 	    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left" >SWAPS</a>
@@ -7,6 +10,7 @@
 	        </ul>
 	    </div>
 	</nav>
+
 
 	<div id="mainImage">
 	</div>
@@ -62,6 +66,149 @@
 
 </main>
 
+=======
+<nav class="orange" role="navigation">
+    {{!-- <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left">SWAPS</a> --}}
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/posts"> Post an Item </a></li>
+            <li><a href="/userPosts"> My Posts </a></li>
+            <li><a href="/search"> Search Posts </a></li>
+            <li><a href="/received"> Offers Received </a></li>
+            <li><a href="/made"> Offers Made </a></li>
+            <li><a href="/lending"> Items Lending </a></li>
+            <li><a href="/borrowing"> Items Borrowing </a></li>
+            {{!-- <li><a href="/logout">Log out</a></li> --}}
+        </ul>
+    </div>
+</nav>
+<br>
+<br>
+<container id="formContainer">
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" class="validate" required="" aria-required="true" name="nameInput">
+                    <label for="nameInput">Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12" required="" aria-required="true" name="categoryInput">
+                    <select>
+                        <option value="" disabled selected>Category</option>
+                        <option value="Appliances">Appliances</option>
+                        <option value="Arts and Crafts">Arts and Crafts</option>
+                        <option value="Auto Parts">Auto Parts</option>
+                        <option value="Baby and Kid">Baby and Kid</option>
+                        <option value="Beauty and Health">Beauty and Health</option>
+                        <option value="Books">Books</option>
+                        <option value="Clothes and Accessories">Clothes and Accessories</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Farm and Garden">Farm and Garden</option>
+                        <option value="Furniture">Furniture</option>
+                        <option value="General">General</option>
+                        <option value="Heavy Equipment">Heavy Equipment</option>
+                        <option value="Household">Household</option>
+                        <option value="Jewelery">Jewelery</option>
+                        <option value="Musical Instruments">Musical Instruments</option>
+                        <option value="Photo and Video">Photo and Video</option>
+                        <option value="Sporting">Sporting</option>
+                        <option value="Tools">Tools</option>
+                        <option value="Toys and Games">Toys and Games</option>
+                        <option value="Vehicles and Boats">Vehicles and Boats</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12" required="" aria-required="true" name="conditionInput">
+                    <select>
+                        <option value="" disabled selected>Condition</option>
+                        <option value="New">New</option>
+                        <option value="Like New">Like New</option>
+                        <option value="Good">Good</option>
+                        <option value="Acceptable">Acceptable</option>
+                        <option value="Broken">Broken</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea class="materialize-textarea" required="" aria-required="true" name="descriptionInput"></textarea>
+                    <label for="descriptionInput">Description</label>
+                </div>
+            </div>
+            <div class="input-field col s12" required="" aria-required="true" name="availabilityInput">
+                <select multiple>
+                    <option value="" disabled selected>Availability</option>
+                    <option value="M">Monday</option>
+                    <option value="T">Tuesday</option>
+                    <option value="W">Wednesday</option>
+                    <option value="Th">Thursday</option>
+                    <option value="F">Friday</option>
+                    <option value="Sa">Saturday</option>
+                    <option value="Su">Sunday</option>
+                </select>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" class="validate" required="" aria-required="true" name="swap_locationInput">
+                    <label for="nameInput">Location</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea class="materialize-textarea" required="" aria-required="true" name="commentsInput"></textarea>
+                    <label for="descriptionInput">Comments</label>
+                </div>
+            </div>
+            <div class="row">
+                <img style="border:1px solid gray;width:300px;" id="preview" src="http://via.placeholder.com/400x300">
+                <label class="btn btn-primary" for="my-file-selector">
+                    <input name="upl" id="my-file-selector" type="file" style="display:none;">Select Image File</label>
+            </div>
+            <button type="submit" id="postForm" class="btn">Post Item to SWAPS</button>
+        </form>
+    </div>
+</container>
+
+<main>
+
+    <div class="col-s-4">
+        <div id="createPost">
+            <div>
+                <div class="row" id="">
+                    <div class="col-s-12">
+                        <div class="row">
+                            <form class="" id="" action="/api/postItem" method="POST" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <input class="validate" required="" aria-required="true" name="nameInput">Name</input>
+                                        <input class="validate" required="" aria-required="true" name="categoryInput">Category</input>
+                                        <input class="validate" required="" aria-required="true" name="descriptionInput">Description</input>
+                                        <input class="validate" required="" aria-required="true" name="conditionInput"> Condition</input>
+                                        <input class="validate" required="" aria-required="true" name="availabilityInput"> Availability </input>
+                                        <input class="validate" required="" aria-required="true" name="swap_locationInput">Location </input>
+                                        <input name="commentsInput">Comments </input>
+                                        <br/>
+                                        <img style="border:1px solid gray;width:300px;" id="preview" src="http://via.placeholder.com/400x300">
+                                        <label class="btn btn-primary" for="my-file-selector">
+                                            <input name="upl" id="my-file-selector" type="file" style="display:none;">Select File</label>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <button type="submit" id="postForm" class="btn">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+</main>
+
 <footer class="page-footer orange z-depth-2">
     <div class="container">
         <div class="row">
@@ -70,8 +217,10 @@
     </div>
 </footer>
 
+<script type="text/javascript">
 
-
-
-
-
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+    
+</script>
