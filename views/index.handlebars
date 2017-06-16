@@ -13,27 +13,7 @@
 
     <div id="mainImage">
     </div>
-
-<<<<<<< HEAD
-<p>Welcome</p>
-<div class="col s12 m8 offset-m2 l6 offset-l3">
-        {{!-- <div class="card-panel grey lighten-5 z-depth-1">
-          <div class="row valign-wrapper">
-            <div class="col s2">
-              <img src="images/yuna.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
-            </div>
-            <div class="col s10">
-              <span class="black-text">
-                This is a square image. Add the "circle" class to it to make it appear circular.
-              </span>
-            </div>
-          </div>
-        </div> --}}
-      </div>
-            
-=======
->>>>>>> a29233092cb910fb2940f84ac0b26079a1fd3520
-
+    
     <nav class="orange" role="navigation">
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="/faq">FAQ</a></li>
@@ -42,17 +22,17 @@
         </div>
     </nav>
     
-    <p>Please Log in to start swapping!</p>
-
 </header>
 
 <main>
+
+    <p>Please Log in to start swapping!</p>
 
     <div class="container" id="postsDiv">
         <div class="section">
             <div class="row">
                 {{#each posts}}
-                    <div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
+                    <div class="col s12 m4 l3" id="{{this.id}}" data="{{this.user_id}}">
                         <div class="card">
                             <div class="card-image">
                                 <img id="image" src="{{this.img_location}}">
