@@ -31,6 +31,14 @@ $("#submitSwapLocation").on("click", function(event){
 		        });
 		     	map.setCenter(marker.getPosition());
 		        });
-	}// end of initMap
-	$("#map").addClass("mapClass");
+	};// end of initMap
+	$(".modal").fadeIn();
+	$(".modal_main").show();
+
+	$(".colse").click(function() {
+		$(".modal").fadeOut();
+		$(".modal_main").fadeOut();
+	});//end of click
+	initMap();
+	//$("#map").addClass("mapClass");
 });// end of on click

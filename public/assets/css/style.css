@@ -86,3 +86,49 @@ footer {
 }
 
 /*--------temp contact form css end ----------*/
+.call_modal {
+			padding: 20px;
+			margin: 6px;
+			border-radius: 	5px;
+			background: #3399cc;
+			color: 	#ccc;
+			font-size: 	26px;
+			border: none;
+			cursor: pointer;
+		}
+
+		.modal {
+			display:none;
+			width: 	100%;
+			height: 100%;
+			position: fixed;	
+			top: 0;
+		}
+
+		.modal_bg {
+			background: rgba(0,0,0,0.5);
+			height: 100%;
+			width: 	100%;
+			position: fixed;	
+			top: 0;
+		}
+
+		.modal_main {
+			position: fixed;
+			width: 50%;
+			height: 400px;
+			background: #fff;
+			border-radius: 	6px;
+			top: 9%;
+			left: 24%;
+			display: none;
+
+		}
+		.closer {
+			position: absolute;
+			top: 58px;
+			right: 27%;
+			cursor: pointer;
+			z-index: 8;
+			font: italic bold 12px/30px Georgia, serif;
+		}
