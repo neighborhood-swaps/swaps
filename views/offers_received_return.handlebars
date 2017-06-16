@@ -30,9 +30,9 @@
 							<p id="comments"> Comments: {{this.comments}} </p>
 	              		</div>
 	              		<div class="card-action">
-			                <a data-id ="{{this.id}}"class="modal-trigger contactTrigger" data-target="contactOwner">Contact</a>
-			                <a data-id ="{{this.id}}"class="modal-trigger acceptTrigger" data-target="accept">Accept</a>
-			                <a data-id ="{{this.id}}"class="modal-trigger rejectTrigger" data-target="reject">No Thanks</a>
+			                <a data-id ="{{this.id}}" data-desc="{{this.description}}" class="modal-trigger contactTrigger" data-target="contactOwner">Contact</a>
+			                <a data-id ="{{this.id}}" data-desc="{{this.description}}" class="modal-trigger acceptTrigger" data-target="accept">Accept</a>
+			                <a data-id ="{{this.id}}" data-desc="{{this.description}}" class="modal-trigger rejectTrigger" data-target="reject">No Thanks</a>
 	              		</div>
 	            	</div>
 	          	</div>
@@ -119,7 +119,7 @@
         var acceptProd = {
             product: $(this).attr("data-id")
         };
-        $("#acceptDesc").html("You have just accepted a swap for the following item: " + $(this).attr("data"));
+        $("#acceptDesc").html("You have just accepted a swap for the following item: " + $(this).attr("data-desc"));
         console.log("acceptProd:  " + acceptProd);
         $.post(currentURL + "/accept", acceptProd);
     }
@@ -130,7 +130,7 @@
         var rejectProd = {
             product: $(this).attr("data-id")
         };
-        $("#rejectDesc").html("The following items will be removed from your offers: " + $(this).attr("data"));
+        $("#rejectDesc").html("The following items will be removed from your offers: " + $(this).attr("data-desc"));
         console.log("rejectProd:  " + rejectProd);
         $.post(currentURL + "/reject", rejectProd);
     }
