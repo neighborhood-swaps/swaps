@@ -8,6 +8,8 @@
         </div>
     </nav>
 
+
+
     <div id="mainImage">
     </div>
 
@@ -28,39 +30,35 @@
 
 <main>
 
-    <div class="container" id="postsDiv">
-    	<div class="section">
-    		<div class="row">
-    			{{#each posts}}
-    	          	<div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
-    	            	<div class="card">
-    	              		<div class="card-image">
-    	              			<img id="image" src="{{this.img_location}}">
-    	              		</div>
-    	              		<div class="card-content">
-    	                		<span id="description" class="center card-title">{{this.description}}</span>
-    	                		<p id="owner"> Owner: {{this.user_name}} </p>
-    							<p id="condition"> Condition: {{this.prod_condition}} </p>
-    							<p id="availability"> Availability: {{this.availability}} </p>
-    							<p id="comments"> Comments: {{this.comments}} </p>
-    	              		</div>
-    	              		<div class="card-action">
-                                <a class="modal-trigger" data-target="contactOwner">Contact</a>
-    								<input type="hidden" name="poster_id" value="{{this.user_id}}">
-    								<input type="hidden" name="modal_desc" value="{{this.description}}">
-    								<input type="hidden" name="product_id" value="{{this.id}}">
-    	                		<a id="{{this.id}}" data="{{this.description}}" class="swapTrigger modal-trigger" data-target="swapRequest">SWAP!</a>
-    	                		<a href="#">Location</a>
-    	              		</div>
-                        </div>
-    	            	</div>
-    	          	</div>
-    	        {{/each}}
-    	    </div>
-    	</div>
-    </div>
-    
-</main>
+<div class="container" id="postsDiv">
+	<div class="section">
+		<div class="row">
+			{{#each posts}}
+	          	<div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
+	            	<div class="card">
+	              		<div class="card-image">
+	              			<img id="image" src="{{this.img_location}}">
+	              		</div>
+	              		<div class="card-content">
+	                		<span id="description" class="card-title">{{this.description}}</span>
+	                		<p id="owner"> Owner: {{this.user_name}} </p>
+							<p id="condition"> Condition: {{this.prod_condition}} </p>
+							<p id="availability"> Availability: {{this.availability}} </p>
+							<p id="comments"> Comments: {{this.comments}} </p>
+	              		</div>
+	              		<div class="card-action">
+                            <a class="modal-trigger" data-target="contactOwner">Contact</a>
+                            <a data-id="{{this.id}}" data-desc="{{this.description}}" class="completeTrigger modal-trigger" data-target="complete">Swap Completed</a>
+	              		</div>
+	            	</div>
+	          	</div>
+	        {{/each}}
+	    </div>
+	</div>
+</div>
+<div id="map"></div>
+
+<br/>
 
 <footer class="page-footer orange z-depth-2">
     <div class="container">
@@ -69,6 +67,7 @@
         </div>
     </div>
 </footer>
+
 
 <!-- Contact Owner Modal -->
 <div id="contactOwner" class="modal">
@@ -102,25 +101,38 @@
     </div>
 </div>
 
-
-<div id="swapLocationModal" class="modal">
-        <div class="modal_bg colse"></div>
-        <p class="closer colse">X</p>
-        <div class="modal_main" id="map"></div>
-    </div>
+<!-- Swap Complete Modal -->
+<div id="complete" class="modal">
+    <div class="modal-content">
+        <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+       	<h4>Swap Completed!</h4>
+        <p id="completeDesc">This product has been removed from your items borrowing.</p>
+   	</div>
+</div>
 
 <script>
 
-    function startSwap() {
-        var newSwap = {
-            product: $(this).attr("id")
+    function completePost() {
+        var completeProd = {
+            product: $(this).attr("data-id")
         };
-        $("#modalDesc").text("A swap request has been submitted for the following item: " + $(this).attr("data"));
-        // console.log("newSwap:  " + newSwap);
-        $.post(currentURL + "/api/swap", newSwap);
+        $("#completeDesc").html("You are no longer borrowing the following item: " + $(this).attr("data-desc"));
+        console.log("completeProd:  " + completeProd);
+        $.post(currentURL + "/complete", completeProd);
     }
+
+
+    // function repostPost() {
+    //     var repostProd = {
+    //         product: $(this).attr("data-id")
+    //     };
+    //     $("#repostDesc").html("The following item has been reposted to your available offers: " + $(this).attr("data-desc"));
+    //     console.log("repostProd:  " + repostProd);
+    //     $.post(currentURL + "/rescind", repostProd);
+    // }
+
     
-    $(document).on("click", ".swapTrigger", startSwap);
+    $(document).on("click", ".completeTrigger", completePost);
 
 </script>
 

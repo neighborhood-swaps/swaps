@@ -38,16 +38,15 @@
     	              			<img id="image" src="{{this.img_location}}">
     	              		</div>
     	              		<div class="card-content">
-    	                		<span id="description" class="center card-title">{{this.description}}</span>
+    	                		<span id="description" class="card-title">{{this.description}}</span>
     	                		<p id="owner"> Owner: {{this.user_name}} </p>
     							<p id="condition"> Condition: {{this.prod_condition}} </p>
     							<p id="availability"> Availability: {{this.availability}} </p>
     							<p id="comments"> Comments: {{this.comments}} </p>
     	              		</div>
     	              		<div class="card-action">
-    			                <a data-id ="{{this.id}}" data-desc="{{this.description}}" class="modal-trigger contactTrigger" data-target="contactOwner">Contact</a>
-    			                <a data-id ="{{this.id}}" data-desc="{{this.description}}" class="modal-trigger acceptTrigger" data-target="accept">Accept</a>
-    			                <a data-id ="{{this.id}}" data-desc="{{this.description}}" class="modal-trigger rejectTrigger" data-target="reject">No Thanks</a>
+                                <a class="modal-trigger" data-target="contactOwner">Contact</a>
+    			                <a data-id ="{{this.id}}" data-desc="{{this.description}}" class="modal-trigger rescindTrigger" data-target="rescind">Rescind</a>
     	              		</div>
     	            	</div>
     	          	</div>
@@ -69,21 +68,12 @@
 </footer>
 
 
-<!-- Accept Modal -->
-<div id="accept" class="modal">
+<!-- Rescind Modal -->
+<div id="rescind" class="modal">
     <div class="modal-content">
         <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
-       	<h4>Swap Accepted!</h4>
-        <p id="acceptDesc">You have just scheduled a swap.</p>
-   	</div>
-</div>
-
-<!-- Reject Modal -->
-<div id="reject" class="modal">
-    <div class="modal-content">
-        <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
-       	<h4>Swap Rejected!</h4>
-        <p id="rejectDesc">This swap has been removed from your offers.</p>
+       	<h4>Offer Rescinded!</h4>
+        <p id="rescindDesc">You have rescinded your offer.</p>
    	</div>
 </div>
 
@@ -121,29 +111,16 @@
 
 <script>
 
-//change status to scheduled
-    function acceptSwap() {
-        var acceptProd = {
+    function rescindSwap() {
+        var rescindProd = {
             product: $(this).attr("data-id")
         };
-        $("#acceptDesc").html("You have just accepted a swap for the following item: " + $(this).attr("data-desc"));
-        console.log("acceptProd:  " + acceptProd);
-        $.post(currentURL + "/accept", acceptProd);
-    }
-
-
-//remove requester_id and change status to open
-    function rejectSwap() {
-        var rejectProd = {
-            product: $(this).attr("data-id")
-        };
-        $("#rejectDesc").html("The following items will be removed from your offers: " + $(this).attr("data-desc"));
-        console.log("rejectProd:  " + rejectProd);
-        $.post(currentURL + "/reject", rejectProd);
+        $("#rescindDesc").html("You have rescinded your offer for the following item: " + $(this).attr("data-desc"));
+        console.log("rescindProd:  " + rescindProd);
+        $.post(currentURL + "/rescind", rescindProd);
     }
     
-    $(document).on("click", ".acceptTrigger", acceptSwap);
-    $(document).on("click", ".rejectTrigger", rejectSwap);
+    $(document).on("click", ".rescindTrigger", rescindSwap);
 
 </script>
 
