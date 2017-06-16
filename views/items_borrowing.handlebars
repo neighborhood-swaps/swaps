@@ -1,13 +1,6 @@
 <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left" >SWAPS</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            {{!-- <li><a href="/posts"> Post an Item </a></li>
-            <li><a href="/userPosts"> My Posts </a></li>
-            <li><a href="/search"> Search Posts </a></li>
-            <li><a href="/received"> Offers Received </a></li>
-            <li><a href="/made"> Offers Made </a></li>
-            <li><a href="/lending"> Items Lending </a></li>
-            <li><a href="/borrowing"> Items Borrowing </a></li> --}}
             <li><a href="/logout">Log out</a></li>
         </ul>
     </div>
@@ -17,7 +10,6 @@
 </div>
 
 <nav class="orange" role="navigation">
-    {{!-- <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left">SWAPS</a> --}}
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="/posts"> Post an Item </a></li>
             <li><a href="/userPosts"> My Posts </a></li>
@@ -26,18 +18,16 @@
             <li><a href="/made"> Offers Made </a></li>
             <li><a href="/lending"> Items Lending </a></li>
             <li><a href="/borrowing"> Items Borrowing </a></li>
-            {{!-- <li><a href="/logout">Log out</a></li> --}}
         </ul>
     </div>
 </nav>
 
-
+<br/> 
 
 <div class="container" id="postsDiv">
 	<div class="section">
 		<div class="row">
 			{{#each posts}}
-				{{!-- This shows the user's item that is promised to someone else - the handlebars in here will be different depending on how we handle the backend --}}
 	          	<div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
 	            	<div class="card">
 	              		<div class="card-image">
@@ -51,46 +41,25 @@
 							<p id="comments"> Comments: {{this.comments}} </p>
 	              		</div>
 	              		<div class="card-action">
-	              		{{!-- contact button opens contact form and sends post owner an email--}}
-	                		<a href="/contact">Contact</a>
-	                		{{!-- delete button deletes the swap from the database - user can press it when 
-	                		the swap has been physically made and this div is no longer needed --}}
-	                		<a href="">Delete!</a>
-	                		{{!-- location button creates a popup/modal of google maps showing address on map --}}
+	              		   {{!-- Contact Owner Modal Trigger; sends owner an email --}}
+                            <a class="modal-trigger" data-target="contactOwner">Contact</a>
+                            {{!-- Swap Modal Trigger; displays swap requested modal --}}
+								<input type="hidden" name="poster_id" value="{{this.user_id}}">
+								<input type="hidden" name="modal_desc" value="{{this.description}}">
+								<input type="hidden" name="product_id" value="{{this.id}}">
+	                		<a id="{{this.id}}" data="{{this.description}}" class="swapTrigger modal-trigger" data-target="swapRequest">SWAP!</a>
+	                		{{!-- Location Modal Trigger; pops up swap location on Google Maps --}}
 	                		<a href="#">Location</a>
 	              		</div>
 	            	</div>
 	          	</div>
-				{{!-- this div shows the item the user asked for in exchange for his/her above item -- the handlebars in here will be different based on how we handle the backend--}}
-	          	<div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
-	            	<div class="card">
-	              		<div class="card-image">
-	              			<img id="image" src="{{this.img_location}}">
-	              		</div>
-	              		<div class="card-content">
-	                		<span id="description" class="card-title">{{this.description}}</span>
-	                		<p id="owner"> Owner: {{this.user_name}} </p>
-							<p id="condition"> Condition: {{this.prod_condition}} </p>
-							<p id="availability"> Availability: {{this.availability}} </p>
-							<p id="comments"> Comments: {{this.comments}} </p>
-	              		</div>
-	              		<div class="card-action">
-	              		{{!-- contact button opens contact form and sends post owner an email--}}
-	                		<a href="/contact">Contact</a>
-	                		{{!-- delete button deletes the swap from the database - user can press it when 
-	                		the swap has been physically made and this div is no longer needed --}}
-	                		<a href="">Delete!</a>
-	                		{{!-- location button creates a popup/modal of google maps showing address on map --}}
-	                		<a href="#">Location</a>
-	              		</div>
-	            	</div>
-	          	</div>
-
 	        {{/each}}
 	    </div>
 	</div>
 </div>
 <div id="map"></div>
+
+<br/>
 
 <footer class="page-footer orange z-depth-2">
     <div class="container">

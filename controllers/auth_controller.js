@@ -28,14 +28,27 @@ var env = {
     AUTH0_CALLBACK_URL: process.env.AUTH0_CALLBACK_URL || "http://localhost:3000/callback"
 };
 
-// renders home page
+//renders home page
 router.get("/", function(req, res, next) {
     res.render("index", { env: env });
 });
 
+// router.get("/", function(req, res, next) {
+//         db.Products.findAll({
+//             limit: 1,
+//             order: [ [ 'createdAt', 'DESC' ]]
+//         })
+//         .then(function(dbPosts) {
+//             var postData = {
+//                 posts: dbPosts
+//             };
+//             console.log("dbPosts:  " + JSON.stringify(dbPosts));
+//             res.render("index", postData, { env: env });
+//         });
+// });
+
 // renders login
-router.get("/login",
-    function(req, res) {
+router.get("/login", function(req, res) {
         res.render("login", { env: env });
 });
 
@@ -104,14 +117,22 @@ router.get("/userPosts", function(req, res) {
         });
 });
 
-// displays category search buttons
 router.get("/search", function(req, res) {
-    res.render("search");
+    db.Products.findAll({
+            limit: 9,
+            order: [ [ 'createdAt', 'DESC' ]]
+        })
+        .then(function(dbPosts) {
+            var postData = {
+                posts: dbPosts
+            };
+            console.log("dbPosts:  " + JSON.stringify(dbPosts));
+            res.render("search", postData);
+        });
 });
 
 // updates requester info and status when user asks to swap
 router.post("/api/swap", function(req, res) {
-    // console.log(req.body.product);
     db.Products.update(
         {
             requester_id: req.user.id,
@@ -127,7 +148,6 @@ router.post("/api/swap", function(req, res) {
 
 // updates status when user accepts a swap
 router.post("/accept", function(req, res) {
-    console.log("req.body.product:  " + req.body.product);
     db.Products.update(
         {
             status: "scheduled"
@@ -142,7 +162,6 @@ router.post("/accept", function(req, res) {
 
 // updates status and deletes requester when user rejects a swap
 router.post("/reject", function(req, res) {
-    console.log("req.body.product:  " + req.body.product);
     db.Products.update(
         {
             requester_id: null,
@@ -158,7 +177,6 @@ router.post("/reject", function(req, res) {
 
 // updates status and deletes requester when user rescinds a swap
 router.post("/rescind", function(req, res) {
-    console.log("req.body.product:  " + req.body.product);
     db.Products.update(
         {
             requester_id: null,
@@ -169,7 +187,39 @@ router.post("/rescind", function(req, res) {
                         id: req.body.product
                    }
         }
-    );
+    ).then(function() {
+            res.redirect("/made");
+        });
+});
+
+// updates status and deletes requester when user reposts a post from items lending
+router.post("/repost", function(req, res) {
+    db.Products.update(
+        {
+            requester_id: null,
+            status: "open"
+        }, 
+        {
+            where: {
+                        id: req.body.product
+                   }
+        }
+    ).then(function(dbPosts) {
+            res.redirect("/lending");
+    });
+});
+
+// deletes a post
+router.post("/delete", function(req, res) {
+    db.Products.destroy(
+        {
+            where: {
+                        id: req.body.product
+                   }
+        }
+    ).then(function(dbPosts) {
+            res.redirect("/lending");
+    });
 });
 
 // displays post input form
@@ -184,12 +234,11 @@ router.get("/received", function(req, res) {
             var postData = {
                 posts: dbPosts
             };
-            // console.log("dbPosts:  " + JSON.stringify(dbPosts));
             res.render("offers_received_return", postData);
         });
 });
 
-// displays post input form
+// displays offers made
 router.get("/made", function(req, res) {
     db.Products.findAll({
             where: {
@@ -201,13 +250,12 @@ router.get("/made", function(req, res) {
             var postData = {
                 posts: dbPosts
             };
-            // console.log("dbPosts:  " + JSON.stringify(dbPosts));
             res.render("offers_made_return", postData);
         });
 });
 
-// displays post input form
-router.get("/scheduled", function(req, res) {
+// displays items scheduled to lend
+router.get("/lending", function(req, res) {
     db.Products.findAll({
             where: {
                 user_id: req.user.id,
@@ -218,10 +266,26 @@ router.get("/scheduled", function(req, res) {
             var postData = {
                 posts: dbPosts
             };
-            // console.log("dbPosts:  " + JSON.stringify(dbPosts));
-            res.render("offers_received_return", postData);
+            res.render("items_lending", postData);
         });
 });
+
+// displays items scheduled to borrow
+router.get("/borrowing", function(req, res) {
+    db.Products.findAll({
+            where: {
+                requester_id: req.user.id,
+                status: "scheduled" 
+            }
+        })
+        .then(function(dbPosts) {
+            var postData = {
+                posts: dbPosts
+            };
+            res.render("items_borrowing", postData);
+        });
+});
+
 
 //************** CODE FOR POSTS/SWAPS END ******************
 
