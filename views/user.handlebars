@@ -26,9 +26,36 @@
 </nav>
 
 
-{{!-- <div id="userPhoto">{{user.picture}}</div><span id="welcome"> Welcome {{user.nickname}} ! </span>  --}}
+<!-- {{!-- <div id="userPhoto">{{user.picture}}</div><span id="welcome"> Welcome {{user.nickname}} ! </span>  --}}
 <h3 id="welcome"> Welcome {{user.nickname}} ! </h3>
-<br/>
+<br/> -->
+
+
+<br><br>
+
+<div class="row">
+    <div class="col s12"> 
+        <img id="userImage" src={{user.picture}} class="circle responsive-img"> 
+    </div>
+</div>
+
+<div>
+    <div class="row" id="welcomeCard">
+        <div class="col s12 m4 offset-m2 l6 offset-l3">
+            <div class="card-panel light-blue roundCard">
+                <span class="white-text">
+                    Welcome {{user.nickname}} ! 
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="row">
+    <div class="col s12 offset-s1"> 
+        <h2> Welcome {{user.nickname}} ! </h2> 
+    </div>
+</div> -->
 
 <div class="container" id="postsDiv">
     <div class="section">
