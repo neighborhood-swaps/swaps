@@ -1,23 +1,15 @@
 <nav class="light-blue lighten-1" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left" >SWAPS</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            {{!-- <li><a href="/posts"> Post an Item </a></li>
-            <li><a href="/userPosts"> My Posts </a></li>
-            <li><a href="/search"> Search Posts </a></li>
-            <li><a href="/received"> Offers Received </a></li>
-            <li><a href="/made"> Offers Made </a></li>
-            <li><a href="/lending"> Items Lending </a></li>
-            <li><a href="/borrowing"> Items Borrowing </a></li> --}}
             <li><a href="/logout">Log out</a></li>
         </ul>
     </div>
 </nav>
 
-<div id="image">
+<div id="mainImage">
 </div>
 
 <nav class="orange" role="navigation">
-    {{!-- <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left">SWAPS</a> --}}
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="/posts"> Post an Item </a></li>
             <li><a href="/userPosts"> My Posts </a></li>
@@ -26,7 +18,6 @@
             <li><a href="/made"> Offers Made </a></li>
             <li><a href="/lending"> Items Lending </a></li>
             <li><a href="/borrowing"> Items Borrowing </a></li>
-            {{!-- <li><a href="/logout">Log out</a></li> --}}
         </ul>
     </div>
 </nav>
@@ -35,13 +26,13 @@
 	<div class="section">
 		<div class="row">
 			{{#each posts}}
-	          	<div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
+	          	<div id="cardDiv" class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
 	            	<div class="card">
 	              		<div class="card-image">
 	              			<img id="image" src="{{this.img_location}}">
 	              		</div>
 	              		<div class="card-content">
-	                		<span id="description" class="card-title">{{this.description}}</span>
+	                		<span id="description" class="center card-title">{{this.description}}</span>
 	                		<p id="owner"> Owner: {{this.user_name}} </p>
 							<p id="condition"> Condition: {{this.prod_condition}} </p>
 							<p id="availability"> Availability: {{this.availability}} </p>

@@ -3,11 +3,6 @@ var express = require("express");
 var passport = require("passport");
 var ensureLoggedIn = require("connect-ensure-login").ensureLoggedIn();
 var router = express.Router();
-
-//NOTE: COOKIE WITH USER INFO SENT WITH EVERY REQUEST TO SERVER. YOU CAN RETRIEVE THE USER ID WITH REQ.USER.ID.
-
-//************** CODE FOR IMAGES START ***************************
-
 var db = require("../models");
 var uuid = require("uuid");
 var path = require("path");
@@ -17,9 +12,7 @@ var multerS3 = require('multer-s3');
 const S3_BUCKET = process.env.S3_BUCKET_NAME;
 s3 = new aws.S3();
 
-//************** CODE FOR IMAGES END ***************************
-
-//************** CODE FOR AUTH START ***************************
+//******************************* CODE FOR AUTH START ***********************************
 
 // sets AuthO credentials
 var env = {
@@ -35,7 +28,7 @@ router.get("/", function(req, res, next) {
 
 // router.get("/", function(req, res, next) {
 //         db.Products.findAll({
-//             limit: 1,
+//             limit: 9,
 //             order: [ [ 'createdAt', 'DESC' ]]
 //         })
 //         .then(function(dbPosts) {
@@ -73,9 +66,24 @@ router.get("/user", ensureLoggedIn, function(req, res, next) {
     res.render("user", { user: req.user });
 });
 
-//************** CODE FOR AUTH END ***************************
+// router.get("/user", ensureLoggedIn, function(req, res, next) {
+//     db.Products.findAll({
+//             limit: 9,
+//             order: [ [ 'createdAt', 'DESC' ]]
+//         })
+//         .then(function(dbPosts) {
+//             var postData = {
+//                 posts: dbPosts
+//             };
+//             console.log("dbPosts:  " + JSON.stringify(dbPosts));
+//             // res.render("search", postData);
+//             res.render("user", { user: req.user }, postData);
+//         });
+// });
 
-//************** CODE FOR POSTS/SWAPS START ******************
+//******************************* CODE FOR AUTH END ***********************************
+
+//*************************** CODE FOR POSTS/SWAPS START ******************************
 
 // retrieves data by category
 router.get("/api/posts/:category", function(req, res) {
@@ -117,6 +125,7 @@ router.get("/userPosts", function(req, res) {
         });
 });
 
+// displays search categories
 router.get("/search", function(req, res) {
     db.Products.findAll({
             limit: 9,
@@ -209,6 +218,23 @@ router.post("/repost", function(req, res) {
     });
 });
 
+// updates status and deletes requester when user completes a swap
+router.post("/complete", function(req, res) {
+    db.Products.update(
+        {
+            requester_id: null,
+            status: "open"
+        }, 
+        {
+            where: {
+                        id: req.body.product
+                   }
+        }
+    ).then(function(dbPosts) {
+            res.redirect("/borrowing");
+    });
+});
+
 // deletes a post
 router.post("/delete", function(req, res) {
     db.Products.destroy(
@@ -222,7 +248,7 @@ router.post("/delete", function(req, res) {
     });
 });
 
-// displays post input form
+// displays offers received
 router.get("/received", function(req, res) {
     db.Products.findAll({
             where: {
@@ -286,25 +312,6 @@ router.get("/borrowing", function(req, res) {
         });
 });
 
-
-//************** CODE FOR POSTS/SWAPS END ******************
-
-//************** CODE FOR IMAGES START ***************************
-
-var upload = multer({
-    storage: multerS3({
-        s3: s3,
-        bucket: S3_BUCKET,
-        key: function(req, file, cb) {
-            cb(null, uuid.v4() + file.originalname); //use Date.now() for unique file keys
-        }
-    })
-});
-
-//************** CODE FOR IMAGES END ***************************
-
-//************** CODE FOR POSTS/SWAPS START **********************
-
 //adds post form data to db then redirects to user page
 router.post('/api/postItem', upload.array('upl', 1), function(req, res) {
     db.Products.create({
@@ -327,9 +334,19 @@ router.get("/404", function(req, res, next) {
     res.render("404");
 });
 
-//************** CODE FOR POSTS/SWAPS END ************************
+//*************************** CODE FOR POSTS/SWAPS END ******************************
 
-//************** CODE FOR IMAGES START ***************************
+//**************************** CODE FOR IMAGES START ********************************
+
+var upload = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: S3_BUCKET,
+        key: function(req, file, cb) {
+            cb(null, uuid.v4() + file.originalname); //use Date.now() for unique file keys
+        }
+    })
+});
 
 router.get('/api/newUser', function(req, res) {
     res.sendFile(path.join(__dirname, "../public/adduser.html"));
@@ -405,6 +422,7 @@ router.post('/save-details', (req, res) => {
     res.sendFile(path.join(__dirname, "../public/uploadfile.html"));
 });
 
-//************** CODE FOR IMAGES END ***************************
+//**************************** CODE FOR IMAGES END ********************************
 
 module.exports = router;
+

@@ -6,7 +6,7 @@
     </div>
 </nav>
 
-<div id="image">
+<div id="mainImage">
 </div>
 
 <nav class="orange" role="navigation">
@@ -41,8 +41,8 @@
 							<p id="comments"> Comments: {{this.comments}} </p>
 	              		</div>
 	              		<div class="card-action">
-                            <a data-id="{{this.id}}" data="{{this.description}}" class="repostTrigger modal-trigger" data-target="repost">Repost</a>
-                            <a data-id="{{this.id}}" data="{{this.description}}" class="deleteTrigger modal-trigger" data-target="delete">Delete Post</a>
+                            <a data-id="{{this.id}}" data-desc="{{this.description}}" class="repostTrigger modal-trigger" data-target="repost">Repost</a>
+                            <a data-id="{{this.id}}" data-desc="{{this.description}}" class="deleteTrigger modal-trigger" data-target="delete">Delete Post</a>
 	              		</div>
 	            	</div>
 	          	</div>
@@ -67,7 +67,7 @@
     <div class="modal-content">
         <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
        	<h4>Product Reposted!</h4>
-        <p id="deleteDesc">This item has been added to your available offers.</p>
+        <p id="repostDesc">This item has been added to your available offers.</p>
    	</div>
 </div>
 
@@ -76,7 +76,7 @@
     <div class="modal-content">
         <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
        	<h4>Product Deleted!</h4>
-        <p id="repostDesc">This item has been deleted.</p>
+        <p id="deleteDesc">This item has been deleted.</p>
    	</div>
 </div>
 

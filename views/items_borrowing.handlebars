@@ -6,7 +6,7 @@
     </div>
 </nav>
 
-<div id="image">
+<div id="mainImage">
 </div>
 
 <nav class="orange" role="navigation">
@@ -22,7 +22,7 @@
     </div>
 </nav>
 
-<br/> 
+<br/>
 
 <div class="container" id="postsDiv">
 	<div class="section">
@@ -41,15 +41,8 @@
 							<p id="comments"> Comments: {{this.comments}} </p>
 	              		</div>
 	              		<div class="card-action">
-	              		   {{!-- Contact Owner Modal Trigger; sends owner an email --}}
                             <a class="modal-trigger" data-target="contactOwner">Contact</a>
-                            {{!-- Swap Modal Trigger; displays swap requested modal --}}
-								<input type="hidden" name="poster_id" value="{{this.user_id}}">
-								<input type="hidden" name="modal_desc" value="{{this.description}}">
-								<input type="hidden" name="product_id" value="{{this.id}}">
-	                		<a id="{{this.id}}" data="{{this.description}}" class="swapTrigger modal-trigger" data-target="swapRequest">SWAP!</a>
-	                		{{!-- Location Modal Trigger; pops up swap location on Google Maps --}}
-	                		<a href="#">Location</a>
+                            <a data-id="{{this.id}}" data-desc="{{this.description}}" class="completeTrigger modal-trigger" data-target="complete">Swap Completed</a>
 	              		</div>
 	            	</div>
 	          	</div>
@@ -68,3 +61,74 @@
         </div>
     </div>
 </footer>
+
+
+<!-- Contact Owner Modal -->
+<div id="contactOwner" class="modal">
+    <div class="modal-content ">
+        <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+        <h4>Contact Owner</h4>
+        <p>Your message will be emailed to {{user.nickname}} </p>
+        <div class="row">
+            <form class="col s12" action="mailto: {{user._json.email}} " method="post" enctype="text/plain">
+                <div class="row modal-form-row">
+                	<div class="input-field col s12">
+                    	<input required autofocus id="name" type="text" name="name" class="validate">
+                    	<label for="name">Name</label>
+                	</div>
+               	</div>
+               	<div class="row">
+                	<div class="input-field col s12">
+                        <input required id="email" type="email" name="email" class="validate">
+                    	<label for="email">Email</label>
+                	</div>
+                </div>
+               	<div class="row">
+               		<div class="input-field col s12">
+                    	<textarea required id="message" type="text" name="message" class="materialize-textarea"></textarea>
+                        <label for="message">Message</label>
+                	</div>
+                </div>
+                <input id="button" type="submit" value="Submit">
+            </form>
+    	</div>
+    </div>
+</div>
+
+<!-- Swap Complete Modal -->
+<div id="complete" class="modal">
+    <div class="modal-content">
+        <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+       	<h4>Swap Completed!</h4>
+        <p id="completeDesc">This product has been removed from your items borrowing.</p>
+   	</div>
+</div>
+
+<script>
+
+    function completePost() {
+        var completeProd = {
+            product: $(this).attr("data-id")
+        };
+        $("#completeDesc").html("You are no longer borrowing the following item: " + $(this).attr("data-desc"));
+        console.log("completeProd:  " + completeProd);
+        $.post(currentURL + "/complete", completeProd);
+    }
+
+
+    // function repostPost() {
+    //     var repostProd = {
+    //         product: $(this).attr("data-id")
+    //     };
+    //     $("#repostDesc").html("The following item has been reposted to your available offers: " + $(this).attr("data-desc"));
+    //     console.log("repostProd:  " + repostProd);
+    //     $.post(currentURL + "/rescind", repostProd);
+    // }
+
+    
+    $(document).on("click", ".completeTrigger", completePost);
+
+</script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>

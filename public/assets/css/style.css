@@ -10,6 +10,8 @@ body {
 
 h4 {
   text-align: center;
+  weight: bold;
+  color: blue;
 }
 
 main {
@@ -22,11 +24,16 @@ main {
 	padding: 10px;
 }
 
+#cardDiv {
+  height: 275px;
+  overflow: scroll;
+}
+
 #postForm, .btn-primary {
 	background-color: #29b6f6;
 }
 
-#image {
+#mainImage {
 	height: 300px;
 	background-image: url(/assets/images/hose.jpg);
     background-size: cover;
@@ -51,11 +58,11 @@ main {
     font-size: inherit;
 }
 
-/*footer {
+footer {
   text-align: center;
-  position: absolute;
+  /*position: absolute;
   width: 100%;
   bottom: 0;
-  height: 70px;
-}*/
+  height: 70px;*/
+}
 
