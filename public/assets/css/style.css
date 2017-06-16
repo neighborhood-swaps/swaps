@@ -13,6 +13,24 @@ body {
      flex: 1 0 auto;
  }
 
+.input-field input[type=text]:focus + label {
+ color: #29b6f6;
+}
+
+.input-field input[type=textarea]:focus + label {
+ color: #29b6f6;
+}
+
+.input-field input[type=text]:focus {
+ border-bottom: 1px solid #29b6f6;
+ box-shadow: 0 1px 0 0 #29b6f6;
+}
+
+.input-field input[type=textarea]:focus {
+ border-bottom: 1px solid #29b6f6;
+ box-shadow: 0 1px 0 0 #29b6f6;
+}
+
 #root {
 	width: 310px; 
 	margin: 40px auto; 
@@ -25,6 +43,16 @@ body {
 
 #userImage {
 		width: 310px; 
+}
+
+#landingImage {
+    max-width: 100%;
+    height: auto;
+}
+
+#formContainer {
+	width: 30%;
+	margin: auto;
 }
 
 /* The following lines were added by Amer on June 11, 2017 at 11:02 pm */
