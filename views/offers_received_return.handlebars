@@ -5,9 +5,9 @@
             <li><a href="/posts"> Post an Item </a></li>
             <li><a href="/userPosts"> My Posts </a></li>
             <li><a href="/search"> Search Posts </a></li>
-            <li><a href="/received"> Offers Received </a></li>
-            <li><a href="/made"> Offers Made </a></li>
-            <li><a href="/scheduled"> Scheduled Swaps </a></li>
+            <li><a href="/received"> Offers Received </a></li> {{!-- ------------------------ --}}
+            <li><a href="/made"> Offers Made </a></li> {{!-- ------------------------ --}}
+            <li><a href="/scheduled"> Scheduled Swaps </a></li> {{!-- ------------------------ --}}
             <li><a href="/logout">Log out</a></li>
         </ul>
     </div>
@@ -30,16 +30,9 @@
 							<p id="comments"> Comments: {{this.comments}} </p>
 	              		</div>
 	              		<div class="card-action">
-	              		{{!-- These 3 buttons allow the user to respond to swap requests --}}
-			              	{{!-- contact button opens contact form and sends requester an email--}}
-			                <a href="/contact">Contact</a>
-			                {{!-- click exchange offers (can be shortened ot offers or a better name)-
-			                this allows the user to see what the requester has to offer (all of the requester's posts) --}}
-			                <a href="/offers">Exchange Offers</a>
-			                {{!-- this one deletes the offer from the database - originally, it was going to go to 
-			                swap history, but I don't think we have time to make a swap history page.
-			                It should also display the reject modal located at the bottom of this page --}}
-			                <a class="modal-trigger" href="#reject">No Thanks</a>
+			                <a data-id ="{{this.id}}"class="modal-trigger contactTrigger" data-target="contactOwner">Contact</a>
+			                <a data-id ="{{this.id}}"class="modal-trigger acceptTrigger" data-target="accept">Accept</a>
+			                <a data-id ="{{this.id}}"class="modal-trigger rejectTrigger" data-target="reject">No Thanks</a>
 	              		</div>
 	            	</div>
 	          	</div>
@@ -59,14 +52,94 @@
     </div>
 </footer>
 
+
+<!-- Accept Modal -->
+<div id="accept" class="modal">
+    <div class="modal-content">
+        <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+       	<h4>Swap Accepted!</h4>
+        <p id="acceptDesc">You have just scheduled a swap.</p>
+   	</div>
+</div>
+
 <!-- Reject Modal -->
 <div id="reject" class="modal">
     <div class="modal-content">
         <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
        	<h4>Swap Rejected!</h4>
-        <p>This swap has been removed from your offers.</p>
+        <p id="rejectDesc">This swap has been removed from your offers.</p>
    	</div>
-    <div class="modal-footer">
-        <a href="/search" class=" modal-action modal-close waves-effect waves-green btn-flat">Search Posts</a>
+</div>
+
+<!-- Contact Owner Modal -->
+<div id="contactOwner" class="modal">
+    <div class="modal-content ">
+        <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+        <h4>Contact Owner</h4>
+        <p>Your message will be emailed to {{user.nickname}} </p>
+        <div class="row">
+            <form class="col s12" action="mailto: {{user._json.email}} " method="post" enctype="text/plain">
+                <div class="row modal-form-row">
+                	<div class="input-field col s12">
+                    	<input required autofocus id="name" type="text" name="name" class="validate">
+                    	<label for="name">Name</label>
+                	</div>
+               	</div>
+               	<div class="row">
+                	<div class="input-field col s12">
+                        <input required id="email" type="email" name="email" class="validate">
+                    	<label for="email">Email</label>
+                	</div>
+                </div>
+               	<div class="row">
+               		<div class="input-field col s12">
+                    	<textarea required id="message" type="text" name="message" class="materialize-textarea"></textarea>
+                        <label for="message">Message</label>
+                	</div>
+                </div>
+                <input id="button" type="submit" value="Submit">
+            </form>
+    	</div>
     </div>
 </div>
+
+<script>
+
+    // function startSwap() {
+    //     var newSwap = {
+    //         product: $(this).attr("id")
+    //     };
+    //     $("#modalDesc").text("A swap request has been submitted for the following item: " + $(this).attr("data"));
+    //     console.log("newSwap:  " + newSwap);
+    //     $.post(currentURL + "/api/swap", newSwap);
+    // }
+
+//change status to scheduled
+    function acceptSwap() {
+        var acceptProd = {
+            product: $(this).attr("data-id")
+        };
+        $("#acceptDesc").html("You have just accepted a swap for the following item: " + $(this).attr("data"));
+        console.log("acceptProd:  " + acceptProd);
+        $.post(currentURL + "/accept", acceptProd);
+    }
+
+
+//remove requester_id and change status to open
+    function rejectSwap() {
+        var rejectProd = {
+            product: $(this).attr("data-id")
+        };
+        $("#rejectDesc").html("The following items will be removed from your offers: " + $(this).attr("data"));
+        console.log("rejectProd:  " + rejectProd);
+        $.post(currentURL + "/reject", rejectProd);
+    }
+    
+    $(document).on("click", ".acceptTrigger", acceptSwap);
+    $(document).on("click", ".rejectTrigger", rejectSwap);
+
+</script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+

@@ -105,7 +105,7 @@
             product: $(this).attr("id")
         };
         $("#modalDesc").text("A swap request has been submitted for the following item: " + $(this).attr("data"));
-        console.log("newSwap:  " + newSwap);
+        // console.log("newSwap:  " + newSwap);
         $.post(currentURL + "/api/swap", newSwap);
     }
     

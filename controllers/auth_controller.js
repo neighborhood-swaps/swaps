@@ -37,7 +37,7 @@ router.get("/", function(req, res, next) {
 router.get("/login",
     function(req, res) {
         res.render("login", { env: env });
-    });
+});
 
 // logs user out, then redirects to home page
 router.get("/logout", function(req, res) {
@@ -53,7 +53,7 @@ router.get("/callback",
             throw new Error('user null');
         }
         res.redirect(req.session.returnTo || "/user");
-    });
+});
 
 // ensures user is logged in, then renders user page
 router.get("/user", ensureLoggedIn, function(req, res, next) {
@@ -66,7 +66,6 @@ router.get("/user", ensureLoggedIn, function(req, res, next) {
 
 // retrieves data by category
 router.get("/api/posts/:category", function(req, res) {
-    // console.log("req.user:  " + JSON.stringify(req.user));
     db.Products.findAll({
             where: {
                 category: req.params.category
@@ -91,7 +90,6 @@ router.get("/posts", function(req, res) {
 
 // displays user's posts
 router.get("/userPosts", function(req, res) {
-    // console.log("req.user.id: " + req.user.id);
     db.Products.findAll({
             where: {
                 user_id: req.user.id
@@ -111,8 +109,9 @@ router.get("/search", function(req, res) {
     res.render("search");
 });
 
-// displays post input form
+// updates requester info and status when user asks to swap
 router.post("/api/swap", function(req, res) {
+    // console.log(req.body.product);
     db.Products.update(
         {
             requester_id: req.user.id,
@@ -124,6 +123,54 @@ router.post("/api/swap", function(req, res) {
                    }
         }
     );
+});
+
+// updates status when user accepts a swap
+router.post("/accept", function(req, res) {
+    console.log("req.body.product:  " + req.body.product);
+    db.Products.update(
+        {
+            status: "scheduled"
+        }, 
+        {
+            where: {
+                        id: req.body.product
+                   }
+        }
+    );
+});
+
+// updates status and deletes requester when user rejects a swap
+router.post("/reject", function(req, res) {
+    console.log("req.body.product:  " + req.body.product);
+    db.Products.update(
+        {
+            requester_id: null,
+            status: "open"
+        }, 
+        {
+            where: {
+                        id: req.body.product
+                   }
+        }
+    );
+});
+
+// displays post input form
+router.get("/received", function(req, res) {
+    db.Products.findAll({
+            where: {
+                user_id: req.user.id,
+                status: "pending" 
+            }
+        })
+        .then(function(dbPosts) {
+            var postData = {
+                posts: dbPosts
+            };
+            // console.log("dbPosts:  " + JSON.stringify(dbPosts));
+            res.render("offers_received_return", postData);
+        });
 });
 
 //************** CODE FOR POSTS/SWAPS END ******************
@@ -146,7 +193,6 @@ var upload = multer({
 
 //adds post form data to db then redirects to user page
 router.post('/api/postItem', upload.array('upl', 1), function(req, res) {
-
     db.Products.create({
         user_name: req.body.nameInput,
         category: req.body.categoryInput,
@@ -177,11 +223,9 @@ router.get('/api/newUser', function(req, res) {
 
 router.get('/api/upload', function(req, res) {
     res.sendFile(path.join(__dirname, "../public/uploadfile.html"));
-    // console.log(S3_BUCKET);
 });
 
 router.get('/sign-s3', (req, res) => {
-    // console.log(req)
     const s3 = new aws.S3();
     var tmpFileName = req.query['file-name'];
     const fileName = uuid.v4() + tmpFileName;
@@ -195,9 +239,7 @@ router.get('/sign-s3', (req, res) => {
         ContentType: fileType,
         ACL: 'public-read'
     };
-
     s3.getSignedUrl('putObject', s3Params, (err, data) => {
-
         if (err) {
             console.log(err);
             return res.end();
@@ -206,16 +248,12 @@ router.get('/sign-s3', (req, res) => {
             signedRequest: data,
             url: `https://${S3_BUCKET}.s3.amazonaws.com/images/${fileName}`
         };
-
-        // console.log(JSON.stringify(returnData));
         res.write(JSON.stringify(returnData));
         res.end();
     });
-
 });
 
 router.post('/api/addUserToDB', (req, res) => {
-
     db.Users.create({
         first_name: req.body.fName,
         last_name: req.body.lName,
@@ -226,7 +264,6 @@ router.post('/api/addUserToDB', (req, res) => {
     });
 });
 
-
 router.get('/api/getSingleImage/:', function(req, res) {
     db.Products.findOne({
             where: {
@@ -236,7 +273,6 @@ router.get('/api/getSingleImage/:', function(req, res) {
         .then(function(dbPost) {
             res.json(dbPost);
         });
-
 });
 
 router.get('/api/getAllImages/:', function(req, res) {
@@ -248,7 +284,6 @@ router.get('/api/getAllImages/:', function(req, res) {
         .then(function(dbPost) {
             res.json(dbPost);
         });
-
 });
 
 // Need to figure out how to correctly handle this return
