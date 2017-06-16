@@ -1,67 +1,66 @@
-<nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left" >SWAPS</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            {{!-- <li><a href="/posts"> Post an Item </a></li>
-            <li><a href="/userPosts"> My Posts </a></li>
-            <li><a href="/search"> Search Posts </a></li>
-            <li><a href="/received"> Offers Received </a></li>
-            <li><a href="/made"> Offers Made </a></li>
-            <li><a href="/lending"> Items Lending </a></li>
-            <li><a href="/borrowing"> Items Borrowing </a></li> --}}
-            <li><a href="/logout">Log out</a></li>
-        </ul>
-    </div>
-</nav>
+<header>
 
-<div id="mainImage">
-</div>
+	<nav class="light-blue lighten-1" role="navigation">
+	    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left" >SWAPS</a>
+	        <ul id="nav-mobile" class="right hide-on-med-and-down">
+	            <li><a href="/logout">Log out</a></li>
+	        </ul>
+	    </div>
+	</nav>
 
-<nav class="orange" role="navigation">
-    {{!-- <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left">SWAPS</a> --}}
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/posts"> Post an Item </a></li>
-            <li><a href="/userPosts"> My Posts </a></li>
-            <li><a href="/search"> Search Posts </a></li>
-            <li><a href="/received"> Offers Received </a></li>
-            <li><a href="/made"> Offers Made </a></li>
-            <li><a href="/lending"> Items Lending </a></li>
-            <li><a href="/borrowing"> Items Borrowing </a></li>
-            {{!-- <li><a href="/logout">Log out</a></li> --}}
-        </ul>
-    </div>
-</nav>
+	<div id="mainImage">
+	</div>
 
-<div class="col-sm-4">
-	<div id="createPost">
-		<div class="">
-			<div class="row" id="">
-				<div class="col-sm-12" id="">
-					<div class="row">
-						<form class="" id="" action="/api/postItem" method="POST" enctype="multipart/form-data"> 
-							<div class="form-group">
-								<div class="col-sm-12">
-									<input name="nameInput">Name</input>
-									<input name="categoryInput">Category</input>
-									<input name="descriptionInput">Description</input>
-									<input name="conditionInput"> Condition</input>
-									<input name="availabilityInput"> Availability </input>
-									<input name="swap_locationInput">Location </input>
-									<input name="commentsInput">Comments </input>
-									<br/>
-									<img style="border:1px solid gray;width:300px;" id="preview" src="http://via.placeholder.com/400x300">
-									<label class="btn btn-primary" for="my-file-selector">
-        							<input name="upl" id="my-file-selector" type="file" style="display:none;">Select File</label>
-									<br/><br/><br/>
-									<button type="submit" id="postForm" class="btn">Submit</button>
+	<nav class="orange" role="navigation">
+	        <ul id="nav-mobile" class="right hide-on-med-and-down">
+	            <li><a href="/posts"> Post an Item </a></li>
+	            <li><a href="/userPosts"> My Posts </a></li>
+	            <li><a href="/search"> Search Posts </a></li>
+	            <li><a href="/received"> Offers Received </a></li>
+	            <li><a href="/made"> Offers Made </a></li>
+	            <li><a href="/lending"> Items Lending </a></li>
+	            <li><a href="/borrowing"> Items Borrowing </a></li>
+	        </ul>
+	    </div>
+	</nav>
+
+</header>
+
+<main>
+
+	<div class="col-sm-4">
+		<div id="createPost">
+			<div class="">
+				<div class="row" id="">
+					<div class="col-sm-12" id="">
+						<div class="row">
+							<form class="" id="" action="/api/postItem" method="POST" enctype="multipart/form-data"> 
+								<div class="form-group">
+									<div class="col-sm-12">
+										<input name="nameInput">Name</input>
+										<input name="categoryInput">Category</input>
+										<input name="descriptionInput">Description</input>
+										<input name="conditionInput"> Condition</input>
+										<input name="availabilityInput"> Availability </input>
+										<input name="swap_locationInput">Location </input>
+										<input name="commentsInput">Comments </input>
+										<br/>
+										<img style="border:1px solid gray;width:300px;" id="preview" src="http://via.placeholder.com/400x300">
+										<label class="btn btn-primary" for="my-file-selector">
+	        							<input name="upl" id="my-file-selector" type="file" style="display:none;">Select File</label>
+										<br/><br/><br/>
+										<button type="submit" id="postForm" class="btn">Submit</button>
+									</div>
 								</div>
-							</div>
-						</form>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+</main>
 
 <footer class="page-footer orange z-depth-2">
     <div class="container">

@@ -12,6 +12,16 @@ var multerS3 = require('multer-s3');
 const S3_BUCKET = process.env.S3_BUCKET_NAME;
 s3 = new aws.S3();
 
+var upload = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: S3_BUCKET,
+        key: function(req, file, cb) {
+            cb(null, uuid.v4() + file.originalname); //use Date.now() for unique file keys
+        }
+    })
+});
+
 //******************************* CODE FOR AUTH START ***********************************
 
 // sets AuthO credentials
@@ -87,10 +97,6 @@ router.get("/user", ensureLoggedIn, function(req, res, next) {
 
 // retrieves data by category
 router.get("/api/posts/:category", function(req, res) {
-<<<<<<< HEAD
-=======
-    console.log("req.user:  " + JSON.stringify(req.user));
->>>>>>> 0066ea2e9b2e1ba92daffb6e3d8e950291f71c0a
     db.Products.findAll({
             where: {
                 category: req.params.category
@@ -341,16 +347,6 @@ router.get("/404", function(req, res, next) {
 //*************************** CODE FOR POSTS/SWAPS END ******************************
 
 //**************************** CODE FOR IMAGES START ********************************
-
-var upload = multer({
-    storage: multerS3({
-        s3: s3,
-        bucket: S3_BUCKET,
-        key: function(req, file, cb) {
-            cb(null, uuid.v4() + file.originalname); //use Date.now() for unique file keys
-        }
-    })
-});
 
 router.get('/api/newUser', function(req, res) {
     res.sendFile(path.join(__dirname, "../public/adduser.html"));
