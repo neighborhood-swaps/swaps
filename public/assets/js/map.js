@@ -1,8 +1,10 @@
 // This code of lines were added by Amer on June 11,2017 at 11:11pm
-$("#submitSwapLocation").on("click", function(event){
+// $("#submitSwapLocation").on("click", function(event){
+	$(document).on("click", "#submitSwapLocation", function(event){
 	event.preventDefault();
-	var map;             
-	var swapLocation = $("#swapLocation").attr("data");
+	var map;           
+	var swapLocation = $(this).attr("value");
+	// var swapLocation = $("#swapLocation").attr("data");
 	console.log(swapLocation);
 	initMap();
 	
@@ -16,11 +18,11 @@ $("#submitSwapLocation").on("click", function(event){
 		});
 
 		var queryURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + swapLocation + '&sensor=false;'
-
 		    $.ajax({
 		        url: queryURL,
 		        method: "GET"
 		    }).done(function(response) {
+		    	console.log(response.results[0].geometry);
 		        //create variables for latitude and longitude of user input
 		        var userLat = response.results[0].geometry.location.lat;
 		        var userLng = response.results[0].geometry.location.lng; 
@@ -31,14 +33,17 @@ $("#submitSwapLocation").on("click", function(event){
 		        });
 		     	map.setCenter(marker.getPosition());
 		        });
+
 	};// end of initMap
-	$(".modal").fadeIn();
+
+	$("#swapLocationModal").fadeIn();
 	$(".modal_main").show();
 
 	$(".colse").click(function() {
-		$(".modal").fadeOut();
+		$("#swapLocationModal").fadeOut();
 		$(".modal_main").fadeOut();
 	});//end of click
+
 	initMap();
 	//$("#map").addClass("mapClass");
 });// end of on click
