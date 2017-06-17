@@ -13,6 +13,7 @@ var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var dotenv = require("dotenv");
 var passport = require("passport");
+var uuid = require("uuid");
 // NOTE: leave Auth0Strategy capital - constructor
 var Auth0Strategy = require("passport-auth0");
 
@@ -67,7 +68,7 @@ passport.deserializeUser(function(user, done) {
 
 // sets port
 var port = process.env.PORT || 3000;
-
+console.log(port);
 // creates an express app instance
 var app = express();
 

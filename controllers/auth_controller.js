@@ -38,7 +38,7 @@ router.get("/", function(req, res, next) {
 
 // renders login
 router.get("/login", function(req, res) {
-        res.render("login", { env: env });
+    res.render("login", { env: env });
 });
 
 // logs user out, then redirects to home page
@@ -55,7 +55,7 @@ router.get("/callback",
             throw new Error('user null');
         }
         res.redirect(req.session.returnTo || "/user");
-});
+    });
 
 // ensures user is logged in, then renders user page
 router.get("/user", ensureLoggedIn, function(req, res, next) {
@@ -68,7 +68,7 @@ router.get("/user", ensureLoggedIn, function(req, res, next) {
 
 // retrieves data by category
 router.get("/api/posts/:category", function(req, res) {
-    console.log("req.user:  " + JSON.stringify(req.user));
+    // console.log("req.user:  " + JSON.stringify(req.user));
     db.Products.findAll({
             where: {
                 category: req.params.category,
@@ -79,6 +79,7 @@ router.get("/api/posts/:category", function(req, res) {
             var postData = {
                 posts: dbPosts
             }
+            console.log(postData.posts.length)
             if (postData.posts.length > 0) {
                 res.render("post_return", postData);
             } else {
@@ -96,7 +97,7 @@ router.get("/posts", function(req, res) {
 router.get("/userPosts", function(req, res) {
     db.Products.findAll({
             where: {
-                user_id: req.user.id, 
+                user_id: req.user.id,
                 status: "open"
             }
         })
@@ -113,7 +114,9 @@ router.get("/userPosts", function(req, res) {
 router.get("/search", function(req, res) {
     db.Products.findAll({
             limit: 9,
-            order: [ [ 'createdAt', 'DESC' ]]
+            order: [
+                ['createdAt', 'DESC']
+            ]
         })
         .then(function(dbPosts) {
             var postData = {
@@ -126,110 +129,89 @@ router.get("/search", function(req, res) {
 
 // updates requester info and status when user asks to swap
 router.post("/api/swap", function(req, res) {
-    db.Products.update(
-        {
-            requester_id: req.user.id,
-            status: "pending"
-        }, 
-        {
-            where: {
-                        id: req.body.product
-                   }
+    db.Products.update({
+        requester_id: req.user.id,
+        status: "pending"
+    }, {
+        where: {
+            id: req.body.product
         }
-    );
+    });
 });
 
 // updates status when user accepts a swap
 router.post("/accept", function(req, res) {
-    db.Products.update(
-        {
-            status: "scheduled"
-        }, 
-        {
-            where: {
-                        id: req.body.product
-                   }
+    db.Products.update({
+        status: "scheduled"
+    }, {
+        where: {
+            id: req.body.product
         }
-    );
+    });
 });
 
 // updates status and deletes requester when user rejects a swap
 router.post("/reject", function(req, res) {
-    db.Products.update(
-        {
-            requester_id: null,
-            status: "open"
-        }, 
-        {
-            where: {
-                        id: req.body.product
-                   }
+    db.Products.update({
+        requester_id: null,
+        status: "open"
+    }, {
+        where: {
+            id: req.body.product
         }
-    );
+    });
 });
 
 // updates status and deletes requester when user rescinds a swap
 router.post("/rescind", function(req, res) {
-    db.Products.update(
-        {
-            requester_id: null,
-            status: "open"
-        }, 
-        {
-            where: {
-                        id: req.body.product
-                   }
+    db.Products.update({
+        requester_id: null,
+        status: "open"
+    }, {
+        where: {
+            id: req.body.product
         }
-    ).then(function() {
-            console.log("We should redirect");
-            // res.redirect("/made");
-        });
+    }).then(function() {
+        res.redirect("/made");
+    });
 });
 
 // updates status and deletes requester when user reposts a post from items lending
 router.post("/repost", function(req, res) {
-    db.Products.update(
-        {
-            requester_id: null,
-            status: "open"
-        }, 
-        {
-            where: {
-                        id: req.body.product
-                   }
+    db.Products.update({
+        requester_id: null,
+        status: "open"
+    }, {
+        where: {
+            id: req.body.product
         }
-    ).then(function(dbPosts) {
-            res.redirect("/lending");
+    }).then(function(dbPosts) {
+        res.redirect("/lending");
     });
 });
 
 // updates status and deletes requester when user completes a swap
 router.post("/complete", function(req, res) {
-    db.Products.update(
-        {
-            requester_id: null,
-            status: "open"
-        }, 
-        {
-            where: {
-                        id: req.body.product
-                   }
+    db.Products.update({
+        requester_id: null,
+        status: "open"
+    }, {
+        where: {
+            id: req.body.product
         }
-    ).then(function(dbPosts) {
-            res.redirect("/borrowing");
+    }).then(function(dbPosts) {
+        res.redirect("/borrowing");
     });
 });
 
 // deletes a post
 router.post("/delete", function(req, res) {
-    db.Products.destroy(
-        {
-            where: {
-                        id: req.body.product
-                   }
+    db.Products.destroy({
+        where: {
+            id: req.body.product
         }
-    ).then(function(dbPosts) {
-            res.redirect("/lending");
+    }).then(function(dbPosts) {
+        res.redirect("/lending");
     });
 });
 
@@ -238,7 +220,7 @@ router.get("/received", function(req, res) {
     db.Products.findAll({
             where: {
                 user_id: req.user.id,
-                status: "pending" 
+                status: "pending"
             }
         })
         .then(function(dbPosts) {
@@ -254,7 +236,7 @@ router.get("/made", function(req, res) {
     db.Products.findAll({
             where: {
                 requester_id: req.user.id,
-                status: "pending" 
+                status: "pending"
             }
         })
         .then(function(dbPosts) {
@@ -270,7 +252,7 @@ router.get("/lending", function(req, res) {
     db.Products.findAll({
             where: {
                 user_id: req.user.id,
-                status: "scheduled" 
+                status: "scheduled"
             }
         })
         .then(function(dbPosts) {
@@ -286,7 +268,7 @@ router.get("/borrowing", function(req, res) {
     db.Products.findAll({
             where: {
                 requester_id: req.user.id,
-                status: "scheduled" 
+                status: "scheduled"
             }
         })
         .then(function(dbPosts) {
@@ -298,18 +280,19 @@ router.get("/borrowing", function(req, res) {
 });
 
 //adds post form data to db then redirects to user page
-router.post('/api/postItem', upload.array('upl', 1), function(req, res) {
+// router.post('/api/postItem', upload.array('upl', 1), function(req, res) {
+router.post('/api/postItem', function(req, res) {
     console.log("I'M IN POST ITEM");
-    console.log(JSON.stringify(req.body));
+    console.log(req.body);
     db.Products.create({
-        user_name: req.body.nameInput,
-        category: req.body.categoryInput,
-        description: req.body.descriptionInput,
-        img_location: req.files[0].location,
-        prod_condition: req.body.conditionInput,
-        availability: req.body.availabilityInput,
-        swap_location: req.body.swap_locationInput,
-        comments: req.body.commentsInput,
+        user_name: req.body.name,
+        category: req.body.category,
+        description: req.body.description,
+        img_location: req.body.img_location,
+        prod_condition: req.body.condition,
+        availability: req.body.availability,
+        swap_location: req.body.location,
+        comments: req.body.comments,
         user_id: req.user.id
     }).then(function() {
         res.redirect("/user");
@@ -334,6 +317,7 @@ router.get('/api/upload', function(req, res) {
 });
 
 router.get('/sign-s3', (req, res) => {
+    console.log("S3.........");
     const s3 = new aws.S3();
     var tmpFileName = req.query['file-name'];
     const fileName = uuid.v4() + tmpFileName;
@@ -354,7 +338,7 @@ router.get('/sign-s3', (req, res) => {
         }
         const returnData = {
             signedRequest: data,
-            url: `https://${S3_BUCKET}.s3.amazonaws.com/images/${fileName}`
+            url: `https://s3.amazonaws.com/${S3_BUCKET}/${fileName}`
         };
         res.write(JSON.stringify(returnData));
         res.end();
@@ -402,4 +386,3 @@ router.post('/save-details', (req, res) => {
 //**************************** CODE FOR IMAGES END ********************************
 
 module.exports = router;
-
