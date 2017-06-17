@@ -67,7 +67,7 @@ passport.deserializeUser(function(user, done) {
 
 // sets port
 var port = process.env.PORT || 3000;
-console.log(port);
+console.log(process.env);
 // creates an express app instance
 var app = express();
 
