@@ -27,62 +27,34 @@
         </div>
     </nav>
 
+<!-- {{!-- <div id="userPhoto">{{user.picture}}</div><span id="welcome"> Welcome {{user.nickname}} ! </span>  --}}
+<h3 id="welcome"> Welcome {{user.nickname}} ! </h3>
+<br/> -->
 </header>
 
 <main>
 
-    <h3 id="welcome"> Welcome {{user.nickname}} ! </h3>
-    <br/>
+    <br><br>
 
-    <div class="container" id="postsDiv">
-        <div class="section">
-            <div class="row">
-                {{#each posts}}
-                    <div class="col s12 m4 l3" id="{{this.id}}" data="{{this.user_id}}">
-                        <div class="card">
-                            <div class="card-image">
-                                <img id="image" src="{{this.img_location}}">
-                            </div>
-                            <div class="card-content">
-                                <span id="description" class="card-title">{{this.description}}</span>
-                                <p id="owner"> Owner: {{this.user_name}} </p>
-                                <p id="condition"> Condition: {{this.prod_condition}} </p>
-                                <p id="availability"> Availability: {{this.availability}} </p>
-                                <p id="comments"> Comments: {{this.comments}} </p>
-                            </div>
-                            <div class="card-action">
-                               {{!-- Contact Owner Modal Trigger; sends owner an email --}}
-                                <a class="modal-trigger" data-target="contactOwner">Contact</a>
-                                {{!-- Swap Modal Trigger; displays swap requested modal --}}
-                                    <input type="hidden" name="poster_id" value="{{this.user_id}}">
-                                    <input type="hidden" name="modal_desc" value="{{this.description}}">
-                                    <input type="hidden" name="product_id" value="{{this.id}}">
-                                <a id="{{this.id}}" data="{{this.description}}" class="swapTrigger modal-trigger" data-target="swapRequest">SWAP!</a>
-                                {{!-- Location Modal Trigger; pops up swap location on Google Maps --}}
-                                <a href="#">Location</a>
-                            </div>
-                        </div>
-                    </div>
-                {{/each}}
+    <div class="row">
+        <div class="col s12"> 
+            <img id="userImage" src={{user.picture}} class="circle responsive-img"> 
+        </div>
+    </div>
+
+    <div>
+        <div class="row" id="welcomeCard">
+            <div class="col s12 m4 offset-m2 l6 offset-l3">
+                <div class="card-panel light-blue roundCard">
+                    <span class="white-text">
+                        Welcome {{user.nickname}} ! 
+                    </span>
+                </div>
             </div>
         </div>
     </div>
 
 </main>
-
-{{!-- <br><br>
-<div class="row">
-    <div class="col s12 offset-s2"> 
-        <img id="userImage" src={{user.picture}} class="circle responsive-img"> 
-    </div>
-</div>
-<div class="row">
-    <div class="col s12 offset-s1"> 
-        <h2> Welcome {{user.nickname}} ! </h2> 
-    </div>
-</div>
-
-<br/> --}}
 
 <footer class="page-footer orange z-depth-2">
     <div class="container">
