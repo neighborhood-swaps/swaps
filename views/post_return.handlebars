@@ -103,6 +103,13 @@
     </div>
 </div>
 
+<div id="swapRequest3" class="modal">
+    <div class="modal-content">
+        <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+        <h4>Swap Request!</h4>
+        <p id="modalDesc"></p>
+    </div>
+</div>
 
 <div id="swapLocationModal" class="modal">
         <div class="modal_bg colse"></div>
@@ -121,6 +128,11 @@
         $.post(currentURL + "/api/swap", newSwap);
     }
 
+    function refreshPage() {
+        location.reload();
+    };
+
+    $(document).on("click", ".modal-close", refreshPage);
     $(document).on("click", ".swapTrigger", startSwap);
 
 </script>

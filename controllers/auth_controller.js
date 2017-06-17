@@ -68,16 +68,18 @@ router.get("/user", ensureLoggedIn, function(req, res, next) {
 
 // retrieves data by category
 router.get("/api/posts/:category", function(req, res) {
-    console.log("req.user:  " + JSON.stringify(req.user));
+    // console.log("req.user:  " + JSON.stringify(req.user));
     db.Products.findAll({
             where: {
-                category: req.params.category
+                category: req.params.category,
+                status: "open"
             }
         })
         .then(function(dbPosts) {
             var postData = {
                 posts: dbPosts
             }
+            console.log(postData.posts.length)
             if (postData.posts.length > 0) {
                 res.render("post_return", postData);
             } else {
@@ -95,7 +97,8 @@ router.get("/posts", function(req, res) {
 router.get("/userPosts", function(req, res) {
     db.Products.findAll({
             where: {
-                user_id: req.user.id
+                user_id: req.user.id,
+                status: "open"
             }
         })
         .then(function(dbPosts) {

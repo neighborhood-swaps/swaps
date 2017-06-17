@@ -141,7 +141,12 @@
         console.log("rejectProd:  " + rejectProd);
         $.post(currentURL + "/reject", rejectProd);
     }
+
+    function refreshPage() {
+        location.reload();
+    };
     
+    $(document).on("click", ".modal-close", refreshPage);
     $(document).on("click", ".acceptTrigger", acceptSwap);
     $(document).on("click", ".rejectTrigger", rejectSwap);
 
