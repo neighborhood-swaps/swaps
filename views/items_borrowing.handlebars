@@ -8,8 +8,6 @@
         </div>
     </nav>
 
-
-
     <div id="mainImage">
     </div>
 
@@ -30,35 +28,34 @@
 
 <main>
 
-<div class="container" id="postsDiv">
-	<div class="section">
-		<div class="row">
-			{{#each posts}}
-	          	<div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
-	            	<div class="card">
-	              		<div class="card-image">
-	              			<img id="image" src="{{this.img_location}}">
-	              		</div>
-	              		<div class="card-content">
-	                		<span id="description" class="card-title">{{this.description}}</span>
-	                		<p id="owner"> Owner: {{this.user_name}} </p>
-							<p id="condition"> Condition: {{this.prod_condition}} </p>
-							<p id="availability"> Availability: {{this.availability}} </p>
-							<p id="comments"> Comments: {{this.comments}} </p>
-	              		</div>
-	              		<div class="card-action">
-                            <a class="modal-trigger" data-target="contactOwner">Contact</a>
-                            <a data-id="{{this.id}}" data-desc="{{this.description}}" class="completeTrigger modal-trigger" data-target="complete">Swap Completed</a>
-	              		</div>
-	            	</div>
-	          	</div>
-	        {{/each}}
-	    </div>
-	</div>
-</div>
-<div id="map"></div>
+    <div class="container" id="postsDiv">
+    	<div class="section">
+    		<div class="row">
+    			{{#each posts}}
+    	          	<div class="col s12 m4 l3" id="{{this.id}}" data="{{this.user_id}}">
+    	            	<div class="card">
+    	              		<div class="card-image">
+    	              			<img id="image" src="{{this.img_location}}">
+    	              		</div>
+    	              		<div class="card-content">
+    	                		<span id="description" class="card-title">{{this.description}}</span>
+    	                		<p id="owner"> Owner: {{this.user_name}} </p>
+    							<p id="condition"> Condition: {{this.prod_condition}} </p>
+    							<p id="availability"> Availability: {{this.availability}} </p>
+    							<p id="comments"> Comments: {{this.comments}} </p>
+    	              		</div>
+    	              		<div class="card-action">
+                                <a class="modal-trigger" data-target="contactOwner">Contact</a>
+                                <a data-id="{{this.id}}" data-desc="{{this.description}}" class="completeTrigger modal-trigger" data-target="complete">Swap Completed</a>
+    	              		</div>
+    	            	</div>
+    	          	</div>
+    	        {{/each}}
+    	    </div>
+    	</div>
+    </div>
 
-<br/>
+</main>
 
 <footer class="page-footer orange z-depth-2">
     <div class="container">
