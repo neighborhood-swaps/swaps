@@ -16,6 +16,10 @@ main {
      flex: 1 0 auto;
 }
 
+#postForm {
+	margin-top: 15px;
+}
+
 .card {
 	height: 500px;
 }
