@@ -1,49 +1,51 @@
+<header>
 
- {{!-- THE BELOW SECTION IS FOR CREATING A POST TO BE SENT TO THE DATABASE --}}
-<nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left">SWAPS</a>
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left" >SWAPS</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/logout">Log out</a></li>
+            </ul>
+        </div>
+    </nav>
 
-	<nav class="light-blue lighten-1" role="navigation">
-	    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left" >SWAPS</a>
-	        <ul id="nav-mobile" class="right hide-on-med-and-down">
-	            <li><a href="/logout">Log out</a></li>
-	        </ul>
-	    </div>
-	</nav>
+    <div id="mainImage">
+    </div>
 
-
-	<div id="mainImage">
-	</div>
-
-	<nav class="orange" role="navigation">
-	        <ul id="nav-mobile" class="right hide-on-med-and-down">
-	            <li><a href="/posts"> Post an Item </a></li>
-	            <li><a href="/userPosts"> My Posts </a></li>
-	            <li><a href="/search"> Search Posts </a></li>
-	            <li><a href="/received"> Offers Received </a></li>
-	            <li><a href="/made"> Offers Made </a></li>
-	            <li><a href="/lending"> Items Lending </a></li>
-	            <li><a href="/borrowing"> Items Borrowing </a></li>
-	        </ul>
-	    </div>
-	</nav>
+    <nav class="orange" role="navigation">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/posts"> Post an Item </a></li>
+                <li><a href="/userPosts"> My Posts </a></li>
+                <li><a href="/search"> Search Posts </a></li>
+                <li><a href="/received"> Offers Received </a></li>
+                <li><a href="/made"> Offers Made </a></li>
+                <li><a href="/lending"> Items Lending </a></li>
+                <li><a href="/borrowing"> Items Borrowing </a></li>
+            </ul>
+        </div>
+    </nav>
 
 </header>
 
 <main>
 
-    <container id="formContainer">
-        <div class="row">
-            <form class="col s12">
+<container id="formContainer">
+    <div class="row">
+        {{!-- -------------- --}}
+        {{!-- <form class="" id="" action="/api/postItem" method="POST" enctype="multipart/form-data">  --}}
+    <form class="" id="" enctype="multipart/form-data">
+    <div class="col s6 offset-s3">
+            <div class="form-group">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input type="text" class="validate" required="" aria-required="true" name="nameInput">
+                        <input type="text" class="validate" required="" aria-required="true" id="nameInput">
                         <label for="nameInput">Name</label>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
                 <div class="row">
-                    <div class="input-field col s12" required="" aria-required="true" name="categoryInput">
-                        <select>
+                    <div class="input-field col s12" required="" aria-required="true" id="categoryInput">
+                        <select >
                             <option value="" disabled selected>Category</option>
                             <option value="Appliances">Appliances</option>
                             <option value="Arts and Crafts">Arts and Crafts</option>
@@ -68,8 +70,10 @@
                         </select>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
                 <div class="row">
-                    <div class="input-field col s12" required="" aria-required="true" name="conditionInput">
+                    <div class="input-field col s12" required="" aria-required="true" id="conditionInput">
                         <select>
                             <option value="" disabled selected>Condition</option>
                             <option value="New">New</option>
@@ -80,13 +84,17 @@
                         </select>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea class="materialize-textarea" required="" aria-required="true" name="descriptionInput"></textarea>
+                        <textarea class="materialize-textarea" required="" aria-required="true" id="descriptionInput"></textarea>
                         <label for="descriptionInput">Description</label>
                     </div>
                 </div>
-                <div class="input-field col s12" required="" aria-required="true" name="availabilityInput">
+            </div>
+            <div class="form-group">
+                <div class="input-field col s12" required="" aria-required="true" id="availabilityInput">
                     <select multiple>
                         <option value="" disabled selected>Availability</option>
                         <option value="M">Monday</option>
@@ -98,27 +106,37 @@
                         <option value="Su">Sunday</option>
                     </select>
                 </div>
+            </div>
+            <div class="form-group">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input type="text" class="validate" required="" aria-required="true" name="swap_locationInput">
+                        <input type="text" class="validate" required="" aria-required="true" id="swap_locationInput">
                         <label for="nameInput">Location</label>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea class="materialize-textarea" required="" aria-required="true" name="commentsInput"></textarea>
+                        <textarea class="materialize-textarea" required="" aria-required="true" id="commentsInput"></textarea>
                         <label for="descriptionInput">Comments</label>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
                 <div class="row">
                     <img style="border:1px solid gray;width:300px;" id="preview" src="http://via.placeholder.com/400x300">
+                     <br/>
                     <label class="btn btn-primary" for="my-file-selector">
-                        <input name="upl" id="my-file-selector" type="file" style="display:none;">Select Image File</label>
+                    <input data-name="upl" id="my-file-selector" type="file" style="display:none;">Select Image File</label>
                 </div>
-                <button type="submit" id="postForm" class="btn">Post Item to SWAPS</button>
-            </form>
+            </div>
+            <div class="divider"></div>
+            <button type="submit" id="postForm2" class="btn">Post Item to SWAPS</button>
         </div>
-    </container>
+        </form>
+    </div>
+</container>
 
 </main>
 
@@ -131,6 +149,24 @@
 </footer>
 
 <script type="text/javascript">
+
+    $("#postForm2").on("click", function(){
+            console.log("I'm in JS postForm");
+            var surveyInfo = {
+                name: $("#idInput").val().trim(),
+                category: $("#categoryInput").val().trim(),
+                condition: $("#conditionInput").val().trim(),
+                description: $("#descriptionInput").val().trim(),
+                availability: $("#availabilityInput").val().trim(),
+                location: $("#swap_locationInput").val().trim(),
+                comments: $("#commentsInput").val().trim()
+            }
+            console.log(surveyInfo);
+            //sends post request with survey data
+            $.post(currentURL + "/api/postItem", surveyInfo); //, function(data){
+
+        return false;
+    });
 
     $(document).ready(function() {
         $('select').material_select();

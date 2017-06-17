@@ -36,20 +36,6 @@ router.get("/", function(req, res, next) {
     res.render("index", { env: env });
 });
 
-// router.get("/", function(req, res, next) {
-//         db.Products.findAll({
-//             limit: 9,
-//             order: [ [ 'createdAt', 'DESC' ]]
-//         })
-//         .then(function(dbPosts) {
-//             var postData = {
-//                 posts: dbPosts
-//             };
-//             console.log("dbPosts:  " + JSON.stringify(dbPosts));
-//             res.render("index", postData, { env: env });
-//         });
-// });
-
 // renders login
 router.get("/login", function(req, res) {
         res.render("login", { env: env });
@@ -75,21 +61,6 @@ router.get("/callback",
 router.get("/user", ensureLoggedIn, function(req, res, next) {
     res.render("user", { user: req.user });
 });
-
-// router.get("/user", ensureLoggedIn, function(req, res, next) {
-//     db.Products.findAll({
-//             limit: 9,
-//             order: [ [ 'createdAt', 'DESC' ]]
-//         })
-//         .then(function(dbPosts) {
-//             var postData = {
-//                 posts: dbPosts
-//             };
-//             console.log("dbPosts:  " + JSON.stringify(dbPosts));
-//             // res.render("search", postData);
-//             res.render("user", { user: req.user }, postData);
-//         });
-// });
 
 //******************************* CODE FOR AUTH END ***********************************
 
@@ -325,6 +296,8 @@ router.get("/borrowing", function(req, res) {
 
 //adds post form data to db then redirects to user page
 router.post('/api/postItem', upload.array('upl', 1), function(req, res) {
+    console.log("I'M IN POST ITEM");
+    console.log(JSON.stringify(req.body));
     db.Products.create({
         user_name: req.body.nameInput,
         category: req.body.categoryInput,
