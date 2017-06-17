@@ -1,67 +1,104 @@
 <header>
 
-     <nav class="light-blue lighten-1" role="navigation">
+<nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left" >SWAPS</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-
-                <li><a href="/login">Log In</a></li>
-            </ul>
-            </ul>
-        </div>
-    </nav>
-
-    <div id="mainImage">
+            <li><a href="/login">Log In</a></li>
+        </ul>
     </div>
+</nav>
 
-
-    <nav class="orange" role="navigation">
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="/faq">FAQ</a></li>
-                <li><a href="/search">Search Posts</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <p>Please Log in to start swapping!</p>
-
+<!-- <img id="landingImage" src="/assets/images/atlanta.jpg"> -->
+<div id="mainImage">
+</div>
 </header>
 
 <main>
 
-    <div class="container" id="postsDiv">
-        <div class="section">
-            <div class="row">
-                {{#each posts}}
-                    <div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
-                        <div class="card">
-                            <div class="card-image">
-                                <img id="image" src="{{this.img_location}}">
-                            </div>
-                            <div class="card-content">
-                                <span id="description" class="card-title">{{this.description}}</span>
-                                <p id="owner"> Owner: {{this.user_name}} </p>
-                                <p id="condition"> Condition: {{this.prod_condition}} </p>
-                                <p id="availability"> Availability: {{this.availability}} </p>
-                                <p id="comments"> Comments: {{this.comments}} </p>
-                            </div>
-                            <div class="card-action">
-                               {{!-- Contact Owner Modal Trigger; sends owner an email --}}
-                                <a class="modal-trigger" data-target="contactOwner">Contact</a>
-                                {{!-- Swap Modal Trigger; displays swap requested modal --}}
-                                    <input type="hidden" name="poster_id" value="{{this.user_id}}">
-                                    <input type="hidden" name="modal_desc" value="{{this.description}}">
-                                    <input type="hidden" name="product_id" value="{{this.id}}">
-                                <a id="{{this.id}}" data="{{this.description}}" class="swapTrigger modal-trigger" data-target="swapRequest">SWAP!</a>
-                                {{!-- Location Modal Trigger; pops up swap location on Google Maps --}}
-                                <a href="#">Location</a>
-                            </div>
-                        </div>
-                    </div>
-                {{/each}}
-            </div>
-        </div>
+<nav class="orange" role="navigation">
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/search">Search Posts</a></li>
+        </ul>
     </div>
+</nav>
+
+<br><br>
+
+<div id="landingCards">
+    <div class="row">
+      <div class="col s12 m8 offset-m2 l6">
+        <div class="card-panel light-blue roundCard">
+          <span class="white-text">
+          Stop Paying. Start Swapping! It’s Easy!
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s12 m8 offset-m2 l6 offset-l3">
+        <div class="card-panel light-blue roundCard">
+          <span class="white-text">
+          Make an Offer, Select an Offer, and SWAP.
+          </span>
+        </div>
+      </div>
+    </div>
+
+
+<p>Welcome</p>
+<div class="col s12 m8 offset-m2 l6 offset-l3">
+        {{!-- <div class="card-panel grey lighten-5 z-depth-1">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="images/yuna.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+            </div>
+            <div class="col s10">
+              <span class="black-text">
+                This is a square image. Add the "circle" class to it to make it appear circular.
+              </span>
+            </div>
+          </div>
+        </div> --}}
+      </div>
+
+    <div class="row">
+      <div class="col s12 m8 offset-m2 l6 offset-l6">
+        <div class="card-panel light-blue roundCard">
+          <span class="white-text">
+          Why are you still reading? Get swapping!
+          </span>
+        </div>
+      </div>
+    </div>
+
+<!--     <div class="row">
+      <div class="col s12 m12 offset-m2 l6 offset-l3">
+        <div class="card-panel light-blue">
+          <span class="white-text">
+          Make an Offer, Select an Offer, and SWAP.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col s12 m8 offset-m2 l6 offset-l6">
+        <div class="card-panel light-blue">
+          <span class="white-text">
+          Now Get Swapping!
+          </span>
+        </div>
+      </div>
+    </div> -->
+</div>
+
+
+
+
+
+
 
 </main>
 

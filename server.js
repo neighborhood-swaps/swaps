@@ -13,6 +13,7 @@ var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var dotenv = require("dotenv");
 var passport = require("passport");
+var uuid = require("uuid");
 // NOTE: leave Auth0Strategy capital - constructor
 var Auth0Strategy = require("passport-auth0");
 

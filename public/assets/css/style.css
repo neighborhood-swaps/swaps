@@ -15,12 +15,20 @@ main {
     flex: 1 0 auto;
 }
 
+#postForm {
+    margin-top: 15px;
+}
+
 .card {
-    height: 600px;
+    height: 500px;
 }
 
 .input-field input[type=text]:focus+label {
     color: #29b6f6;
+}
+
+.roundCard {
+    border-radius: 45px;
 }
 
 .input-field input[type=textarea]:focus+label {
@@ -35,6 +43,12 @@ main {
 .input-field input[type=textarea]:focus {
     border-bottom: 1px solid #29b6f6;
     box-shadow: 0 1px 0 0 #29b6f6;
+}
+
+#landingCards,
+#welcomeCard {
+    text-align: center;
+    font-size: 25px;
 }
 
 #root {
@@ -90,16 +104,15 @@ main {
     font-size: inherit;
 }
 
-
-/*.call_modal {
-	padding: 20px;
-	margin: 6px;
-	border-radius: 	5px;
-	background: #3399cc;
-	color: 	#ccc;
-	font-size: 	26px;
-	border: none;
-	cursor: pointer;
+.call_modal {
+    padding: 20px;
+    margin: 6px;
+    border-radius: 5px;
+    background: #3399cc;
+    color: #ccc;
+    font-size: 26px;
+    border: none;
+    cursor: pointer;
 }
 
 .modal {
@@ -130,27 +143,16 @@ main {
 }
 
 .closer {
-	position: absolute;
-	top: 58px;
-	right: 27%;
-	cursor: pointer;
-	z-index: 8;
-	font: italic bold 12px/30px Georgia, serif;
-}*/
+    position: absolute;
+    top: 58px;
+    right: 27%;
+    cursor: pointer;
+    z-index: 8;
+    font: italic bold 12px/30px Georgia, serif;
+}
 
 footer {
     text-align: center;
-}
-
-.call_modal {
-    padding: 20px;
-    margin: 6px;
-    border-radius: 5px;
-    background: #3399cc;
-    color: #ccc;
-    font-size: 26px;
-    border: none;
-    cursor: pointer;
 }
 
 #swapLocationModal {
@@ -187,4 +189,8 @@ footer {
     cursor: pointer;
     z-index: 8;
     font: italic bold 12px/30px Georgia, serif;
+}
+
+#image {
+    max-height: 300px;
 }

@@ -28,18 +28,24 @@
 
 <main>
 
-    <container id="formContainer">
-        <div class="row">
-            <form class="col s6 offset-s3">
+<container id="formContainer">
+    <div class="row">
+        {{!-- -------------- --}}
+        {{!--<form class="" id="portForm" action="/api/postItem" method="POST" enctype="multipart/form-data">--}}
+    <form class="" id="postForm" enctype="multipart/form-data">
+    <div class="col s6 offset-s3">
+            <div class="form-group">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input type="text" class="validate" required="" aria-required="true" name="nameInput">
+                        <input type="text" class="validate" required="" aria-required="true" id="nameInput">
                         <label for="nameInput">Name</label>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
                 <div class="row">
-                    <div class="input-field col s12" required="" aria-required="true" name="categoryInput">
-                        <select>
+                    <div class="input-field col s12" required="" aria-required="true" id="categoryInput">
+                        <select >
                             <option value="" disabled selected>Category</option>
                             <option value="Appliances">Appliances</option>
                             <option value="Arts and Crafts">Arts and Crafts</option>
@@ -64,8 +70,10 @@
                         </select>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
                 <div class="row">
-                    <div class="input-field col s12" required="" aria-required="true" name="conditionInput">
+                    <div class="input-field col s12" required="" aria-required="true" id="conditionInput">
                         <select>
                             <option value="" disabled selected>Condition</option>
                             <option value="New">New</option>
@@ -76,13 +84,17 @@
                         </select>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea class="materialize-textarea" required="" aria-required="true" name="descriptionInput"></textarea>
+                        <textarea class="materialize-textarea" required="" aria-required="true" id="descriptionInput"></textarea>
                         <label for="descriptionInput">Description</label>
                     </div>
                 </div>
-                <div class="input-field col s12" required="" aria-required="true" name="availabilityInput">
+            </div>
+            <div class="form-group">
+                <div class="input-field col s12" required="" aria-required="true" id="availabilityInput">
                     <select multiple>
                         <option value="" disabled selected>Availability</option>
                         <option value="M">Monday</option>
@@ -94,27 +106,37 @@
                         <option value="Su">Sunday</option>
                     </select>
                 </div>
+            </div>
+            <div class="form-group">
                 <div class="row">
                     <div class="input-field col s12">
-                        <input type="text" class="validate" required="" aria-required="true" name="swap_locationInput">
+                        <input type="text" class="validate" required="" aria-required="true" id="swap_locationInput">
                         <label for="nameInput">Location</label>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea class="materialize-textarea" required="" aria-required="true" name="commentsInput"></textarea>
+                        <textarea class="materialize-textarea" required="" aria-required="true" id="commentsInput"></textarea>
                         <label for="descriptionInput">Comments</label>
                     </div>
                 </div>
+            </div>
+            <div class="form-group">
                 <div class="row">
                     <img style="border:1px solid gray;width:300px;" id="preview" src="http://via.placeholder.com/400x300">
+                     <br/>
                     <label class="btn btn-primary" for="my-file-selector">
-                        <input name="upl" id="my-file-selector" type="file" style="display:none;">Select Image File</label>
+                    <input name="upl" id="my-file-selector" type="file" style="display:none;">Select Image File</label>
                 </div>
-                <button type="submit" id="postForm" class="btn">Post Item to SWAPS</button>
-            </form>
+            </div>
+            <div class="divider"></div>
+            <button type="submit" id="postForm2" class="btn">Post Item to SWAPS</button>
         </div>
-    </container>
+        </form>
+    </div>
+</container>
 
 </main>
 
@@ -127,6 +149,39 @@
 </footer>
 
 <script type="text/javascript">
+var currentURL = window.location.origin;
+     $("#postForm2").on("click", function(){
+            console.log("I'm in JS postForm");
+
+            var surveyInfo = {
+                name: $("#nameInput").val().trim(),
+                category: $(".select-dropdown[value='Category']").val(),
+                condition: $(".select-dropdown[value='Condition']").val(),
+                description: $("#descriptionInput").val().trim(),
+                availability: $(".select-dropdown[value='Availability']").val(),
+                location: $("#swap_locationInput").val().trim(),
+                comments: $("#commentsInput").val().trim(),
+                img_location: $("#my-file-selector").attr("value")
+            }
+//            for (i = 1; i <= $("#availabilityInput :selected").length; i++){
+//                Avail += $("#availabilityInput :selected")[i].text + "|"
+//                };
+//            var surveyInfo = {
+//                name: $("#idInput").val().trim(),
+//                category: $("#categoryInput :selected").val().trim(),
+//                condition: $("#conditionInput :selected").val().trim(),
+///                description: $("#descriptionInput").val().trim(),
+//                availability: Avail
+//                location: $("#swap_locationInput").val().trim(),
+//                comments: $("#commentsInput").val().trim()
+//            }
+            console.log(surveyInfo);
+            //sends post request with survey data
+            $.post(currentURL + "/api/postItem", surveyInfo); //, function(data){
+
+        return false;
+
+});
 
     $(document).ready(function() {
         $('select').material_select();

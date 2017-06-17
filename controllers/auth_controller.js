@@ -36,20 +36,6 @@ router.get("/", function(req, res, next) {
     res.render("index", { env: env });
 });
 
-// router.get("/", function(req, res, next) {
-//         db.Products.findAll({
-//             limit: 9,
-//             order: [ [ 'createdAt', 'DESC' ]]
-//         })
-//         .then(function(dbPosts) {
-//             var postData = {
-//                 posts: dbPosts
-//             };
-//             console.log("dbPosts:  " + JSON.stringify(dbPosts));
-//             res.render("index", postData, { env: env });
-//         });
-// });
-
 // renders login
 router.get("/login", function(req, res) {
     res.render("login", { env: env });
@@ -76,27 +62,13 @@ router.get("/user", ensureLoggedIn, function(req, res, next) {
     res.render("user", { user: req.user });
 });
 
-// router.get("/user", ensureLoggedIn, function(req, res, next) {
-//     db.Products.findAll({
-//             limit: 9,
-//             order: [ [ 'createdAt', 'DESC' ]]
-//         })
-//         .then(function(dbPosts) {
-//             var postData = {
-//                 posts: dbPosts
-//             };
-//             console.log("dbPosts:  " + JSON.stringify(dbPosts));
-//             // res.render("search", postData);
-//             res.render("user", { user: req.user }, postData);
-//         });
-// });
-
 //******************************* CODE FOR AUTH END ***********************************
 
 //*************************** CODE FOR POSTS/SWAPS START ******************************
 
 // retrieves data by category
 router.get("/api/posts/:category", function(req, res) {
+    console.log("req.user:  " + JSON.stringify(req.user));
     db.Products.findAll({
             where: {
                 category: req.params.category
@@ -305,16 +277,19 @@ router.get("/borrowing", function(req, res) {
 });
 
 //adds post form data to db then redirects to user page
-router.post('/api/postItem', upload.array('upl', 1), function(req, res) {
+// router.post('/api/postItem', upload.array('upl', 1), function(req, res) {
+router.post('/api/postItem', function(req, res) {
+    console.log("I'M IN POST ITEM");
+    console.log(req.body);
     db.Products.create({
-        user_name: req.body.nameInput,
-        category: req.body.categoryInput,
-        description: req.body.descriptionInput,
-        img_location: req.files[0].location,
-        prod_condition: req.body.conditionInput,
-        availability: req.body.availabilityInput,
-        swap_location: req.body.swap_locationInput,
-        comments: req.body.commentsInput,
+        user_name: req.body.name,
+        category: req.body.category,
+        description: req.body.description,
+        img_location: req.body.img_location,
+        prod_condition: req.body.condition,
+        availability: req.body.availability,
+        swap_location: req.body.location,
+        comments: req.body.comments,
         user_id: req.user.id
     }).then(function() {
         res.redirect("/user");
@@ -339,6 +314,7 @@ router.get('/api/upload', function(req, res) {
 });
 
 router.get('/sign-s3', (req, res) => {
+    console.log("S3.........");
     const s3 = new aws.S3();
     var tmpFileName = req.query['file-name'];
     const fileName = uuid.v4() + tmpFileName;
@@ -359,7 +335,7 @@ router.get('/sign-s3', (req, res) => {
         }
         const returnData = {
             signedRequest: data,
-            url: `https://${S3_BUCKET}.s3.amazonaws.com/images/${fileName}`
+            url: `https://s3.amazonaws.com/${S3_BUCKET}/${fileName}`
         };
         res.write(JSON.stringify(returnData));
         res.end();
