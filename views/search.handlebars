@@ -94,7 +94,7 @@
                                     <input type="hidden" name="modal_desc" value="{{this.description}}">
                                     <input type="hidden" name="product_id" value="{{this.id}}">
                                 <a id="{{this.id}}" data="{{this.description}}" class="swapTrigger modal-trigger" data-target="swapRequest2">SWAP!</a>
-                                <a href="#">Location</a>
+                                <a id="submitSwapLocation" href="#" name="swap_location" value="{{this.swap_location}}">Location</a>
                             </div>
                         </div>
                     </div>
@@ -154,6 +154,13 @@
     </div>
 </div>
 
+<div id="swapLocationModal" class="modal">
+        <div class="modal_bg colse"></div>
+        <p class="closer colse">X</p>
+        <div class="modal_main" id="map"></div>
+    </div>
+
+
 <script>
 
     function startSwap() {
@@ -163,11 +170,11 @@
         $("#modalDesc").text("A swap request has been submitted for the following item: " + $(this).attr("data"));
         $.post(currentURL + "/api/swap", newSwap);
     }
-    
+
     function refreshPage() {
         location.reload();
     };
-    
+
     $(document).on("click", ".modal-close", refreshPage);
     $(document).on("click", ".swapTrigger", startSwap);
 
