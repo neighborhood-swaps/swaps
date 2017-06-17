@@ -118,17 +118,11 @@
         $.post(currentURL + "/complete", completeProd);
     }
 
-
-    // function repostPost() {
-    //     var repostProd = {
-    //         product: $(this).attr("data-id")
-    //     };
-    //     $("#repostDesc").html("The following item has been reposted to your available offers: " + $(this).attr("data-desc"));
-    //     console.log("repostProd:  " + repostProd);
-    //     $.post(currentURL + "/rescind", repostProd);
-    // }
-
+    function refreshPage() {
+        location.reload();
+    };
     
+    $(document).on("click", ".modal-close", refreshPage);
     $(document).on("click", ".completeTrigger", completePost);
 
 </script>

@@ -71,7 +71,7 @@
 <!-- Rescind Modal -->
 <div id="rescind" class="modal">
     <div class="modal-content">
-        <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+        <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
        	<h4>Offer Rescinded!</h4>
         <p id="rescindDesc">You have rescinded your offer.</p>
    	</div>
@@ -80,7 +80,7 @@
 <!-- Contact Owner Modal -->
 <div id="contactOwner" class="modal">
     <div class="modal-content ">
-        <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+        <button class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
         <h4>Contact Owner</h4>
         <p>Your message will be emailed to {{user.nickname}} </p>
         <div class="row">
@@ -117,10 +117,18 @@
         };
         $("#rescindDesc").html("You have rescinded your offer for the following item: " + $(this).attr("data-desc"));
         console.log("rescindProd:  " + rescindProd);
-        $.post(currentURL + "/rescind", rescindProd);
+        $.post(currentURL + "/rescind", rescindProd, function() {
+        });
+
     }
+
+    function refreshPage() {
+        console.log("executing get");
+        location.reload();
+    };
     
     $(document).on("click", ".rescindTrigger", rescindSwap);
+    $(document).on("click", "#clearModal", refreshPage);
 
 </script>
 

@@ -102,7 +102,12 @@
         console.log("deleteProd:  " + deleteProd);
         $.post(currentURL + "/delete", deleteProd);
     }
+
+    function refreshPage() {
+        location.reload();
+    };
     
+    $(document).on("click", ".modal-close", refreshPage);
     $(document).on("click", ".repostTrigger", repostPost);
     $(document).on("click", ".deleteTrigger", deletePost);
 

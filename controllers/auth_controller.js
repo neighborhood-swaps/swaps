@@ -95,7 +95,8 @@ router.get("/posts", function(req, res) {
 router.get("/userPosts", function(req, res) {
     db.Products.findAll({
             where: {
-                user_id: req.user.id
+                user_id: req.user.id, 
+                status: "open"
             }
         })
         .then(function(dbPosts) {
@@ -179,7 +180,8 @@ router.post("/rescind", function(req, res) {
                    }
         }
     ).then(function() {
-            res.redirect("/made");
+            console.log("We should redirect");
+            // res.redirect("/made");
         });
 });
 
