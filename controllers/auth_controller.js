@@ -68,6 +68,7 @@ router.get("/user", ensureLoggedIn, function(req, res, next) {
 
 // retrieves data by category
 router.get("/api/posts/:category", function(req, res) {
+    console.log("req.user:  " + JSON.stringify(req.user));
     db.Products.findAll({
             where: {
                 category: req.params.category
