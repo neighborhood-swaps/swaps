@@ -53,6 +53,7 @@ module.exports = function(sequelize, DataTypes) {
         status: {
             type: DataTypes.STRING,
             allowNull: true,
+            defaultValue: "open",
             validate: { len: [1] }
         }
     }, {

@@ -71,7 +71,8 @@ router.get("/api/posts/:category", function(req, res) {
     console.log("req.user:  " + JSON.stringify(req.user));
     db.Products.findAll({
             where: {
-                category: req.params.category
+                category: req.params.category,
+                status: "open"
             }
         })
         .then(function(dbPosts) {
