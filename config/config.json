@@ -1,7 +1,7 @@
 {
     "development": {
         "username": "root",
-        "password": null,
+        "password": "Cr051998",
         "database": "swaps_db",
         "host": "localhost",
         "dialect": "mysql"

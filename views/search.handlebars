@@ -1,116 +1,109 @@
-<nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left" >SWAPS</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            {{!-- <li><a href="/posts"> Post an Item </a></li>
-            <li><a href="/userPosts"> My Posts </a></li>
-            <li><a href="/search"> Search Posts </a></li>
-            <li><a href="/received"> Offers Received </a></li>
-            <li><a href="/made"> Offers Made </a></li>
-            <li><a href="/lending"> Items Lending </a></li>
-            <li><a href="/borrowing"> Items Borrowing </a></li> --}}
-            <li><a href="/logout">Log out</a></li>
-        </ul>
+<header>
+
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left" >SWAPS</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/logout">Log out</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="mainImage">
     </div>
-</nav>
 
-<div id="mainImage">
-</div>
+    <nav class="orange" role="navigation">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/posts"> Post an Item </a></li>
+                <li><a href="/userPosts"> My Posts </a></li>
+                <li><a href="/search"> Search Posts </a></li>
+                <li><a href="/received"> Offers Received </a></li>
+                <li><a href="/made"> Offers Made </a></li>
+                <li><a href="/lending"> Items Lending </a></li>
+                <li><a href="/borrowing"> Items Borrowing </a></li>
+            </ul>
+        </div>
+    </nav>
 
-<nav class="orange" role="navigation">
-    {{!-- <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left">SWAPS</a> --}}
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/posts"> Post an Item </a></li>
-            <li><a href="/userPosts"> My Posts </a></li>
-            <li><a href="/search"> Search Posts </a></li>
-            <li><a href="/received"> Offers Received </a></li>
-            <li><a href="/made"> Offers Made </a></li>
-            <li><a href="/lending"> Items Lending </a></li>
-            <li><a href="/borrowing"> Items Borrowing </a></li>
-            {{!-- <li><a href="/logout">Log out</a></li> --}}
-        </ul>
+</header>
+
+<main>
+
+    <div>
+    	<table>
+    		<tbody>
+    			<tr>
+    				<td><a href="api/posts/appliances"><button id="appliances" type="submit"> Appliances </button></a></td>
+    				<td><a href="api/posts/arts"><button id="arts" type="submit"> Arts and Crafts </button></a></td>
+    				<td><a href="api/posts/parts"><button id="parts" type="submit"> Auto Parts </button></a></td>
+    				<td><a href="api/posts/kid"><button id="kid" type="submit"> Baby and Kid </button></a></td>
+    				<td><a href="api/posts/health"><button id="health" type="submit"> Beauty and Health </button></a></td>
+    			</tr>
+    			<tr>
+    				<td><a href="api/posts/books"><button id="books" type="submit"> Books </button></a></td>
+    				<td><a href="api/posts/clothes"><button id="clothes" type="submit"> Clothes and Accessories </button></a></td>
+    				<td><a href="api/posts/electronics"><button id="electronics" type="submit"> Electronics </button></a></td>
+    				<td><a href="api/posts/farm"><button id="farm" type="submit"> Farm and Garden </button></a></td>
+    				<td><a href="api/posts/furniture"><button id="furniture" type="submit"> Furniture </button></a></td>
+    			</tr>
+    			<tr>
+    				<td><a href="api/posts/general"><button id="general" type="submit"> General </button></a></td>
+    				<td><a href="api/posts/equipment"><button id="equipment" type="submit"> Heavy Equipment </button></a></td>
+    				<td><a href="api/posts/household"><button id="household" type="submit"> Household </button></a></td>
+
+    				<td><a href="api/posts/jewelry"><button id="jewelry" type="submit"> Jewelry </button></a></td>
+
+    				<td><a href="api/posts/instruments"><button id="instruments" type="submit"> Musical Instruments </button></a></td>
+    			</tr>
+    			<tr>
+    				<td><a href="api/posts/photo"><button id="photo" type="submit"> Photo and Video </button></a></td>
+
+    				<td><a href="api/posts/sporting"><button id="sporting" type="submit"> Sporting </button></a></td>
+    				<td><a href="api/posts/tools"><button id="tools" type="submit"> Tools </button></a></td>
+
+    				<td><a href="api/posts/toys"><button id="toys" type="submit"> Toys and Games </button></a></td>
+
+    				<td><a href="api/posts/vehicles"><button id="vehicles" type="submit"> Vehicles and Boats </button></a></td>
+    			</tr>
+    		</tbody>
+    	</table>
     </div>
-</nav>
 
-<br/>
 
-<div>
-	<table>
-		<tbody>
-			<tr>
-				<td><a href="api/posts/appliances"><button id="appliances" type="submit"> Appliances </button></a></td>
-				<td><a href="api/posts/arts"><button id="arts" type="submit"> Arts and Crafts </button></a></td>
-				<td><a href="api/posts/parts"><button id="parts" type="submit"> Auto Parts </button></a></td>
-				<td><a href="api/posts/kid"><button id="kid" type="submit"> Baby and Kid </button></a></td>
-				<td><a href="api/posts/health"><button id="health" type="submit"> Beauty and Health </button></a></td>
-			</tr>
-			<tr>
-				<td><a href="api/posts/books"><button id="books" type="submit"> Books </button></a></td>
-				<td><a href="api/posts/clothes"><button id="clothes" type="submit"> Clothes and Accessories </button></a></td>
-				<td><a href="api/posts/electronics"><button id="electronics" type="submit"> Electronics </button></a></td>
-				<td><a href="api/posts/farm"><button id="farm" type="submit"> Farm and Garden </button></a></td>
-				<td><a href="api/posts/furniture"><button id="furniture" type="submit"> Furniture </button></a></td>
-			</tr>
-			<tr>
-				<td><a href="api/posts/general"><button id="general" type="submit"> General </button></a></td>
-				<td><a href="api/posts/equipment"><button id="equipment" type="submit"> Heavy Equipment </button></a></td>
-				<td><a href="api/posts/household"><button id="household" type="submit"> Household </button></a></td>
 
-				<td><a href="api/posts/jewelry"><button id="jewelry" type="submit"> Jewelry </button></a></td>
+    <h4> Latest Offers </h4>
 
-				<td><a href="api/posts/instruments"><button id="instruments" type="submit"> Musical Instruments </button></a></td>
-			</tr>
-			<tr>
-				<td><a href="api/posts/photo"><button id="photo" type="submit"> Photo and Video </button></a></td>
-
-				<td><a href="api/posts/sporting"><button id="sporting" type="submit"> Sporting </button></a></td>
-				<td><a href="api/posts/tools"><button id="tools" type="submit"> Tools </button></a></td>
-
-				<td><a href="api/posts/toys"><button id="toys" type="submit"> Toys and Games </button></a></td>
-
-				<td><a href="api/posts/vehicles"><button id="vehicles" type="submit"> Vehicles and Boats </button></a></td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-
-<br/>
-
-<h4> Latest Offers </h4>
-
-<div class="container" id="postsDiv">
-    <div class="section">
-        <div class="row">
-            {{#each posts}}
-                <div class="col s12 m4" id="{{this.id}}" data="{{this.user_id}}">
-                    <div class="card">
-                        <div class="card-image">
-                            <img id="image" src="{{this.img_location}}">
-                        </div>
-                        <div class="card-content">
-                            <span id="description" class="card-title">{{this.description}}</span>
-                            <p id="owner"> Owner: {{this.user_name}} </p>
-                            <p id="condition"> Condition: {{this.prod_condition}} </p>
-                            <p id="availability"> Availability: {{this.availability}} </p>
-                            <p id="comments"> Comments: {{this.comments}} </p>
-                        </div>
-                        <div class="card-action">
-                           {{!-- Contact Owner Modal Trigger; sends owner an email --}}
-                            <a class="modal-trigger" data-target="contactOwner">Contact</a>
-                            {{!-- Swap Modal Trigger; displays swap requested modal --}}
-                                <input type="hidden" name="poster_id" value="{{this.user_id}}">
-                                <input type="hidden" name="modal_desc" value="{{this.description}}">
-                                <input type="hidden" name="product_id" value="{{this.id}}">
-                            <a id="{{this.id}}" data="{{this.description}}" class="swapTrigger modal-trigger" data-target="swapRequest">SWAP!</a>
-                            {{!-- Location Modal Trigger; pops up swap location on Google Maps --}}
-                            <a href="#">Location</a>
+    <div class="container" id="postsDiv">
+        <div class="section">
+            <div class="row">
+                {{#each posts}}
+                    <div class="col s12 m4 l3" id="{{this.id}}" data="{{this.user_id}}">
+                        <div class="card">
+                            <div class="card-image">
+                                <img id="image" src="{{this.img_location}}">
+                            </div>
+                            <div class="card-content">
+                                <span id="description" class="card-title">{{this.description}}</span>
+                                <p id="owner"> Owner: {{this.user_name}} </p>
+                                <p id="condition"> Condition: {{this.prod_condition}} </p>
+                                <p id="availability"> Availability: {{this.availability}} </p>
+                                <p id="comments"> Comments: {{this.comments}} </p>
+                            </div>
+                            <div class="card-action">
+                                <a class="modal-trigger" data-target="contactOwner2">Contact</a>
+                                    <input type="hidden" name="poster_id" value="{{this.user_id}}">
+                                    <input type="hidden" name="modal_desc" value="{{this.description}}">
+                                    <input type="hidden" name="product_id" value="{{this.id}}">
+                                <a id="{{this.id}}" data="{{this.description}}" class="swapTrigger modal-trigger" data-target="swapRequest2">SWAP!</a>
+                                <a href="#">Location</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {{/each}}
+                {{/each}}
+            </div>
         </div>
     </div>
-</div>
-<div id="map"></div>
+
+</main>
 
 <footer class="page-footer orange z-depth-2">
     <div class="container">
@@ -119,5 +112,68 @@
         </div>
     </div>
 </footer>
+
+<!-- Contact Owner Modal -->
+<div id="contactOwner2" class="modal">
+    <div class="modal-content ">
+        <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+        <h4>Contact Owner</h4>
+        <p>Your message will be emailed to {{user.nickname}} </p>
+        <div class="row">
+            <form class="col s12" action="mailto: {{user._json.email}} " method="post" enctype="text/plain">
+                <div class="row modal-form-row">
+                    <div class="input-field col s12">
+                        <input required autofocus id="name" type="text" name="name" class="validate">
+                        <label for="name">Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input required id="email" type="email" name="email" class="validate">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea required id="message" type="text" name="message" class="materialize-textarea"></textarea>
+                        <label for="message">Message</label>
+                    </div>
+                </div>
+                <input id="button" type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Swap Modal -->
+<div id="swapRequest2" class="modal">
+    <div class="modal-content">
+        <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
+        <h4>Swap Request!</h4>
+        <p id="modalDesc"></p>
+    </div>
+</div>
+
+<script>
+
+    function startSwap() {
+        var newSwap = {
+            product: $(this).attr("id")
+        };
+        $("#modalDesc").text("A swap request has been submitted for the following item: " + $(this).attr("data"));
+        // console.log("newSwap:  " + newSwap);
+        $.post(currentURL + "/api/swap", newSwap);
+    }
+    
+    $(document).on("click", ".swapTrigger", startSwap);
+
+</script>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+
+
+
+
 
 

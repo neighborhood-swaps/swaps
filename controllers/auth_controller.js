@@ -349,8 +349,6 @@ router.get("/404", function(req, res, next) {
 
 //**************************** CODE FOR IMAGES START ********************************
 
-
-
 router.get('/api/newUser', function(req, res) {
     res.sendFile(path.join(__dirname, "../public/adduser.html"));
 });
