@@ -21,13 +21,13 @@ dotenv.load();
 
 // imports routes, giving server access to them
 var authRoutes = require("./controllers/auth_controller.js");
-var call_url = "https://quiet-mountain-85520.herokuapp.com:" + process.env.PORT + "/callback"
-    // configures Passport to use Auth0 and retrieves user info from auth0
+
+// configures Passport to use Auth0 and retrieves user info from auth0
 var strategy = new Auth0Strategy({
     domain: process.env.AUTH0_DOMAIN,
     clientID: process.env.AUTH0_CLIENT_ID,
     clientSecret: process.env.AUTH0_CLIENT_SECRET,
-    callbackURL: process.env.AUTH0_CALLBACK_URL || call_url //"http://localhost:3000/callback"
+    callbackURL: process.env.AUTH0_CALLBACK_URL || "http://localhost:3000/callback"
 }, function(accessToken, refreshToken, extraParams, profile, done) {
     var userProfile = {
         "profile": profile,
@@ -67,7 +67,7 @@ passport.deserializeUser(function(user, done) {
 
 // sets port
 var port = process.env.PORT || 3000;
-console.log(process.env);
+console.log(port);
 // creates an express app instance
 var app = express();
 
