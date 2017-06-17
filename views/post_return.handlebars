@@ -50,15 +50,16 @@
     								<input type="hidden" name="modal_desc" value="{{this.description}}">
     								<input type="hidden" name="product_id" value="{{this.id}}">
     	                		<a id="{{this.id}}" data="{{this.description}}" class="swapTrigger modal-trigger" data-target="swapRequest">SWAP!</a>
-    	                		<a href="#">Location</a>
+    	                		<a id="submitSwapLocation" href="#" name="swap_location" value="{{this.swap_location}}">Location</a>
     	              		</div>
                         </div>
     	            	</div>
-    	          	</div>
+
     	        {{/each}}
+                </div>
     	    </div>
     	</div>
-    </div>
+
 
 </main>
 

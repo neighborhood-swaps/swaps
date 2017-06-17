@@ -1,32 +1,28 @@
+<header>
 
- {{!-- THE BELOW SECTION IS FOR CREATING A POST TO BE SENT TO THE DATABASE --}}
-<nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left">SWAPS</a>
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left" >SWAPS</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/logout">Log out</a></li>
+            </ul>
+        </div>
+    </nav>
 
-	<nav class="light-blue lighten-1" role="navigation">
-	    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo left" >SWAPS</a>
-	        <ul id="nav-mobile" class="right hide-on-med-and-down">
-	            <li><a href="/logout">Log out</a></li>
-	        </ul>
-	    </div>
-	</nav>
+    <div id="mainImage">
+    </div>
 
-
-	<div id="mainImage">
-	</div>
-
-	<nav class="orange" role="navigation">
-	        <ul id="nav-mobile" class="right hide-on-med-and-down">
-	            <li><a href="/posts"> Post an Item </a></li>
-	            <li><a href="/userPosts"> My Posts </a></li>
-	            <li><a href="/search"> Search Posts </a></li>
-	            <li><a href="/received"> Offers Received </a></li>
-	            <li><a href="/made"> Offers Made </a></li>
-	            <li><a href="/lending"> Items Lending </a></li>
-	            <li><a href="/borrowing"> Items Borrowing </a></li>
-	        </ul>
-	    </div>
-	</nav>
+    <nav class="orange" role="navigation">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/posts"> Post an Item </a></li>
+                <li><a href="/userPosts"> My Posts </a></li>
+                <li><a href="/search"> Search Posts </a></li>
+                <li><a href="/received"> Offers Received </a></li>
+                <li><a href="/made"> Offers Made </a></li>
+                <li><a href="/lending"> Items Lending </a></li>
+                <li><a href="/borrowing"> Items Borrowing </a></li>
+            </ul>
+        </div>
+    </nav>
 
 </header>
 
@@ -34,7 +30,7 @@
 
     <container id="formContainer">
         <div class="row">
-            <form class="col s12">
+            <form class="col s6 offset-s3">
                 <div class="row">
                     <div class="input-field col s12">
                         <input type="text" class="validate" required="" aria-required="true" name="nameInput">
@@ -135,5 +131,5 @@
     $(document).ready(function() {
         $('select').material_select();
     });
-    
+
 </script>
