@@ -120,6 +120,11 @@
         $.post(currentURL + "/api/swap", newSwap);
     }
     
+    function refreshPage() {
+        location.reload();
+    };
+    
+    $(document).on("click", ".modal-close", refreshPage);
     $(document).on("click", ".swapTrigger", startSwap);
 
 </script>

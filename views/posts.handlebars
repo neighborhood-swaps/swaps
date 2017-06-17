@@ -171,5 +171,11 @@
     $(document).ready(function() {
         $('select').material_select();
     });
+
+    function refreshPage() {
+        location.reload();
+    };
+    
+    $(document).on("click", ".modal-close", refreshPage);
     
 </script>
