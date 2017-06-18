@@ -68,7 +68,7 @@ router.get("/user", ensureLoggedIn, function(req, res, next) {
 
 // retrieves data by category
 router.get("/api/posts/:category", function(req, res) {
-    // console.log("req.user:  " + JSON.stringify(req.user));
+    console.log("REQ.USER in category:  " + JSON.stringify(req.user));
     db.Products.findAll({
             where: {
                 category: req.params.category,
@@ -79,9 +79,10 @@ router.get("/api/posts/:category", function(req, res) {
             var postData = {
                 posts: dbPosts
             }
-            console.log(postData.posts.length)
             if (postData.posts.length > 0) {
-                res.render("post_return", postData);
+                // res.render("post_return", postData, { user: req.user });//---------------------------
+                res.render("post_return", postData);//---------------------------
+                
             } else {
                 res.redirect("/search");
             }
@@ -105,7 +106,6 @@ router.get("/userPosts", function(req, res) {
             var postData = {
                 posts: dbPosts
             };
-            console.log("dbPosts:  " + JSON.stringify(dbPosts));
             res.render("post_return", postData);
         });
 });
@@ -122,7 +122,6 @@ router.get("/search", function(req, res) {
             var postData = {
                 posts: dbPosts
             };
-            console.log("dbPosts:  " + JSON.stringify(dbPosts));
             res.render("search", postData);
         });
 });

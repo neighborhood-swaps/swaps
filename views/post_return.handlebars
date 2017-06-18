@@ -45,7 +45,7 @@
     							<p id="comments"> Comments: {{this.comments}} </p>
     	              		</div>
     	              		<div class="card-action">
-                                <a class="modal-trigger" data-target="contactOwner">Contact</a>
+                                <a id="contactBtn" class="modal-trigger" data-name="{{this.user_name}}" data-email="{{this.user_email}}" data-target="contactOwner">Contact</a>
     								<input type="hidden" name="poster_id" value="{{this.user_id}}">
     								<input type="hidden" name="modal_desc" value="{{this.description}}">
     								<input type="hidden" name="product_id" value="{{this.id}}">
@@ -75,7 +75,7 @@
     <div class="modal-content ">
         <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
         <h4>Contact Owner</h4>
-        <p>Your message will be emailed to {{user.nickname}} </p>
+        <p id="contactNickname"> Your message will be emailed to the owner. </p>
         <div class="row">
             <form class="col s12" action="mailto: {{user._json.email}} " method="post" enctype="text/plain">
                 <div class="row modal-form-row">
@@ -132,6 +132,11 @@
         location.reload();
     };
 
+    function addNickname() {
+        $("#contactNickname").html("Your message will be emailed to: " + $(this).attr("data-name"));
+    }
+
+    $(document).on("click", "#contactBtn", addNickname);
     $(document).on("click", ".modal-close", refreshPage);
     $(document).on("click", ".swapTrigger", startSwap);
 
