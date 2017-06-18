@@ -30,8 +30,6 @@
 
 <container id="formContainer">
     <div class="row">
-        {{!-- -------------- --}}
-        {{!--<form class="" id="portForm" action="/api/postItem" method="POST" enctype="multipart/form-data">--}}
     <form class="" id="postForm" enctype="multipart/form-data">
     <div class="col s6 offset-s3">
             <div class="form-group">
@@ -149,10 +147,9 @@
 </footer>
 
 <script type="text/javascript">
-var currentURL = window.location.origin;
-     $("#postForm2").on("click", function(){
-            console.log("I'm in JS postForm");
 
+    var currentURL = window.location.origin;
+        $("#postForm2").on("click", function(){
             var surveyInfo = {
                 name: $("#nameInput").val().trim(),
                 category: $(".select-dropdown[value='Category']").val(),
@@ -163,31 +160,18 @@ var currentURL = window.location.origin;
                 comments: $("#commentsInput").val().trim(),
                 img_location: $("#my-file-selector").attr("value")
             }
-//            for (i = 1; i <= $("#availabilityInput :selected").length; i++){
-//                Avail += $("#availabilityInput :selected")[i].text + "|"
-//                };
-//            var surveyInfo = {
-//                name: $("#idInput").val().trim(),
-//                category: $("#categoryInput :selected").val().trim(),
-//                condition: $("#conditionInput :selected").val().trim(),
-///                description: $("#descriptionInput").val().trim(),
-//                availability: Avail
-//                location: $("#swap_locationInput").val().trim(),
-//                comments: $("#commentsInput").val().trim()
-//            }
-            console.log(surveyInfo);
             //sends post request with survey data
-            $.post(currentURL + "/api/postItem", surveyInfo); //, function(data){
+            $.post(currentURL + "/api/postItem", surveyInfo); 
+            //refreshes page
             location.reload();
-
         return false;
-
-});
+    });
 
     $(document).ready(function() {
         $('select').material_select();
     });
 
+    //refreshes page when close modal
     function refreshPage() {
         location.reload();
     };

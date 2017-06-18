@@ -1,4 +1,3 @@
-//******* WORKING DATABASE **************
 
 module.exports = function(sequelize, DataTypes) {
     var Products = sequelize.define("Products", {
@@ -42,7 +41,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         user_id: {
             type: DataTypes.STRING,
-            allowNull: true, //-----------------------------------temp true
+            allowNull: false, 
             validate: { len: [1] }
         },
         requester_id: {
@@ -61,17 +60,13 @@ module.exports = function(sequelize, DataTypes) {
             associate: function(models) {
                 Products.belongsTo(models.Users, {
                     onDelete: "cascade",
-                    foreignKey: {
-                        // allowNull: false
-                    }
+                    foreignKey: {}
                 });
             },
             associate: function(models) {
                 Products.belongsTo(models.Locations, {
                     onDelete: "cascade",
-                    foreignKey: {
-                        // allowNull: false
-                    }
+                    foreignKey: {}
                 });
             }
         }
