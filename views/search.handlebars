@@ -85,7 +85,7 @@
                                 <p id="comments"> Comments: {{this.comments}} </p>
                             </div>
                             <div class="card-action">
-                                <a id="contactBtn" class="modal-trigger" data="{{this.user_nickname}}" data-target="contactOwner2">Contact</a>
+                                <a id="contactBtn" class="modal-trigger" data-name="{{this.user_name}}" data-email="{{this.user_email}}" data-target="contactOwner">Contact</a>
                                     <input type="hidden" name="poster_id" value="{{this.user_id}}">
                                     <input type="hidden" name="modal_desc" value="{{this.description}}">
                                     <input type="hidden" name="product_id" value="{{this.id}}">
@@ -110,7 +110,7 @@
 </footer>
 
 <!-- Contact Owner Modal -->
-<div id="contactOwner2" class="modal">
+<div id="contactOwner" class="modal">
     <div class="modal-content ">
         <button id="clearModal" class="modal-close btn-flat" style="position:absolute;top:0;right:0;">X</button>
         <h4>Contact Owner</h4>
@@ -159,11 +159,6 @@
 
 <script>
 
-    function addNickname() {
-        console.log("$(this).attr("data"):  "  + $(this).attr("data"));
-        $("#contactNickname").html("Your message will be emailed to: " + $(this).attr("data"));
-    }
-
     function startSwap() {
         var newSwap = {
             product: $(this).attr("id")
@@ -175,6 +170,10 @@
     function refreshPage() {
         location.reload();
     };
+
+    function addNickname() {
+        $("#contactNickname").html("Your message will be emailed to: " + $(this).attr("data-name"));
+    }
 
     $(document).on("click", "#contactBtn", addNickname);
     $(document).on("click", ".modal-close", refreshPage);
