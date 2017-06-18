@@ -112,11 +112,11 @@ router.get("/userPosts", function(req, res) {
 
 // displays search categories
 router.get("/search", function(req, res) {
-    db.Products.findAll({
-            limit: 9,
-            order: [
-                ['createdAt', 'DESC']
-            ]
+    db.Products.findAll(
+        {
+            where: {
+                status: "open"
+            }
         })
         .then(function(dbPosts) {
             var postData = {
@@ -282,8 +282,6 @@ router.get("/borrowing", function(req, res) {
 //adds post form data to db then redirects to user page
 // router.post('/api/postItem', upload.array('upl', 1), function(req, res) {
 router.post('/api/postItem', function(req, res) {
-    console.log("I'M IN POST ITEM");
-    console.log(req.body);
     db.Products.create({
         user_name: req.body.name,
         category: req.body.category,
